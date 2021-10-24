@@ -112,9 +112,10 @@ settings {
     }
 }
 
-#!extension kineticExplosionEffects
 #!extension explosionSounds
 #!extension buffStatusEffects
+#!extension debuffStatusEffects
+#!extension buffAndDebuffSounds
 
 playervar hero_
 playervar moveSpeed
@@ -124,6 +125,7 @@ playervar ultimateIcon
 playervar ultimateIconColor
 globalvar TESTBOT
 globalvar ultBoost
+playervar i
 #
 playervar stateSpeed
 playervar usingUltimateREAL
@@ -172,12 +174,11 @@ subroutine superChargerPulsingEffect
 # sigma
 playervar fluxCenter
 playervar fluxExtraRangeEffect
-# soldier
-playervar helixRocketX
 # sombra
 playervar vulnerabledVictims
 playervar empRadius
 playervar empEffect
+playervar victimEffects
 
 def Cleanup():
     @Name "SUB Cleanup"
@@ -235,9 +236,11 @@ rule "[Global] Global 1":
     hudText(getAllPlayers(), "Discord", "Join for Updates and to Give Feedback", "bit.ly/ENDERSWORKSHOP (all caps)", HudPosition.RIGHT, -18, rgb(188,103,245), rgb(243,224,255), rgb(243,224,255), HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     # testing hud texts
-    hudHeader(getAllPlayers(), TESTBOT.getUltCharge(), HudPosition.LEFT, 0, Color.RED, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), distance(localPlayer, TESTBOT), HudPosition.LEFT, 1, Color.BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), localPlayer.isUsingUltimate(), HudPosition.LEFT, 2, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Bot Ult Charge : {0}".format(TESTBOT.getUltCharge()), HudPosition.LEFT, 0, Color.RED, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Bot Distance : {0}".format(distance(localPlayer, TESTBOT)), HudPosition.LEFT, 1, Color.BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Player Is Using Ult : {0}".format(localPlayer.isUsingUltimate()), HudPosition.LEFT, 2, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Effects/Entities : {0}".format(getNumberOfEntityIds()), HudPosition.LEFT, 3, Color.YELLOW, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Texts : {0}".format(getNumberOfTextIds()), HudPosition.LEFT, 4, Color.GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
     # set global variables
     bombRadius = true
     bombOutsideRange = true
@@ -310,7 +313,8 @@ rule "[Debug] Create bots":
     
     wait(0.333, Wait.ABORT_WHEN_FALSE)
     createDummy(random.choice(getAllHeroes()), eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), vect(0,100,0))
-    createDummy(/*random.choice(getAllHeroes())*/Hero.SOMBRA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
+    #createDummy(random.choice(getAllHeroes()), getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
+    createDummy(Hero.ORISA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
     TESTBOT = getLastCreatedEntity()
     wait()
     TESTBOT.setUltCharge(100)
@@ -882,8 +886,9 @@ rule "[Moira]":
 def superChargerPulsingEffect():
     @Name "[Orisa] SUB Supercharger Pulsing Effect"
 
-    playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.GREEN, eventPlayer.superchargerPosition, 70)
-    playEffect(getAllPlayers(), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, Color.GREEN, eventPlayer.superchargerPosition, 200)
+    playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.GREEN, eventPlayer.superchargerPosition, eventPlayer.superchargerSize * 2)
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.superchargerPosition, eventPlayer.superchargerSize * 2)
+    playEffect(getPlayersInRadius(eventPlayer.superchargerPosition, 35, Team.ALL, LosCheck.OFF), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, Color.GREEN, eventPlayer.superchargerPosition, 200) 
     wait(2.75, Wait.ABORT_WHEN_FALSE)
     if eventPlayer.superchargerSize >= 35:
         async(superChargerPulsingEffect(), AsyncBehavior.RESTART)
@@ -914,8 +919,8 @@ rule "[Orisa] Create Large Zone":
     wait(0.8)
     # remove effects and reset variables
     stopChasingVariable(eventPlayer.superchargerSize)
+    destroyEffect(eventPlayer.superchargerEffect)
     eventPlayer.superchargerSize = 0
-    destroyEffect(eventPlayer.matrixEffect)
 
 rule "[Orisa] Buff Teammates in Zone":
     @Event eachPlayer
@@ -1049,7 +1054,7 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.disallowButton(Button.ABILITY_1)
     eventPlayer.disallowButton(Button.ABILITY_2)
     eventPlayer.setAmmo(0, 30)
-    for eventPlayer.helixRocketX in range(12):
+    for eventPlayer.i in range(12):
         eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, 0)
         wait(0.5)
         eventPlayer.forceButtonPress(Button.SECONDARY_FIRE)
@@ -1080,9 +1085,10 @@ rule "[Sombra] Apply vulnerabled effect":
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
     eventPlayer.empRadius = 0
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_RADIUS_AND_COLOR)
+    eventPlayer.i = 0
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_RADIUS_AND_COLOR)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
     eventPlayer.applyImpulse(Vector.UP, 1, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
@@ -1098,14 +1104,23 @@ rule "[Sombra] Apply vulnerabled effect":
     wait(0.25)
     # revert floating effect
     eventPlayer.setGravity(100)
-    # give vulnerability and sound to victims
+    # give vulnerability and player-specific queues to victims
     playEffect(eventPlayer.vulnerabledVictims, DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims.getPosition(), 200)
+    for eventPlayer.i in range(len(eventPlayer.vulnerabledVictims) - 1):
+        createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_LOOPING, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[eventPlayer.i].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        eventPlayer.victimEffects.append(getLastCreatedEntity())
+        createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[eventPlayer.i].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        eventPlayer.victimEffects.append(getLastCreatedEntity())
+        eventPlayer.i += 1
     eventPlayer.vulnerabledVictims.damageReceived *= 2.0
     # destroy effect
     destroyEffect(eventPlayer.empEffect)
     eventPlayer.empEffect = null
     wait(5)
     # revert changes
+    destroyEffect(eventPlayer.victimEffects)
+    eventPlayer.victimEffects = null
     eventPlayer.vulnerabledVictims.damageReceived /= 2.0
     eventPlayer.vulnerabledVictims = null
     eventPlayer.usingUltimateREAL = false
+    eventPlayer.i = 0
