@@ -1,7 +1,7 @@
 #!mainFile "../main.opy"
 
 def Cleanup():
-    @Name "SUB Cleanup"
+    @Name "SUB Full Cleanup"
     eventPlayer.fluxCenter = null
     eventPlayer.moveSpeed[true] = 100
     eventPlayer.moveSpeed[false] = 100
