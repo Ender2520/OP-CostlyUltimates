@@ -8,6 +8,8 @@ rule "[Moira] Initialize":
     wait(0.128)
     eventPlayer.disallowButton(Button.ULTIMATE)
     eventPlayer.strikePos = vect(0,-1000,0)
+    eventPlayer.strikeEffects = []
+    eventPlayer.strikeTexts = []
 
 # CREDITS GO TO Alomare FOR ALL OF THE MATH AND CONCEPT
 rule "[Moira] Call Coalescene Strike":
@@ -35,14 +37,17 @@ rule "[Moira] Call Coalescene Strike":
     wait()
     # create effects
     createEffect(getAllPlayers(), Effect.RING, Color.RED, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 3, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.RING, Color.YELLOW, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.SIGMA_GRAVITIC_FLUX_TARGET_SOUND, eventPlayer.getTeam(), eventPlayer.strikePos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + angleToDirection(getTotalTimeElapsed() * 120, 0) * 2 + Vector.UP * eventPlayer.strikeHeight, eventPlayer.strikePos + angleToDirection(120 * getTotalTimeElapsed(), 0) * 0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * 2) + Vector.UP * eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * 0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * 2) + Vector.UP * eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * 0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    createInWorldText(getAllPlayers(), "C: Alomare", eventPlayer.strikePos + ((angleToDirection(getTotalTimeElapsed() * 120, 0)) * 2) + Vector.UP * (eventPlayer.strikeHeight * 0.5), 1, Clip.NONE, WorldTextReeval.VISIBILITY_AND_POSITION, Color.ORANGE, SpecVisibility.ALWAYS)
-    createInWorldText(getAllPlayers(), "C: Alomare", eventPlayer.strikePos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * 2) + Vector.UP * (eventPlayer.strikeHeight * 0.4), 1, Clip.NONE, WorldTextReeval.VISIBILITY_AND_POSITION, Color.ORANGE, SpecVisibility.ALWAYS)
-    createInWorldText(getAllPlayers(), "C: Alomare", eventPlayer.strikePos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * 2) + Vector.UP * (eventPlayer.strikeHeight * 0.3), 1, Clip.NONE, WorldTextReeval.VISIBILITY_AND_POSITION, Color.ORANGE, SpecVisibility.ALWAYS)
+    eventPlayer.strikeEffects.append(getLastCreatedEntity())
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.strikePos, 8)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.strikePos, 8)
     # chase pos and height
@@ -59,6 +64,9 @@ rule "[Moira] Call Coalescene Strike":
     stopChasingVariable(eventPlayer.strikeHeight)
     stopChasingVariable(eventPlayer.strikePos)
     eventPlayer.strikePos = vect(0,-1000,0)
+    destroyEffect(eventPlayer.strikeEffects)
+    eventPlayer.strikeEffects = []
+    eventPlayer.strikeTexts = []
 
 rule "[Moira] Looping Ultimate Effects":
     @Event eachPlayer

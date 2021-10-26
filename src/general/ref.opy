@@ -56,6 +56,8 @@ playervar goldenGunCooldown
 # moira
 playervar strikePos
 playervar strikeHeight
+playervar strikeEffects
+playervar strikeTexts
 # orisa
 playervar superchargerSize
 playervar superchargerEffect
