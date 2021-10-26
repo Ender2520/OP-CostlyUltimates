@@ -24,7 +24,7 @@ rule "[Global] Ultimate Indicator":
     @Condition eventPlayer.hasSpawned()
     @Condition eventPlayer.ultimateIcon == null
     
-    createIcon(getAllPlayers() if eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true else null, updateEveryTick(eventPlayer.getEyePosition() + vect(0,1,0)), Icon.EXCLAMATION_MARK, IconReeval.VISIBILITY_POSITION_AND_COLOR, eventPlayer.ultimateIconColor, false)
+    createIcon([player for player in getAllPlayers() if player != eventPlayer] if eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true else null, updateEveryTick(eventPlayer.getEyePosition() + vect(0,0.5,0)), Icon.EXCLAMATION_MARK, IconReeval.VISIBILITY_POSITION_AND_COLOR, eventPlayer.ultimateIconColor, false)
     eventPlayer.ultimateIcon = (getLastCreatedText())
 
 rule "[Global] Remove Indicators on Leave":
