@@ -1,5 +1,7 @@
 #!include "settings.opy"
 
+#!suppressWarnings w_wait_until
+
 #!include "general/ref.opy"
 #!include "general/sub.opy"
 #!include "general/global.opy"
