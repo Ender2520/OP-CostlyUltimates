@@ -68,6 +68,9 @@ settings {
             "mercy": {
                 "ultGen%": 70
             },
+            "moira": {
+                "ultGen%": 75
+            },
             "orisa": {
                 "ultGen%": 70
             },
