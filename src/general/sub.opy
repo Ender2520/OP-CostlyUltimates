@@ -53,7 +53,7 @@ def animationCleanup():
     # cleanup all bastion effects and changes from his ultimate
     destroyEffect(eventPlayer.missileEffect)
     eventPlayer.missileEffect = []
-    eventPlayer.moveSpeed /= 1.5
+    eventPlayer.moveSpeed /= 1.75
     kill(eventPlayer, eventPlayer)
     wait(1)
     eventPlayer.stopCamera()
