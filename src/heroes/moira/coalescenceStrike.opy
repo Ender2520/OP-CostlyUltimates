@@ -45,10 +45,10 @@ rule "[Moira] Call Coalescene Strike":
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.strikePos, 8)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.strikePos, 8)
     # chase pos and height
-    chase(eventPlayer.strikePos, eventPlayer.strikePos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=3, ChaseReeval.NONE)
+    chase(eventPlayer.strikePos, eventPlayer.strikePos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=3.3, ChaseReeval.NONE)
     chase(eventPlayer.strikeHeight, 75, duration=2, ChaseReeval.NONE)
     # duration
-    wait(8)
+    wait(10)
     # stop ultimate
     eventPlayer.usingUltimateREAL = false
     wait()
@@ -64,16 +64,18 @@ rule "[Moira] Looping Ultimate Effects":
     @Hero moira
     @Condition eventPlayer.usingUltimateREAL == true
 
+    # sounds
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.VIOLET, eventPlayer.strikePos, 16)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.YELLOW, eventPlayer.strikePos, 15)
     playEffect(getAllPlayers(), DynamicEffect.MOIRA_FADE_REAPPEAR_SOUND, Color.TEAM_1, eventPlayer.strikePos, 40)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.TEAM_1, eventPlayer.strikePos, 15)
+    # damage and heal over time
     [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startDoT(eventPlayer, 0.5, 100)
     [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startDoT(eventPlayer, 0.5, 300)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.5, 50)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startHoT(eventPlayer, 0.5, 150)
-    #if distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,10,0), null, getAllPlayers(), false).getHitPosition()) >= 0.2 and distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,5.1,0), null, getAllPlayers(), false).getHitPosition()) < 5:
-    #    eventPlayer.strikePos = raycast(eventPlayer.strikePos, eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()
+    if distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,6,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,6,0), null, getAllPlayers(), false).getHitPosition()) < 5:
+        eventPlayer.strikePos = raycast(eventPlayer.strikePos, eventPlayer.strikePos - vect(0,5,0), null, getAllPlayers(), false).getHitPosition()
     wait(0.5)
     if RULE_CONDITION:
         goto RULE_START
