@@ -2,6 +2,7 @@
 
 rule "[Genji] Cooldown Decrease DASH":
     @Event eachPlayer
+    @Hero genji
     # detect dash on cooldown
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0.1
     @Condition eventPlayer.isUsingUltimate()
