@@ -9,6 +9,7 @@ rule "[Moira] Initialize":
     eventPlayer.disallowButton(Button.ULTIMATE)
     eventPlayer.strikePos = vect(0,-1000,0)
 
+# CREDITS GO TO Alomare FOR ALL OF THE MATH AND CONCEPT
 rule "[Moira] Call Coalescene Strike":
     @Event eachPlayer
     @Hero moira
@@ -20,7 +21,7 @@ rule "[Moira] Call Coalescene Strike":
     @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 40, BarrierLos.PASS_THROUGH_BARRIERS) == false
     @Condition angleBetweenVectors(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 40, getAllPlayers(), eventPlayer, false).getNormal(), Vector.UP) <= 30
     
-    # activate coal
+    # activate coalnado
     eventPlayer.allowButton(Button.ULTIMATE)
     wait()
     eventPlayer.forceButtonPress(Button.ULTIMATE)
