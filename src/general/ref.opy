@@ -1,9 +1,9 @@
 #!mainFile "../main.opy"
 
 #!extension explosionSounds
-#!extension buffStatusEffects
 #!extension debuffStatusEffects
 #!extension buffAndDebuffSounds
+#!extension beamEffects
 
 playervar hero_
 playervar moveSpeed
@@ -53,6 +53,9 @@ playervar mccreeShieldBot
 playervar goldenGunReloaded
 playervar goldenGunHUD
 playervar goldenGunCooldown
+# moira
+playervar strikePos
+playervar strikeHeight
 # orisa
 playervar superchargerSize
 playervar superchargerEffect

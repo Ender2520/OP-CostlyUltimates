@@ -115,7 +115,8 @@ settings {
                 "sigma",
                 "soldier",
                 "sombra",
-                "symmetra"
+                "symmetra",
+                "moira",
             ]
         }
     }

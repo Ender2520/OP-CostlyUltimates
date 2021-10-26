@@ -43,6 +43,8 @@
 #!include "heroes/mercy/goldenGunMech.opy"
 #!include "heroes/mercy/initialize.opy"
 
+#!include "heroes/moira/coalescenceStrike.opy"
+
 #!include "heroes/orisa/buffs&Debuffs.opy"
 #!include "heroes/orisa/superchargerZone.opy"
 

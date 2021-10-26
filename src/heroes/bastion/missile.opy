@@ -20,13 +20,9 @@ rule "[Bastion] Heat Seeking Missile":
     eventPlayer.missileEffect.append(getLastCreatedEntity())
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.BAD_AURA, Color.AQUA, updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual / 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.missileEffect.append(getLastCreatedEntity())
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.WINSTON_PRIMAL_RAGE, eventPlayer.getTeam(), updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual / 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.missileEffect.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.missileEffect.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.BAD_AURA, Color.RED, updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual / 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.missileEffect.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.WINSTON_PRIMAL_RAGE, getOppositeTeam(eventPlayer.getTeam()), updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.missileEffect.append(getLastCreatedEntity())
     #
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 200)
