@@ -16,7 +16,7 @@ rule "[Doomfist] Detect Ultimate Use":
     eventPlayer.damageIncrease = 1
     chase(eventPlayer.ultimateDuration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     # peri-ultimate
-    progressBarHud(eventPlayer, updateEveryTick(100 * (eventPlayer.ultimateDuration / 15)), "{0} Meteor Strike | Damage Increase {1}%".format(abilityIconString(Hero.DOOMFIST, Button.ULTIMATE), eventPlayer.damageIncrease * 100), HudPosition.TOP, -10, Color.RED, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    progressBarHud(eventPlayer, updateEveryTick(100 * (eventPlayer.ultimateDuration / 15)), "{0} Overdrive | Damage Increase {1}%".format(abilityIconString(Hero.DOOMFIST, Button.ULTIMATE), eventPlayer.damageIncrease * 100), HudPosition.TOP, -10, Color.RED, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
     eventPlayer.ultimateBar = getLastCreatedText()
     eventPlayer.usingUltimateREAL = true
     waitUntil(eventPlayer.ultimateDuration == 0, 99999)
