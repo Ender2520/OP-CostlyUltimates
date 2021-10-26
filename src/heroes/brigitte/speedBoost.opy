@@ -1,4 +1,4 @@
-#!mainFile "../../mainFile.opy"
+#!mainFile "../../main.opy"
 
 rule "[Brigitte] Self Speed Increase":
     @Event eachPlayer
