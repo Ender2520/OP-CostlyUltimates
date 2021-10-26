@@ -27,7 +27,7 @@ rule "[Global] Hero HUD":
     @Condition eventPlayer.hasSpawned()
     @Condition eventPlayer.heroHUD == null
 
-    hudText(eventPlayer, heroIcon(eventPlayer.hero_), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
+    hudText(eventPlayer, heroIcon(eventPlayer.hero_), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
     eventPlayer.heroHUD = getLastCreatedText()
 
 rule "[Global] Ultimate Indicator":
