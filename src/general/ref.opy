@@ -52,8 +52,8 @@ playervar damageIncrease
 playervar ultimateBar
 # hanzo
 playervar dragonStrikeCharges
-# mccree
-playervar mccreeShieldBot
+# cassidy
+playervar cassidyShieldBot
 # mercy
 playervar goldenGunReloaded
 playervar goldenGunHUD
