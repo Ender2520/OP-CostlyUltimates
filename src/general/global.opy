@@ -20,14 +20,14 @@ rule "[Global] Global 1":
     # set global variables
     bombRadius = true
     bombOutsideRange = true
-    colorArray = [Hero.ANA, Color.AQUA, Hero.ASHE, Color.GRAY, Hero.BAPTISTE, Color.LIME_GREEN, Hero.BASTION, Color.GRAY, Hero.BRIGITTE, Color.ORANGE, Hero.DOOMFIST, Color.RED, Hero.DVA, Color.ROSE, Hero.ECHO, Color.SKY_BLUE, Hero.GENJI, Color.GREEN, Hero.HANZO, Color.BLUE, Hero.JUNKRAT, Color.ORANGE, Hero.LUCIO, Color.TURQUOISE, Hero.MCCREE, Color.ORANGE, Hero.MEI, Color.SKY_BLUE, Hero.MERCY, Color.YELLOW, Hero.MOIRA, Color.PURPLE, Hero.PHARAH, Color.SKY_BLUE, Hero.REAPER, Color.VIOLET, Hero.REINHARDT, Color.GRAY, Hero.ROADHOG, Color.ORANGE, Hero.SIGMA, Color.BLUE, Hero.SOLDIER, Color.BLUE, Hero.SOMBRA, Color.PURPLE, Hero.SYMMETRA, Color.AQUA, Hero.TORBJORN, Color.ORANGE, Hero.TRACER, Color.ORANGE, Hero.WIDOWMAKER, Color.VIOLET, Hero.WINSTON, Color.GRAY, Hero.HAMMOND, Color.ORANGE, Hero.ZARYA, Color.ROSE, Hero.ZENYATTA, Color.YELLOW]
+    colorArray = [Hero.ANA, Color.AQUA, Hero.ASHE, Color.GRAY, Hero.BAPTISTE, Color.LIME_GREEN, Hero.BASTION, Color.GRAY, Hero.BRIGITTE, Color.ORANGE, Hero.DOOMFIST, Color.RED, Hero.DVA, Color.ROSE, Hero.ECHO, Color.SKY_BLUE, Hero.GENJI, Color.GREEN, Hero.HANZO, Color.BLUE, Hero.ORISA, Color.LIME_GREEN, Hero.JUNKRAT, Color.ORANGE, Hero.LUCIO, Color.TURQUOISE, Hero.MCCREE, Color.ORANGE, Hero.MEI, Color.SKY_BLUE, Hero.MERCY, Color.YELLOW, Hero.MOIRA, Color.PURPLE, Hero.PHARAH, Color.SKY_BLUE, Hero.REAPER, Color.VIOLET, Hero.REINHARDT, Color.GRAY, Hero.ROADHOG, Color.ORANGE, Hero.SIGMA, Color.BLUE, Hero.SOLDIER, Color.BLUE, Hero.SOMBRA, Color.PURPLE, Hero.SYMMETRA, Color.AQUA, Hero.TORBJORN, Color.ORANGE, Hero.TRACER, Color.ORANGE, Hero.WIDOWMAKER, Color.VIOLET, Hero.WINSTON, Color.GRAY, Hero.HAMMOND, Color.ORANGE, Hero.ZARYA, Color.ROSE, Hero.ZENYATTA, Color.YELLOW]
 
 rule "[Global] Hero HUD":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
     @Condition eventPlayer.heroHUD == null
 
-    hudText(eventPlayer, heroIcon(eventPlayer.hero_), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
+    hudText(eventPlayer, " {0} ".format(heroIcon(eventPlayer.hero_)), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
     eventPlayer.heroHUD = getLastCreatedText()
 
 rule "[Global] Ultimate Indicator":
