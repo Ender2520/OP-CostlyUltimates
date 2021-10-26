@@ -42,11 +42,11 @@ rule "[Moira] Call Coalescene Strike":
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.SIGMA_GRAVITIC_FLUX_TARGET_SOUND, eventPlayer.getTeam(), eventPlayer.strikePos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 120, 0) * /*top distance*/5 + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + angleToDirection(120 * getTotalTimeElapsed(), 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/7 + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + angleToDirection(120 * getTotalTimeElapsed(), 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(/*rotation*/120 + getTotalTimeElapsed() * 120, 0)) * /*top distance*/5) + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(/*rotation*/120 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/7) + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(/*rotation*/240 + getTotalTimeElapsed() * 120, 0)) * /*top distance*/5) + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + ((angleToDirection(/*rotation*/240 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/7) + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.strikePos, 8)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.strikePos, 8)
@@ -83,8 +83,8 @@ rule "[Moira] Looping Ultimate Effects":
     [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startDoT(eventPlayer, 0.5, 300)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.5, 50)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startHoT(eventPlayer, 0.5, 150)
-    if distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,12,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,12,0), null, getAllPlayers(), false).getHitPosition()) < 10 and (raycast(eventPlayer.strikePos + vect(0,1.5,0), eventPlayer.strikePos - vect(0,12,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.strikePos * vect(0,1,0):
-        eventPlayer.strikePos = raycast(eventPlayer.strikePos, eventPlayer.strikePos - vect(0,12,0), null, getAllPlayers(), false).getHitPosition()
+    if distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) < 7 and (raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.strikePos * vect(0,1,0):
+        eventPlayer.strikePos = raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()
     wait(0.5)
     if RULE_CONDITION:
         goto RULE_START
