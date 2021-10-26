@@ -19,6 +19,11 @@ rule "[Global] Global 1":
     bombRadius = true
     bombOutsideRange = true
 
+rule "[Global] Hero HUD":
+    @Event eachPlayer
+    @Condition eventPlayer.hasSpawned()
+    @Condition eventPlayer.heroHUD != null
+
 rule "[Global] Ultimate Indicator":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()

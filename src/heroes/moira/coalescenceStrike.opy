@@ -18,10 +18,10 @@ rule "[Moira] Call Coalescene Strike":
     @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
-    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 40, BarrierLos.PASS_THROUGH_BARRIERS) == false
-    @Condition angleBetweenVectors(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 40, getAllPlayers(), eventPlayer, false).getNormal(), Vector.UP) <= 30
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
+    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 20, BarrierLos.PASS_THROUGH_BARRIERS) == false
+    @Condition angleBetweenVectors(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 20, getAllPlayers(), eventPlayer, false).getNormal(), Vector.UP) <= 30
     
     # activate coalnado
     eventPlayer.allowButton(Button.ULTIMATE)
@@ -32,7 +32,7 @@ rule "[Moira] Call Coalescene Strike":
     eventPlayer.usingUltimateREAL = true
     eventPlayer.disallowButton(Button.ULTIMATE)
     eventPlayer.cancelPrimaryAction() 
-    eventPlayer.strikePos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 40, getAllPlayers(), eventPlayer, false).getHitPosition()
+    eventPlayer.strikePos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 20, getAllPlayers(), eventPlayer, false).getHitPosition()
     eventPlayer.strikeHeight = 0
     wait()
     # create effects

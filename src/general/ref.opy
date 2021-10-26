@@ -12,6 +12,7 @@ playervar damageReceived
 playervar ultimateIcon
 playervar ultimateIconColor
 playervar i
+playervar heroHUD
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
