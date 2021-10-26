@@ -6,15 +6,20 @@
 #!extension beamEffects
 
 playervar hero_
+playervar spawnedREAL
 playervar moveSpeed
 playervar damageDealt
 playervar damageReceived
 playervar ultimateIcon
 playervar ultimateIconColor
 playervar i
+playervar heroHUD
+playervar ultName
+playervar ultDesc
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
+globalvar colorArray
 #
 playervar stateSpeed
 playervar usingUltimateREAL
@@ -56,6 +61,8 @@ playervar goldenGunCooldown
 # moira
 playervar strikePos
 playervar strikeHeight
+playervar strikeEffects
+playervar strikeTexts
 # orisa
 playervar superchargerSize
 playervar superchargerEffect

@@ -1,17 +1,20 @@
 #!mainFile "../main.opy"
 
-rule "[Automation] Cleanup on Spawn":
+rule "[Automation] Every Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
     @Condition eventPlayer.isDummy() != true
 
-    async(Cleanup, AsyncBehavior.RESTART)
+    Cleanup()
 
-rule "[Automation] Hero":
+rule "[Automation] Swapped":
     @Event eachPlayer
     @Condition eventPlayer.hero_ != eventPlayer.getCurrentHero()
     
-    async(Cleanup, AsyncBehavior.RESTART)
+    eventPlayer.spawnedREAL = false
+    Cleanup()
+    wait()
+    eventPlayer.spawnedREAL = true
 
 rule "[Automation] Move Speed":
     @Event eachPlayer
