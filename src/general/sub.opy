@@ -71,9 +71,9 @@ def normalTracking():
         wait(false)
     eventPlayer.damageDealt *= 1000000
     wait(0.064)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 18, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 11, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 25, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 10, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
     damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 5, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
 
 def downwardsTracking():
@@ -92,9 +92,9 @@ def downwardsTracking():
         wait(false)
     eventPlayer.damageDealt *= 1000000
     wait(0.064)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 18, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 11, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 25, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
+    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 10, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
     damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 5, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
 
 def superChargerPulsingEffect():
