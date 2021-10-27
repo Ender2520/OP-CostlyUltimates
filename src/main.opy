@@ -82,3 +82,6 @@
 
 #!include "heroes/sombra/initialize.opy"
 #!include "heroes/sombra/emp.opy"
+
+#!include "heroes/symmetra/initialize.opy"
+#!include "heroes/symmetra/superTurret.opy"

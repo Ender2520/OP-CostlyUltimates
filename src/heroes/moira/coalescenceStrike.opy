@@ -1,16 +1,5 @@
 #!mainFile "../../main.opy"
 
-rule "[Moira] Initialize":
-    @Event eachPlayer
-    @Hero moira
-    @Condition eventPlayer.hasSpawned()
-
-    wait(0.128)
-    eventPlayer.disallowButton(Button.ULTIMATE)
-    eventPlayer.strikePos = vect(0,-1000,0)
-    eventPlayer.strikeEffects = []
-    eventPlayer.strikeTexts = []
-
 # CREDITS GO TO Alomare FOR ALL OF THE MATH AND CONCEPT
 rule "[Moira] Call Coalescene Strike":
     @Event eachPlayer
@@ -68,7 +57,7 @@ rule "[Moira] Call Coalescene Strike":
     eventPlayer.strikeEffects = []
     eventPlayer.strikeTexts = []
 
-rule "[Moira] Looping Ultimate Effects":
+rule "[Moira] Ultimate Loop":
     @Event eachPlayer
     @Hero moira
     @Condition eventPlayer.usingUltimateREAL == true

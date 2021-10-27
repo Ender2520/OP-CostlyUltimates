@@ -78,3 +78,10 @@ playervar vulnerabledVictims
 playervar empRadius
 playervar empEffect
 playervar victimEffects
+# symmetra 
+playervar turretPos
+playervar turretEffects
+playervar turretTexts
+playervar turretTarget
+playervar turretTimer
+playervar turretEntity
