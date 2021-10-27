@@ -25,7 +25,7 @@ rule "[Moira] Call Coalescene Strike":
     eventPlayer.strikeHeight = 0
     wait()
     # create effects
-    createEffect(getAllPlayers(), Effect.RING, Color.RED, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 3, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.RING, Color.RED, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 4, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.RING, Color.YELLOW, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
@@ -40,7 +40,7 @@ rule "[Moira] Call Coalescene Strike":
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.strikePos, 8)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.strikePos, 8)
     # chase pos and height
-    chase(eventPlayer.strikePos, eventPlayer.strikePos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=3.3, ChaseReeval.NONE)
+    chase(eventPlayer.strikePos, eventPlayer.strikePos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=3.0, ChaseReeval.NONE)
     chase(eventPlayer.strikeHeight, 75, duration=2, ChaseReeval.NONE)
     # duration
     wait(10)
@@ -68,10 +68,10 @@ rule "[Moira] Ultimate Loop":
     playEffect(getAllPlayers(), DynamicEffect.MOIRA_FADE_REAPPEAR_SOUND, Color.TEAM_1, eventPlayer.strikePos, 40)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.TEAM_1, eventPlayer.strikePos, 15)
     # damage and heal over time
-    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startDoT(eventPlayer, 0.5, 100)
-    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startDoT(eventPlayer, 0.5, 300)
-    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.5, 50)
-    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 3].startHoT(eventPlayer, 0.5, 150)
+    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startDoT(eventPlayer, 0.5, 70)
+    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 4].startDoT(eventPlayer, 0.5, 105)
+    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.5, 140)
+    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.strikePos * vect(1,0,1)) < 4].startHoT(eventPlayer, 0.5, 210)
     if distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.strikePos, raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) < 7 and (raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.strikePos * vect(0,1,0):
         eventPlayer.strikePos = raycast(eventPlayer.strikePos + vect(0,2,0), eventPlayer.strikePos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()
     wait(0.5)
