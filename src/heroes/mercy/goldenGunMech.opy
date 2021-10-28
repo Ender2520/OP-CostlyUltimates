@@ -11,7 +11,7 @@ rule "[Mercy] Golden Gun Fire Rate":
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.setWeapon(2)
     eventPlayer.goldenGunReloaded = false
-    eventPlayer.goldenGunCooldown = 2
+    eventPlayer.goldenGunCooldown = 1.8
     waitUntil(eventPlayer.goldenGunCooldown == 0, 9999)
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
