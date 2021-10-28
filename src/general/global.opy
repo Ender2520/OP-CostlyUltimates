@@ -32,8 +32,8 @@ rule "[Global] Hero HUD":
 
     hudText(eventPlayer, " {0} ".format(heroIcon(eventPlayer.hero_)), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
     eventPlayer.heroHUD = getLastCreatedText()
-    hudSubtext(eventPlayer if eventPlayer.isStatused == true else null, "                                                                                                 {0}   {2} | {1} | {2}   {0}".format(eventPlayer.statusIcon, eventPlayer.statusName, eventPlayer.statusTimer if eventPlayer.statusTimer != null else ""), HudPosition.TOP, 4, eventPlayer.statusColor, HudReeval.VISIBILITY_SORT_ORDER_STRING_AND_COLOR, SpecVisibility.DEFAULT)
-
+    hudSubtext(eventPlayer if eventPlayer.isStatused[0] == true else null, "                                                                                                 {0}   {2} | {1} | {2}   {0}".format(eventPlayer.statusIcon[0], eventPlayer.statusName[0], eventPlayer.statusTimer[0] if eventPlayer.statusTimer[0] != null else ""), HudPosition.TOP, 4, eventPlayer.statusColor[0], HudReeval.VISIBILITY_SORT_ORDER_STRING_AND_COLOR, SpecVisibility.DEFAULT)
+	hudSubtext(eventPlayer if eventPlayer.isStatused[1] == true else null, "                                                                                                 {0}   {2} | {1} | {2}   {0}".format(eventPlayer.statusIcon[1], eventPlayer.statusName[1], eventPlayer.statusTimer[1] if eventPlayer.statusTimer[1] != null else ""), HudPosition.TOP, 4, eventPlayer.statusColor[1], HudReeval.VISIBILITY_SORT_ORDER_STRING_AND_COLOR, SpecVisibility.DEFAULT)
 rule "[Global] Ultimate Indicator":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
