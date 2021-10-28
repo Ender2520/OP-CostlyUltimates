@@ -2,18 +2,18 @@
 
 def Cleanup():
     @Name "SUB Full Cleanup"
-    eventPlayer.fluxCenter = null
+	# reset changeable variables
     eventPlayer.moveSpeed[true] = 100
     eventPlayer.moveSpeed[false] = 100
     eventPlayer.damageDealt[true] = 100
     eventPlayer.damageDealt[false] = 100
     eventPlayer.damageReceived[true] = 100
     eventPlayer.damageReceived[false] = 100
+	# stop chasing variables
     stopChasingVariable(eventPlayer.goldenGunCooldown)
+	# remove health pools
     removeHealthPool(eventPlayer.overHealthPool)
-    eventPlayer.bombCenterPoint = vect(false, false, false)
-    eventPlayer.hero_ = eventPlayer.getCurrentHero()
-    eventPlayer.overHealthPool = null
+	# allow buttons
     eventPlayer.allowButton(Button.ABILITY_1)
     eventPlayer.allowButton(Button.ABILITY_2)
     eventPlayer.allowButton(Button.CROUCH)
@@ -24,16 +24,22 @@ def Cleanup():
     eventPlayer.allowButton(Button.RELOAD)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
     eventPlayer.allowButton(Button.ULTIMATE)
+	# reset base stats
     eventPlayer.setHealingDealt(100)
     eventPlayer.setKnockbackReceived(100)
     eventPlayer.setKnockbackDealt(100)
     eventPlayer.setMaxHealth(100)
     eventPlayer.setUltCharge(0+ultBoost)
+	eventPlayer.setProjectileSpeed(100)
+    eventPlayer.setProjectileGravity(100)
+    eventPlayer.setGravity(100)
+	# clear effects
     eventPlayer.setInvisibility(Invis.NONE)
     eventPlayer.clearStatusEffect(Status.ROOTED)
     eventPlayer.clearStatusEffect(Status.UNKILLABLE)
     eventPlayer.clearStatusEffect(Status.PHASED_OUT)
     eventPlayer.clearStatusEffect(Status.INVINCIBLE)
+	# stop player changes
     eventPlayer.stopForcingPosition()
     eventPlayer.detach()
     eventPlayer.stopScalingSize()
@@ -41,13 +47,21 @@ def Cleanup():
     eventPlayer.stopAllDoT()
     eventPlayer.stopAllHoT()
     eventPlayer.stopAcceleration()
-    eventPlayer.setProjectileSpeed(100)
-    eventPlayer.setProjectileGravity(100)
-    eventPlayer.setGravity(100)
+	# enable all abilities
     eventPlayer.setAbility2Enabled(true)
     eventPlayer.setAbility1Enabled(true)
     eventPlayer.setUltEnabled(true)
     eventPlayer.setSecondaryFireEnabled(true)
+	# reset variables
+	eventPlayer.fluxCenter = null
+	eventPlayer.bombCenterPoint = vect(false, false, false)
+    eventPlayer.hero_ = eventPlayer.getCurrentHero()
+    eventPlayer.overHealthPool = null
+	evemtPlayer.isStatused = []
+	eventPlayer.statusName = []
+	eventPlayer.statusIcon = []
+	eventPlayer.statusTimer = []
+	eventPlayer.statusColor = []
 
 def animationCleanup():
     @Name "SUB Bastion Animation Cleanup"
