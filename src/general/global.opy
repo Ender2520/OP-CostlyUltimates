@@ -8,15 +8,18 @@ rule "[Global] Global 1":
     hudSubheader(getAllPlayers(), "Overwatch OP & Costly Ultimates vALPHA | ---", HudPosition.RIGHT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), "Original by u/Ender | Code: -----", HudPosition.RIGHT, 2, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudText(getAllPlayers(), "Discord", "Join for Updates and to Give Feedback", "bit.ly/ENDERSWORKSHOP (all caps)", HudPosition.RIGHT, 3, rgb(188,103,245), rgb(243,224,255), rgb(243,224,255), HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
-    hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
-    hudSubheader(getAllPlayers(), " \n\n", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
-    hudSubheader(getAllPlayers(), " \n\n", HudPosition.LEFT, 2, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    #
+    hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    hudSubheader(getAllPlayers(), " \n\n\n\n", HudPosition.TOP, 3, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    #
+    hudSubheader(getAllPlayers(), " \n\n\n\n", HudPosition.LEFT, 0, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    hudSubheader(getAllPlayers(), " \n\n\n\n", HudPosition.LEFT, 2, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     # testing hud texts
-    hudHeader(getAllPlayers(), "Bot Ult Charge : {0}".format(TESTBOT.getUltCharge()), HudPosition.LEFT, 5, Color.RED, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), "Bot Distance : {0}".format(distance(localPlayer, TESTBOT)), HudPosition.LEFT, 6, Color.BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), "Player Is Using Ult : {0}".format(localPlayer.isUsingUltimate()), HudPosition.LEFT, 7, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), "Effects/Entities : {0}".format(getNumberOfEntityIds()), HudPosition.LEFT, 8, Color.YELLOW, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudHeader(getAllPlayers(), "Texts : {0}".format(getNumberOfTextIds()), HudPosition.LEFT, 9, Color.GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Bot Ult Charge : {0}".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.RED, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Bot Distance : {0}".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Player Is Using Ult : {0}".format(localPlayer.isUsingUltimate()), HudPosition.RIGHT, 7, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Effects/Entities : {0}".format(getNumberOfEntityIds()), HudPosition.RIGHT, 8, Color.YELLOW, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudHeader(getAllPlayers(), "Texts : {0}".format(getNumberOfTextIds()), HudPosition.RIGHT, 9, Color.GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
     # set global variables
     bombRadius = true
     bombOutsideRange = true
@@ -29,6 +32,7 @@ rule "[Global] Hero HUD":
 
     hudText(eventPlayer, " {0} ".format(heroIcon(eventPlayer.hero_)), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
     eventPlayer.heroHUD = getLastCreatedText()
+    hudSubtext(eventPlayer if eventPlayer.isStatused == true else null, "                                                                                                 {0}   {2} | {1} | {2}   {0}".format(eventPlayer.statusIcon, eventPlayer.statusName, eventPlayer.statusTimer if eventPlayer.statusTimer != null else ""), HudPosition.TOP, 4, eventPlayer.statusColor, HudReeval.VISIBILITY_SORT_ORDER_STRING_AND_COLOR, SpecVisibility.DEFAULT)
 
 rule "[Global] Ultimate Indicator":
     @Event eachPlayer

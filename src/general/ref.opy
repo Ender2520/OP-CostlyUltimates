@@ -16,6 +16,11 @@ playervar i
 playervar heroHUD
 playervar ultName
 playervar ultDesc
+playervar statusIcon
+playervar statusName
+playervar statusTimer
+playervar statusColor
+playervar isStatused
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
