@@ -2,7 +2,7 @@
 
 rule "[Baptiste] Create Amplification Matrix":
     @Event eachPlayer
-    @Condition eventPlayer.getCurrentHero() == Hero.BAPTISTE
+    @Hero baptiste
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
     @Condition eventPlayer.getUltCharge() == 100
 
@@ -27,6 +27,7 @@ rule "[Baptiste] Create Amplification Matrix":
 
 rule "[Baptiste] Detect Matrix Victims":
     @Event eachPlayer
+    @Hero baptiste
     @Condition eventPlayer.matrixSize > 0
 
     # assign players withtin conditions to matrixVictims
