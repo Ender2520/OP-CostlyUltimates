@@ -52,6 +52,7 @@ subroutine downwardsTracking
 # doomfist
 playervar damageIncrease
 playervar ultimateBar
+playervar overdriveEffects
 # hanzo
 playervar dragonStrikeCharges
 # lucio
