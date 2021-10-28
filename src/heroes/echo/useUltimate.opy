@@ -9,9 +9,30 @@ rule "[Echo] Detect Ultimate Use":
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
 
+    # initialize
     eventPlayer.usingUltimateREAL = true
+    eventPlayer.counterpoiseSize = 0
+    wait()
+    # create effects
+    chase(eventPlayer.counterpoiseSize, 200, duration=1, ChaseReeval.NONE)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.SKY_BLUE, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.counterpoiseEffects.append(getLastCreatedEntity())
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.counterpoiseEffects.append(getLastCreatedEntity())
+    # play effects
+    # activation visuals
+    playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 20)
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, getOppositeTeam(eventPlayer.getTeam()), eventPlayer.getEyePosition(), 20)
+    # activation audio
+    playEffect(getAllPlayers(), DynamicEffect.SOMBRA_TRANSLOCATOR_REAPPEAR_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 200)
+    playEffect(getAllPlayers(), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 200)
+    playEffect(getAllPlayers(), DynamicEffect.WINSTON_JUMP_PACK_LANDING_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 200)
+    # revert changes
+    wait(1)
+    destroyEffect(eventPlayer.counterpoiseEffects)
+    stopChasingVariable(eventPlayer.counterpoiseSize)
     eventPlayer.setUltCharge(0+ultBoost)
-    wait(0.1)
+    eventPlayer.counterpoiseEffects = []
     eventPlayer.usingUltimateREAL = false
 
 rule "[Echo] Decrease Enemy Ultimate Charge":

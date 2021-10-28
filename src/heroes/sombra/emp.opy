@@ -14,9 +14,9 @@ rule "[Sombra] Apply vulnerabled effect":
     eventPlayer.setUltCharge(0)
     eventPlayer.empRadius = 0
     eventPlayer.i = 0
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer, eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
     eventPlayer.applyImpulse(Vector.UP, 1, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
