@@ -11,6 +11,8 @@ rule "[Lucio] Provide Health to Teammates from Beat":
     # prevent multiple overhealth assignments
     eventPlayer.usingUltimateREAL = true
     # assign players meeting conditions overhealth
-    [p for p in getPlayers(eventPlayer.getTeam()) if isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and distance(eventPlayer, p) <= 30].addHealthPool(Health.NORMAL, 400, false, false)
+    for eventPlayer.i in range(len([p for p in getPlayers(eventPlayer.getTeam()) if isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and distance(eventPlayer, p) <= 30])):
+        ([p for p in getPlayers(eventPlayer.getTeam()) if isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and distance(eventPlayer, p) <= 30])[eventPlayer.i].addHealthPool(Health.NORMAL, 400, false, false)
+        ([p for p in getPlayers(eventPlayer.getTeam()) if isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and distance(eventPlayer, p) <= 30])[eventPlayer.i].overHealthPool = getLastCreatedHealthPool()
     waitUntil(not eventPlayer.isUsingUltimate(), 99999)
     eventPlayer.usingUltimateREAL = false

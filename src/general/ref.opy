@@ -35,6 +35,8 @@ playervar missileEffect
 subroutine animationCleanup
 # brigitte
 playervar brigSpeedBoost
+# cassidy
+playervar cassidyShieldBot
 # dva
 globalvar bombRadius
 globalvar bombOutsideRange
@@ -52,8 +54,8 @@ playervar damageIncrease
 playervar ultimateBar
 # hanzo
 playervar dragonStrikeCharges
-# cassidy
-playervar cassidyShieldBot
+# lucio
+playervar overHealthPool
 # mercy
 playervar goldenGunReloaded
 playervar goldenGunHUD

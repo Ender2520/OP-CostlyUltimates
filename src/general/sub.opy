@@ -10,8 +10,10 @@ def Cleanup():
     eventPlayer.damageReceived[true] = 100
     eventPlayer.damageReceived[false] = 100
     stopChasingVariable(eventPlayer.goldenGunCooldown)
+    removeHealthPool(eventPlayer.overHealthPool)
     eventPlayer.bombCenterPoint = vect(false, false, false)
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
+    eventPlayer.overHealthPool = null
     eventPlayer.allowButton(Button.ABILITY_1)
     eventPlayer.allowButton(Button.ABILITY_2)
     eventPlayer.allowButton(Button.CROUCH)
