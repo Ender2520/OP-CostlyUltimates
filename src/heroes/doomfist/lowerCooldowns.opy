@@ -6,8 +6,8 @@ rule "[Doomfist] Cooldown Decrease SECONDARY":
     @Condition eventPlayer.getAbilityCooldown(Button.SECONDARY_FIRE) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
     
-    wait(0.128, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, 2)
+    wait(0.256, Wait.ABORT_WHEN_FALSE)
+    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, 1.744)
 
 rule "[Doomfist] Cooldown Decrease ABILITY1":
     @Event eachPlayer
@@ -15,8 +15,8 @@ rule "[Doomfist] Cooldown Decrease ABILITY1":
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
     
-    wait(0.128, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 2)
+    wait(0.256, Wait.ABORT_WHEN_FALSE)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 1.744)
 
 rule "[Doomfist] Cooldown Decrease ABILITY2":
     @Event eachPlayer
@@ -24,5 +24,5 @@ rule "[Doomfist] Cooldown Decrease ABILITY2":
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
     
-    wait(0.128, Wait.ABORT_WHEN_FALSE)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 2)
+    wait(0.256, Wait.ABORT_WHEN_FALSE)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 1.744)
