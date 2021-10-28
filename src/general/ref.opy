@@ -53,6 +53,9 @@ subroutine downwardsTracking
 playervar damageIncrease
 playervar ultimateBar
 playervar overdriveEffects
+#echo
+playervar counterpoiseEffects
+playervar counterpoiseSize
 # hanzo
 playervar dragonStrikeCharges
 # lucio
