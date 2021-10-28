@@ -14,8 +14,8 @@ rule "[Baptiste] Create Amplification Matrix":
     eventPlayer.matrixSize = 0
     createEffect(getAllPlayers(), Effect.SPHERE, Color.LIME_GREEN, eventPlayer.getPosition(), eventPlayer.matrixSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.LIME_GREEN, eventPlayer.getPosition(), 40)
-    playEffect(getAllPlayers(), DynamicEffect.BAPTISTE_BIOTIC_LAUNCHER_EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 200)
-    playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 200)
+    playEffect(getAllPlayers(), DynamicEffect.BAPTISTE_BIOTIC_LAUNCHER_EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 180)
+    playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 120)
     eventPlayer.matrixEffect = getLastCreatedEntity()
     # expand Amp. Matrix
     chase(eventPlayer.matrixSize, 20, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
@@ -33,12 +33,12 @@ rule "[Baptiste] Detect Matrix Victims":
     # assign players withtin conditions to matrixVictims
     eventPlayer.matrixVictims = [p for p in getAllPlayers() if distance(eventPlayer, p) <= 20 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ALL_BARRIERS) and p.getTeam() == eventPlayer.getTeam() and p.isAlive()]
     # STATUS
-    eventPlayer.statusIcon = abilityIconString(Hero.BAPTISTE, Button.ULTIMATE)
-    eventPlayer.statusName = "AMPLIFIED"
-    eventPlayer.statusTimer = 10
-    eventPlayer.statusColor = Color.GREEN
-    eventPlayer.isStatused = true
-    chase(eventPlayer.statusTimer, 0, duration=10, ChaseReeval.NONE)
+    eventPlayer.statusIcon.append(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
+    eventPlayer.statusName.append("AMPLIFIED")
+    eventPlayer.statusTimer.append(10)
+    eventPlayer.statusColor.append(Color.GREEN)
+    eventPlayer.isStatused.append(true)
+    chase(eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")], 0, duration=10, ChaseReeval.NONE)
     # increase damage of those players
     eventPlayer.matrixVictims.damageDealt[false] *= 2.0
     wait(10)
