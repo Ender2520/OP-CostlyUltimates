@@ -111,6 +111,7 @@ settings {
                 "mccree",
                 "mei",
                 "mercy",
+                "moira",
                 "orisa",
                 "reaper",
                 "reinhardt",
@@ -119,7 +120,6 @@ settings {
                 "soldier",
                 "sombra",
                 "symmetra",
-                "moira",
             ]
         }
     }

@@ -57,7 +57,7 @@ def Cleanup():
 	eventPlayer.bombCenterPoint = vect(false, false, false)
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
     eventPlayer.overHealthPool = null
-	evemtPlayer.isStatused = []
+	eventPlayer.isStatused = []
 	eventPlayer.statusName = []
 	eventPlayer.statusIcon = []
 	eventPlayer.statusTimer = []
@@ -122,3 +122,10 @@ def superChargerPulsingEffect():
     wait(2.75, Wait.ABORT_WHEN_FALSE)
     if eventPlayer.superchargerSize >= 30:
         async(superChargerPulsingEffect(), AsyncBehavior.RESTART)
+
+def statusTimerBaptisteAmplified():
+    @Name "[STATUS] Baptiste Amplified"
+
+    for eventPlayer.statusLoop in range(100):
+        eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")] -= 0.1
+        wait(0.1)

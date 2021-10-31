@@ -32,18 +32,21 @@ rule "[Baptiste] Detect Matrix Victims":
 
     # assign players withtin conditions to matrixVictims
     eventPlayer.matrixVictims = [p for p in getAllPlayers() if distance(eventPlayer, p) <= 20 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ALL_BARRIERS) and p.getTeam() == eventPlayer.getTeam() and p.isAlive()]
+    # increase damage of those players
+    eventPlayer.matrixVictims.damageDealt[false] *= 2.0
     # STATUS
     eventPlayer.statusIcon.append(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
     eventPlayer.statusName.append("AMPLIFIED")
     eventPlayer.statusTimer.append(10)
     eventPlayer.statusColor.append(Color.GREEN)
     eventPlayer.isStatused.append(true)
-    chase(eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")], 0, duration=10, ChaseReeval.NONE)
-    # increase damage of those players
-    eventPlayer.matrixVictims.damageDealt[false] *= 2.0
-    wait(10)
+    statusTimerBaptisteAmplified()
     # reverse of above
-    stopChasingVariable(eventPlayer.statusTimer)
     eventPlayer.matrixVictims.damageDealt[false] /= 2.0
     eventPlayer.matrixVictims = []
-    eventPlayer.isStatused = false
+    # STATUS REVERT
+    eventPlayer.statusTimer.remove(eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")])
+    eventPlayer.statusIcon.remove(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
+    eventPlayer.statusName.remove("AMPLIFIED")
+    eventPlayer.statusColor.remove(Color.GREEN)
+    eventPlayer.isStatused.remove(true)

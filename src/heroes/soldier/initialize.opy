@@ -6,8 +6,8 @@ rule "[Soldier 76] Info":
     @Condition eventPlayer.spawnedREAL == true
 
     wait(0.2) 
-    eventPlayer.ultName = " Automatic Helix"
-    eventPlayer.ultDesc = " Automatically fires several Helix Rockets quickly."
+    eventPlayer.ultName = " Helix Pack"
+    eventPlayer.ultDesc = " Automatically fire several Helix Rockets quickly\n from your shoulders."
 
 rule "[Soldier 76] Initialize":
     @Event eachPlayer

@@ -2,7 +2,7 @@
 
 #!extension explosionSounds
 #!extension debuffStatusEffects
-#!extension buffAndDebuffSounds
+#!extension buffStatusEffects
 #!extension beamEffects
 
 playervar hero_
@@ -13,6 +13,7 @@ playervar damageReceived
 playervar ultimateIcon
 playervar ultimateIconColor
 playervar i
+playervar parent
 playervar heroHUD
 playervar ultName
 playervar ultDesc
@@ -21,6 +22,7 @@ playervar statusName
 playervar statusTimer
 playervar statusColor
 playervar isStatused
+playervar statusLoop
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
@@ -84,6 +86,9 @@ subroutine superChargerPulsingEffect
 # sigma
 playervar fluxCenter
 playervar fluxExtraRangeEffect
+# soldier
+playervar autoHelixEffects
+playervar helixBot
 # sombra
 playervar vulnerabledVictims
 playervar empRadius

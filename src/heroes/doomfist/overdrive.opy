@@ -20,7 +20,7 @@ rule "[Doomfist] Detect Ultimate Use":
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.WINSTON_TESLA_CANNON_TARGET, getOppositeTeam(eventPlayer.getTeam()), eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.TORBJORN_OVERLOADING_SOUND, eventPlayer.getTeam(), eventPlayer, 120, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.BAD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer, 120, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
     # play effects
     # activation visuals

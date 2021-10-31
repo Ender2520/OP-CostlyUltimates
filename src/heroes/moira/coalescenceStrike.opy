@@ -29,7 +29,7 @@ rule "[Moira] Call Coalescene Strike":
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.RING, Color.YELLOW, updateEveryTick(raycast(eventPlayer.strikePos + vect(0,1,0), eventPlayer.strikePos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.SIGMA_GRAVITIC_FLUX_TARGET_SOUND, eventPlayer.getTeam(), eventPlayer.strikePos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.BAD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer.strikePos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.strikePos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/7 + Vector.UP * /*height*/eventPlayer.strikeHeight, eventPlayer.strikePos + angleToDirection(120 * getTotalTimeElapsed(), 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects.append(getLastCreatedEntity())
