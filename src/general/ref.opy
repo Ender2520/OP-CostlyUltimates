@@ -27,6 +27,7 @@ globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
 globalvar colorArray
+globalvar specialThanks
 #
 playervar stateSpeed
 playervar usingUltimateREAL
@@ -72,10 +73,10 @@ playervar goldenGunReloaded
 playervar goldenGunHUD
 playervar goldenGunCooldown
 # moira
-playervar strikePos
-playervar strikeHeight
-playervar strikeEffects
-playervar strikeTexts
+playervar tornadoPos
+playervar tornadoHeight
+playervar tornadoEffects
+playervar tornadoTexts
 # orisa
 playervar superchargerSize
 playervar superchargerEffect
@@ -83,6 +84,21 @@ playervar superchargerPosition
 playervar orisaBuffs
 playervar orisaDebuffs
 subroutine superChargerPulsingEffect
+# pharah
+playervar strikeCount
+playervar camPos
+playervar strikeEffects
+playervar strikeEffects_
+playervar strikeTexts
+playervar strikeAvailable
+playervar strikeLaunch1
+playervar strikeLaunch2
+playervar strikeLaunch3
+playervar strikeLaunch4
+playervar strikeDrop1
+playervar strikeDrop2
+playervar strikeDrop3
+playervar strikeDrop4
 # sigma
 playervar fluxCenter
 playervar fluxExtraRangeEffect
