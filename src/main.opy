@@ -65,6 +65,9 @@
 #!include "heroes/orisa/buffs&Debuffs.opy"
 #!include "heroes/orisa/superchargerZone.opy"
 
+#!include "heroes/pharah/initialize.opy"
+#!include "heroes/pharah/artilleryStrike.opy"
+
 #!include "heroes/reaper/initialize.opy"
 #!include "heroes/reaper/deathBlossom.opy"
 

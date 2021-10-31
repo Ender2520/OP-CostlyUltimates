@@ -74,6 +74,9 @@ settings {
             "orisa": {
                 "ultGen%": 70
             },
+            "pharah": {
+                "ultGen%": 80
+            },
             "reaper": {
                 "ultGen%": 80
             },
@@ -113,6 +116,7 @@ settings {
                 "mercy",
                 "moira",
                 "orisa",
+                "pharah",
                 "reaper",
                 "reinhardt",
                 "roadhog",
