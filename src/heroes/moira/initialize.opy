@@ -16,6 +16,6 @@ rule "[Moira] Initialize":
 
     wait(0.128)
     eventPlayer.disallowButton(Button.ULTIMATE)
-    eventPlayer.strikePos = vect(0,-1000,0)
-    eventPlayer.strikeEffects = []
-    eventPlayer.strikeTexts = []
+    eventPlayer.tornadoPos = vect(0,-1000,0)
+    eventPlayer.tornadoEffects = []
+    eventPlayer.tornadoTexts = []
