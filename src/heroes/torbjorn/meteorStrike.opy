@@ -119,7 +119,7 @@ rule "[Torbjorn] Meteor Strike Dropped":
     eventPlayer.strikeEffects_[4] = getLastCreatedEntity()
     createEffect(getAllPlayers(), Effect.BAD_AURA, Color.ORANGE, eventPlayer.strikeLaunch1, 7.6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects_[5] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=8, ChaseReeval.DESTINATION_AND_DURATION)
+    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=5, ChaseReeval.DESTINATION_AND_DURATION)
     while eventPlayer.strikeLaunch1 != eventPlayer.strikeDrop1:
         wait(0.072)
         playEffect(getAllPlayers(), DynamicEffect.BASTION_TANK_CANNON_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.strikeLaunch1, 180)
