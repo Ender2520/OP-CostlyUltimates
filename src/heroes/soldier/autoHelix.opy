@@ -3,11 +3,12 @@
 rule "[Soldier 76] Spam Helix Rockets":
     @Event eachPlayer
     @Hero soldier
-    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
+    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
 
     eventPlayer.setUltCharge(0)
     eventPlayer.usingUltimateREAL = true
