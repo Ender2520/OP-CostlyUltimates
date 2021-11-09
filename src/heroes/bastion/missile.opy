@@ -2,9 +2,8 @@
 
 rule "[Bastion] Heat Seeking Missile":
     @Event eachPlayer
-    @Condition eventPlayer.getCurrentHero() == Hero.BASTION
+    @Hero bastion
     @Condition eventPlayer.isUsingUltimate()
-    @Condition eventPlayer.isAlive()
 
     eventPlayer.disallowButton(Button.PRIMARY_FIRE)
     eventPlayer.setSecondaryFireEnabled(false)
