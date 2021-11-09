@@ -2,6 +2,7 @@
 
 rule "[Doomfist] Cooldown Decrease SECONDARY":
     @Event eachPlayer
+    @Hero doomfist
     # detect ability on cooldown
     @Condition eventPlayer.getAbilityCooldown(Button.SECONDARY_FIRE) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
@@ -11,6 +12,7 @@ rule "[Doomfist] Cooldown Decrease SECONDARY":
 
 rule "[Doomfist] Cooldown Decrease ABILITY1":
     @Event eachPlayer
+    @Hero doomfist
     # detect ability on cooldown
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
@@ -20,6 +22,7 @@ rule "[Doomfist] Cooldown Decrease ABILITY1":
 
 rule "[Doomfist] Cooldown Decrease ABILITY2":
     @Event eachPlayer
+    @Hero doomfist
     # detect ability on cooldown
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) > 0.1
     @Condition eventPlayer.usingUltimateREAL == true
