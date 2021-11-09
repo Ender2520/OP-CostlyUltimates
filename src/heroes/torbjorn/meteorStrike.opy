@@ -4,11 +4,12 @@
 rule "[Torbjorn] Meteor Strike Activate":
     @Event eachPlayer
     @Hero torbjorn
-    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
+    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     
     # initalize
     eventPlayer.usingUltimateREAL = true
@@ -119,7 +120,7 @@ rule "[Torbjorn] Meteor Strike Dropped":
     eventPlayer.strikeEffects_[4] = getLastCreatedEntity()
     createEffect(getAllPlayers(), Effect.BAD_AURA, Color.ORANGE, eventPlayer.strikeLaunch1, 7.6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects_[5] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=8, ChaseReeval.DESTINATION_AND_DURATION)
+    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=5, ChaseReeval.DESTINATION_AND_DURATION)
     while eventPlayer.strikeLaunch1 != eventPlayer.strikeDrop1:
         wait(0.072)
         playEffect(getAllPlayers(), DynamicEffect.BASTION_TANK_CANNON_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.strikeLaunch1, 180)

@@ -5,4 +5,4 @@ rule "[Reinhardt] 12s Ultimate Duration":
     @Hero reinhardt
     @Condition eventAbility == Button.ULTIMATE
 
-    victim.setStatusEffect(attacker, Status.KNOCKED_DOWN, 12)
+    victim.setStatusEffect(attacker, Status.KNOCKED_DOWN, 10)

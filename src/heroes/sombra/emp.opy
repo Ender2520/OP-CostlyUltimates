@@ -3,12 +3,13 @@
 rule "[Sombra] Apply vulnerabled effect":
     @Event eachPlayer
     @Hero sombra
-    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
+    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
-
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
+    
     # initialize emp
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
@@ -19,8 +20,9 @@ rule "[Sombra] Apply vulnerabled effect":
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
-    eventPlayer.applyImpulse(Vector.UP, 1, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
-    eventPlayer.setGravity(5)
+    eventPlayer.applyImpulse(Vector.UP, 1.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
+    eventPlayer.setGravity(10)
+    eventPlayer.setKnockbackReceived(25)
     # sound/visual queue
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_LOGO_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_EMP_EXPLOSION_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
@@ -31,6 +33,7 @@ rule "[Sombra] Apply vulnerabled effect":
     wait(0.25)
     # revert floating effect
     eventPlayer.setGravity(100)
+    eventPlayer.setKnockbackReceived(100)
     # give vulnerability and player-specific queues to victims
     playEffect(eventPlayer.vulnerabledVictims, DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims.getPosition(), 200)
     for eventPlayer.i in range(len(eventPlayer.vulnerabledVictims)):
@@ -38,7 +41,7 @@ rule "[Sombra] Apply vulnerabled effect":
         eventPlayer.victimEffects.append(getLastCreatedEntity())
         #createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
-    eventPlayer.vulnerabledVictims.damageReceived *= 2.0
+    eventPlayer.vulnerabledVictims.damageReceived *= 1.65
     # destroy effect
     destroyEffect(eventPlayer.empEffect)
     eventPlayer.empEffect = null
@@ -46,7 +49,7 @@ rule "[Sombra] Apply vulnerabled effect":
     # revert changes
     destroyEffect(eventPlayer.victimEffects)
     eventPlayer.victimEffects = null
-    eventPlayer.vulnerabledVictims.damageReceived /= 2.0
+    eventPlayer.vulnerabledVictims.damageReceived /= 1.65
     eventPlayer.vulnerabledVictims = null
     eventPlayer.usingUltimateREAL = false
     eventPlayer.i = 0

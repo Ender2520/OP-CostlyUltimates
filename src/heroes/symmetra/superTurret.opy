@@ -3,12 +3,12 @@
 rule "[Symmetra] Create Super Turret":
     @Event eachPlayer
     @Hero symmetra
-    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
+    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     @Condition eventPlayer.usingUltimateREAL != true
-    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 30, BarrierLos.PASS_THROUGH_BARRIERS) == false
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     
     # get turret position
     eventPlayer.turretPos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 30, null, getAllPlayers(), false).getHitPosition()

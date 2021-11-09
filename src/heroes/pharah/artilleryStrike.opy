@@ -4,13 +4,12 @@
 rule "[Pharah] Artillery Strike Activate":
     @Event eachPlayer
     @Hero pharah
-    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
+    @Condition eventPlayer.getUltCharge() == 100
     @Condition eventPlayer.isMeleeing() != true
-    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
-    @Condition eventPlayer.isInAir() != true
-    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 10, BarrierLos.PASS_THROUGH_BARRIERS) == true
     @Condition eventPlayer.usingUltimateREAL != true
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
     
     # initalize
     eventPlayer.usingUltimateREAL = true

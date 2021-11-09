@@ -4,7 +4,10 @@ rule "[Baptiste] Create Amplification Matrix":
     @Event eachPlayer
     @Hero baptiste
     @Condition eventPlayer.isHoldingButton(Button.ULTIMATE)
+    @Condition eventPlayer.isAlive() == true
     @Condition eventPlayer.getUltCharge() == 100
+    @Condition eventPlayer.isMeleeing() != true
+    @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
 
     # cancel default ultimate
     eventPlayer.cancelPrimaryAction()
