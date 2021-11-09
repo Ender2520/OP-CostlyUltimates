@@ -19,8 +19,9 @@ rule "[Sombra] Apply vulnerabled effect":
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
-    eventPlayer.applyImpulse(Vector.UP, 1, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
-    eventPlayer.setGravity(5)
+    eventPlayer.applyImpulse(Vector.UP, 1.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
+    eventPlayer.setGravity(10)
+    eventPlayer.setKnockbackReceived(25)
     # sound/visual queue
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_LOGO_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_EMP_EXPLOSION_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
@@ -31,6 +32,7 @@ rule "[Sombra] Apply vulnerabled effect":
     wait(0.25)
     # revert floating effect
     eventPlayer.setGravity(100)
+    eventPlayer.setKnockbackReceived(100)
     # give vulnerability and player-specific queues to victims
     playEffect(eventPlayer.vulnerabledVictims, DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims.getPosition(), 200)
     for eventPlayer.i in range(len(eventPlayer.vulnerabledVictims)):
