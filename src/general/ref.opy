@@ -84,7 +84,7 @@ playervar superchargerPosition
 playervar orisaBuffs
 playervar orisaDebuffs
 subroutine superChargerPulsingEffect
-# pharah
+# pharah / torbjorn
 playervar strikeCount
 playervar camPos
 playervar strikeEffects
@@ -99,6 +99,7 @@ playervar strikeDrop1
 playervar strikeDrop2
 playervar strikeDrop3
 playervar strikeDrop4
+playervar lavaPitDoT
 # sigma
 playervar fluxCenter
 playervar fluxExtraRangeEffect

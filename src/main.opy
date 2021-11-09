@@ -88,3 +88,6 @@
 
 #!include "heroes/symmetra/initialize.opy"
 #!include "heroes/symmetra/superTurret.opy"
+
+#!include "heroes/torbjorn/initialize.opy"
+#!include "heroes/torbjorn/meteorStrike.opy"

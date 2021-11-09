@@ -1,6 +1,6 @@
 #!mainFile "../../main.opy"
 
-rule "[Pharha] Info":
+rule "[Pharah] Info":
     @Event eachPlayer
     @Hero pharah
     @Condition eventPlayer.spawnedREAL == true

@@ -124,6 +124,7 @@ settings {
                 "soldier",
                 "sombra",
                 "symmetra",
+                "torbjorn",
             ]
         }
     }
