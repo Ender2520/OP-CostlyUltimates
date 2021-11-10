@@ -31,8 +31,9 @@ rule "[Torbjorn] Meteor Strike Activate":
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 100)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 100)
     createEffect(eventPlayer, Effect.RING, Color.GRAY, raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 100, null, getAllPlayers(), true).getHitPosition(), 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    eventPlayer.strikeEffects[0] = getLastCreatedEntity()
     createEffect(eventPlayer, Effect.LIGHT_SHAFT, Color.GRAY, raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 100, null, getAllPlayers(), true).getHitPosition(), 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.strikeEffects = getLastCreatedEntity()
+    eventPlayer.strikeEffects[1] = getLastCreatedEntity()
     createInWorldText(eventPlayer, "{0} Fire                                         {1} Zoom Out | Zoom In {2}".format(buttonString(Button.PRIMARY_FIRE), buttonString(Button.SECONDARY_FIRE), buttonString(Button.CROUCH)), updateEveryTick(eventPlayer.camPos + Vector.DOWN * 15), 1.5, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.ORANGE, SpecVisibility.DEFAULT)
     eventPlayer.strikeTexts = getLastCreatedText()
     # start camera
@@ -41,7 +42,8 @@ rule "[Torbjorn] Meteor Strike Activate":
     eventPlayer.setUltCharge(0+ultBoost)
     # destroy effects
     destroyInWorldText(eventPlayer.strikeTexts)
-    destroyEffect(eventPlayer.strikeEffects)
+    destroyEffect(eventPlayer.strikeEffects[0])
+    destroyEffect(eventPlayer.strikeEffects[1])
     wait(0.5)
     # revert changes
     eventPlayer.stopCamera()
@@ -99,7 +101,7 @@ rule "[Torbjorn] Meteor Strike Fired":
     eventPlayer.strikeAvailable = false
     eventPlayer.strikeCount += 1
     eventPlayer.strikeDrop1 = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 1000, null, getAllPlayers(), true).getHitPosition()
-    eventPlayer.strikeLaunch1 = eventPlayer.strikeDrop1 + vect(0, 700, 0)
+    eventPlayer.strikeLaunch1 = eventPlayer.strikeDrop1 + vect(0, 500, 0)
     wait(0.85)
     eventPlayer.strikeAvailable = true
 

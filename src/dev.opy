@@ -14,9 +14,9 @@ rule "[Dev] Create bots":
     TESTBOT = getLastCreatedEntity()
     wait()
     #TESTBOT.startForcingThrottle(1,1,0,0,0,0)
-    TESTBOT.setUltCharge(100)
-    wait(1)
-    TESTBOT.forceButtonPress(Button.ULTIMATE)
+    #TESTBOT.setUltCharge(100)
+    #wait(1)
+    #TESTBOT.forceButtonPress(Button.ULTIMATE)
 
 rule "[Dev] Destroy bots":
     @Event eachPlayer
