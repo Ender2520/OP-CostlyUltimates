@@ -3,12 +3,10 @@
 def Cleanup():
     @Name "SUB Full Cleanup"
 	# reset changeable variables
-    eventPlayer.moveSpeed[true] = 100
     eventPlayer.moveSpeed[false] = 100
-    eventPlayer.damageDealt[true] = 100
     eventPlayer.damageDealt[false] = 100
-    eventPlayer.damageReceived[true] = 100
     eventPlayer.damageReceived[false] = 100
+    eventPlayer.healingDealt[false] = 100
 	# stop chasing variables
     stopChasingVariable(eventPlayer.goldenGunCooldown)
 	# remove health pools
@@ -23,15 +21,14 @@ def Cleanup():
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.RELOAD)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
-    eventPlayer.allowButton(Button.ULTIMATE)
+    if any([eventPlayer if eventPlayer.getCurrentHero != Hero.DOOMFIST or eventPlayer.getCurrentHero != Hero.SOLDIER or eventPlayer.getCurrentHero != Hero.PHARAH or eventPlayer.getCurrentHero != Hero.TORBJORN or eventPlayer.getCurrentHero != Hero.ECHO or eventPlayer.getCurrentHero != Hero.SOMBRA or eventPlayer.getCurrentHero != Hero.SYMMETRA])
+        eventPlayer.allowButton(Button.ULTIMATE)
 	# reset base stats
-    eventPlayer.setHealingDealt(100)
     eventPlayer.setKnockbackReceived(100)
     eventPlayer.setKnockbackDealt(100)
     eventPlayer.setMaxHealth(100)
-    eventPlayer.setUltCharge(0+ultBoost)
-	eventPlayer.setProjectileSpeed(100)
-    eventPlayer.setProjectileGravity(100)
+    if eventPlayer.spawnedREAL == true
+        eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.setGravity(100)
 	# clear effects
     eventPlayer.setInvisibility(Invis.NONE)
@@ -46,7 +43,6 @@ def Cleanup():
     eventPlayer.stopScalingBarriers()
     eventPlayer.stopAllDoT()
     eventPlayer.stopAllHoT()
-    eventPlayer.stopAcceleration()
 	# enable all abilities
     eventPlayer.setAbility2Enabled(true)
     eventPlayer.setAbility1Enabled(true)
@@ -126,6 +122,6 @@ def superChargerPulsingEffect():
 def statusTimerBaptisteAmplified():
     @Name "[STATUS] Baptiste Amplified"
 
-    for eventPlayer.statusLoop in range(100):
-        eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")] -= 0.1
-        wait(0.1)
+    for eventPlayer.statusLoop in range(40):
+        eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")] -= 0.25
+        wait(0.25)
