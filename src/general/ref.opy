@@ -10,6 +10,7 @@ playervar spawnedREAL
 playervar moveSpeed
 playervar damageDealt
 playervar damageReceived
+playervar healingDealt
 playervar ultimateIcon
 playervar ultimateIconColor
 playervar i
