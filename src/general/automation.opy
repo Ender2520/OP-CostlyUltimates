@@ -13,8 +13,6 @@ rule "[Automation] Swapped":
     
     eventPlayer.spawnedREAL = false
     Cleanup()
-    wait()
-    eventPlayer.spawnedREAL = true
 
 rule "[Automation] Move Speed":
     @Event eachPlayer
@@ -32,14 +30,6 @@ rule "[Automation] Damage Dealt":
     eventPlayer.damageDealt[true] = eventPlayer.damageDealt[false]
     eventPlayer.setDamageDealt(eventPlayer.damageDealt[true])
 
-rule "[Automation] Healing Dealt":
-    @Event eachPlayer
-    @Condition eventPlayer.healingDealt[true] != eventPlayer.healingDealt[false]
-
-    # update damageDealt variable and damage dealt to that variable
-    eventPlayer.healingDealt[true] = eventPlayer.healingDealt[false]
-    eventPlayer.setHealingDealt(eventPlayer.healingDealt[true]) 
-
 rule "[Automation] Damage Received":
     @Event eachPlayer
     @Condition eventPlayer.damageReceived[true] != eventPlayer.damageReceived[false]
@@ -47,3 +37,12 @@ rule "[Automation] Damage Received":
     # update damageDealt variable and damage dealt to that variable
     eventPlayer.damageReceived[true] = eventPlayer.damageReceived[false]
     eventPlayer.setDamageReceived(eventPlayer.damageReceived[true]) 
+
+rule "[Automation] Healing Dealt":
+    @Event eachPlayer
+    @Condition eventPlayer.healingDealt[true] != eventPlayer.healingDealt[false]
+
+    # update healingDealt variable and healing dealt to that variable
+    eventPlayer.healingDealt[true] = eventPlayer.healingDealt[false]
+    eventPlayer.setHealingDealt(eventPlayer.healingDealt[true]) 
+

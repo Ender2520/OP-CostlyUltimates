@@ -21,14 +21,15 @@ def Cleanup():
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.RELOAD)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
-    if any([eventPlayer if eventPlayer.getCurrentHero != Hero.DOOMFIST or eventPlayer.getCurrentHero != Hero.SOLDIER or eventPlayer.getCurrentHero != Hero.PHARAH or eventPlayer.getCurrentHero != Hero.TORBJORN or eventPlayer.getCurrentHero != Hero.ECHO or eventPlayer.getCurrentHero != Hero.SOMBRA or eventPlayer.getCurrentHero != Hero.SYMMETRA])
+    if any([p for p in eventPlayer if eventPlayer.getCurrentHero() != (Hero.DOOMFIST or Hero.ECHO or Hero.PHARAH or Hero.SOLDIER or Hero.SOMBRA or Hero.SYMMETRA or Hero.TORBJORN)]):
         eventPlayer.allowButton(Button.ULTIMATE)
 	# reset base stats
     eventPlayer.setKnockbackReceived(100)
     eventPlayer.setKnockbackDealt(100)
     eventPlayer.setMaxHealth(100)
-    if eventPlayer.spawnedREAL == true
+    if eventPlayer.spawnedREAL == false:
         eventPlayer.setUltCharge(0+ultBoost)
+        eventPlayer.spawnedREAL = true
     eventPlayer.setGravity(100)
 	# clear effects
     eventPlayer.setInvisibility(Invis.NONE)
