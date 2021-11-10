@@ -36,7 +36,8 @@ rule "[Baptiste] Detect Matrix Victims":
     # assign players withtin conditions to matrixVictims
     eventPlayer.matrixVictims = [p for p in getAllPlayers() if distance(eventPlayer, p) <= 20 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ALL_BARRIERS) and p.getTeam() == eventPlayer.getTeam() and p.isAlive()]
     # increase damage of those players
-    eventPlayer.matrixVictims.damageDealt[false] *= 2.0
+    eventPlayer.matrixVictims.damageDealt[false] *= 1.75
+	eventPlayer.matrixVictims.healingDealt[false] *= 1.75
     # STATUS
     eventPlayer.statusIcon.append(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
     eventPlayer.statusName.append("AMPLIFIED")
@@ -45,7 +46,8 @@ rule "[Baptiste] Detect Matrix Victims":
     eventPlayer.isStatused.append(true)
     statusTimerBaptisteAmplified()
     # reverse of above
-    eventPlayer.matrixVictims.damageDealt[false] /= 2.0
+    eventPlayer.matrixVictims.damageDealt[false] /= 1.75
+	eventPlayer.matrixVictims.healingDealt[false] /= 1.75
     eventPlayer.matrixVictims = []
     # STATUS REVERT
     eventPlayer.statusTimer.remove(eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")])
