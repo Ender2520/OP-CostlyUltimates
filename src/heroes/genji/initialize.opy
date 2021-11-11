@@ -7,4 +7,4 @@ rule "[Genji] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Dragonblade"
-    eventPlayer.ultDesc = " Grants Genji infinite Swift Strikes."
+    eventPlayer.ultDesc = " Grants Genji with an infinite number of Swift Strikes\n on a short cooldown."
