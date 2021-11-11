@@ -7,7 +7,7 @@ rule "[Symmetra] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Super Turret"
-    eventPlayer.ultDesc = " Locks onto nearby enemies within LoS, deals constant\n damage, and provides a movement debuff to the target."
+    eventPlayer.ultDesc = " Symmetra creates a large turret that locks onto nearby\n enemies within LoS, deals constant damage, and\n provides a movement debuff to the target."
 
 rule "[Symmetra] Initialize":
     @Event eachPlayer
