@@ -6,8 +6,8 @@ rule "[Sombra] Info":
     @Condition eventPlayer.spawnedREAL == true
 
     wait(0.2) 
-    eventPlayer.ultName = " VMP"
-    eventPlayer.ultDesc = " Enemies within the range become vulnerable.\n Vulnerable players take 200% damage."
+    eventPlayer.ultName = " EXP"
+    eventPlayer.ultDesc = " Enemies within the range become vulnerable.\n Vulnerabled players take greatly increased damage."
 
 rule "[Sombra] Initialize":
     @Event eachPlayer
