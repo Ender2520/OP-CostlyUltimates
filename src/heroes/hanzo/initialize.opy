@@ -7,4 +7,4 @@ rule "[Hanzo] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Dragon Storm"
-    eventPlayer.ultDesc = " Fires 5 Dragonstrikes"
+    eventPlayer.ultDesc = " Grants Hanzo with five seperate Dragonstrikes."
