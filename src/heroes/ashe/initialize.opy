@@ -7,4 +7,4 @@ rule "[Ashe] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " B.O.O.B."
-    eventPlayer.ultDesc = " Now lasts forever."
+    eventPlayer.ultDesc = " Lasts forever, unless eliminated."
