@@ -7,7 +7,7 @@ rule "[Doomfist] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Overdrive"
-    eventPlayer.ultDesc = " Decreases Doomfist’s cooldowns to 2 seconds.\n Eliminations reset his cooldowns and increase\n his damage by 0.25x."
+    eventPlayer.ultDesc = " Shortens the cooldown of Doomfist's abilities.\n Eliminations reset his cooldowns and increase\n his strength, increasing damage."
 
 rule "[Doomfist] Disallow Ultimate Button":
     @Event eachPlayer
