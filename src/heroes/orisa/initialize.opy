@@ -7,4 +7,4 @@ rule "[Orisa] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Supercharger"
-    eventPlayer.ultDesc = " Creates a large zone that weakens enemies within the\n radius and strengthens teammates within the radius."
+    eventPlayer.ultDesc = " Orisa takes control of a large area of the map that weakens enemies\n within the radius and strengthens teammates\n within the radius."
