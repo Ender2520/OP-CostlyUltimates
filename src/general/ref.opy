@@ -81,6 +81,7 @@ playervar superchargerEffect
 playervar superchargerPosition
 playervar orisaBuffs
 playervar orisaDebuffs
+playervar superchargerHoT
 subroutine superChargerPulsingEffect
 # pharah / torbjorn
 playervar strikeCount

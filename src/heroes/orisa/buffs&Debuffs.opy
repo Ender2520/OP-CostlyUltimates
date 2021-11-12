@@ -33,9 +33,12 @@ rule "[Orisa] Apply Buffs":
     # apply buffs
     eventPlayer.damageDealt[false] *= 1.25
     eventPlayer.damageReceived[false] *= 0.75
+    eventPlayer.startHoT([p for p in getPlayersOnHero(Hero.ORISA, eventPlayer.getTeam())], 9999, 14)
+    eventPlayer.superchargerHoT = getLastHoT()
     waitUntil(eventPlayer.orisaBuffs != true, 999)
     eventPlayer.damageDealt[false] /= 1.25
     eventPlayer.damageReceived[false] /= 0.75
+    stopHoT(eventPlayer.superchargerHoT)
 
 rule "[Orisa] Apply Debuffs":
     @Event eachPlayer
