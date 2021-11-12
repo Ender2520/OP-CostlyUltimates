@@ -14,6 +14,7 @@ rule "[Baptiste] Create Amplification Matrix":
     eventPlayer.setUltCharge(0+ultBoost)
     wait()
     # initialize Amp. Matrix
+    eventPlayer.usingUltimateREAL = true
     eventPlayer.matrixSize = 0
     createEffect(getAllPlayers(), Effect.SPHERE, Color.LIME_GREEN, eventPlayer.getPosition(), eventPlayer.matrixSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.LIME_GREEN, eventPlayer.getPosition(), 40)
@@ -21,12 +22,16 @@ rule "[Baptiste] Create Amplification Matrix":
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 120)
     eventPlayer.matrixEffect = getLastCreatedEntity()
     # expand Amp. Matrix
-    chase(eventPlayer.matrixSize, 20, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
-    wait(1.3)
+    chase(eventPlayer.matrixSize, 20, duration=0.5, ChaseReeval.DESTINATION_AND_DURATION)
+    wait(1)
     # remove effects and reset variables
     stopChasingVariable(eventPlayer.matrixSize)
     eventPlayer.matrixSize = 0
     destroyEffect(eventPlayer.matrixEffect)
+    wait(9, Wait.IGNORE_CONDITION)
+    # stop ultimate
+    eventPlayer.usingUltimateREAL = false
+
 
 rule "[Baptiste] Detect Matrix Victims":
     @Event eachPlayer
@@ -38,20 +43,12 @@ rule "[Baptiste] Detect Matrix Victims":
     # increase damage of those players
     eventPlayer.matrixVictims.damageDealt[false] *= 1.75
 	eventPlayer.matrixVictims.healingDealt[false] *= 1.75
-    # STATUS
-    eventPlayer.statusIcon.append(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
-    eventPlayer.statusName.append("AMPLIFIED")
-    eventPlayer.statusTimer.append(10)
-    eventPlayer.statusColor.append(Color.GREEN)
-    eventPlayer.isStatused.append(true)
-    statusTimerBaptisteAmplified()
+    # begin statuses
+    eventPlayer.matrixVictims.isStatused[0] = true
+    eventPlayer.matrixVictims.amplifiedSTIMER = 10
+    waitUntil(eventPlayer.usingUltimateREAL != true, 9999)
     # reverse of above
     eventPlayer.matrixVictims.damageDealt[false] /= 1.75
 	eventPlayer.matrixVictims.healingDealt[false] /= 1.75
+    eventPlayer.matrixVictims.isStatused[0] = false
     eventPlayer.matrixVictims = []
-    # STATUS REVERT
-    eventPlayer.statusTimer.remove(eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")])
-    eventPlayer.statusIcon.remove(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE))
-    eventPlayer.statusName.remove("AMPLIFIED")
-    eventPlayer.statusColor.remove(Color.GREEN)
-    eventPlayer.isStatused.remove(true)
