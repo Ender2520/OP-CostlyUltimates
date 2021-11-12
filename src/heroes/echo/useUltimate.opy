@@ -13,6 +13,7 @@ rule "[Echo] Detect Ultimate Use":
     # initialize
     eventPlayer.usingUltimateREAL = true
     eventPlayer.counterpoiseSize = 0
+    eventPlayer.setUltCharge(0+ultBoost)
     wait()
     # create effects
     chase(eventPlayer.counterpoiseSize, 200, duration=1, ChaseReeval.NONE)
@@ -32,7 +33,6 @@ rule "[Echo] Detect Ultimate Use":
     wait(1)
     destroyEffect(eventPlayer.counterpoiseEffects)
     stopChasingVariable(eventPlayer.counterpoiseSize)
-    eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.counterpoiseEffects = []
     eventPlayer.usingUltimateREAL = false
 
@@ -43,3 +43,6 @@ rule "[Echo] Decrease Enemy Ultimate Charge":
     # decrease enemy ult charge by a certain percent of their current charge depending on there distance from echo.
     # graph demo here: https://www.desmos.com/calculator/wudcnjsrwc
     eventPlayer.setUltCharge(eventPlayer.getUltCharge() * (1-((1.5**(-0.05*(distance(eventPlayer, getPlayersOnHero(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam()))))+11.35775))/100)))
+    eventPlayer.isStatused[1] = true
+    wait(1)
+    eventPlayer.isStatused[1] = false
