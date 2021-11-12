@@ -7,7 +7,7 @@ rule "[Pharah] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Artillery Strike"
-    eventPlayer.ultDesc = " Call down several air strikes on your opponents\n that deal massive damage to enemies within range."
+    eventPlayer.ultDesc = " Pharah calls down several air strikes on her opponents\n that deal massive damage to enemies within range."
 
 rule "[Pharah] Initialize":
     @Event eachPlayer

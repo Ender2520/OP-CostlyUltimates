@@ -8,4 +8,4 @@ rule "[Genji] Cooldown Decrease DASH":
     @Condition eventPlayer.isUsingUltimate()
     
     # remove cooldown
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0.5)

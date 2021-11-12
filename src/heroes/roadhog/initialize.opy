@@ -7,4 +7,4 @@ rule "[Roadhog] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Whole Hog"
-    eventPlayer.ultDesc = " Enemies hit get pulled towards Roadhog."
+    eventPlayer.ultDesc = " Enemies damaged get pulled towards Roadhog."

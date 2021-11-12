@@ -7,4 +7,4 @@ rule "[Ana] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Mega Boost"
-    eventPlayer.ultDesc = " Now makes the boosted player invincible."
+    eventPlayer.ultDesc = " Boosted players are invincible."

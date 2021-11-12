@@ -7,4 +7,4 @@ rule "[Reaper] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Death Blossom"
-    eventPlayer.ultDesc = " Getting an elimination teleports Reaper to the\n nearest enemy within sight."
+    eventPlayer.ultDesc = " Eliminations instantly teleport Reaper to the\n nearest enemy within his line of sight."

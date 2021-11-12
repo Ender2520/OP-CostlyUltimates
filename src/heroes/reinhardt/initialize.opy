@@ -7,4 +7,4 @@ rule "[Reinhardt] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Earthshatter"
-    eventPlayer.ultDesc = " Stuns enemies for 12 seconds."
+    eventPlayer.ultDesc = " Reinhardt shatters enemy spinal cords causing them\n to be stunned for a very long duration."
