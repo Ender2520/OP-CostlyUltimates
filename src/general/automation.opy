@@ -10,6 +10,7 @@ rule "[Automation] Every Spawn":
 rule "[Automation] Swapped":
     @Event eachPlayer
     @Condition eventPlayer.hero_ != eventPlayer.getCurrentHero()
+    @Condition eventPlayer.isDummy() != true
     
     eventPlayer.spawnedREAL = false
     Cleanup()
@@ -46,3 +47,14 @@ rule "[Automation] Healing Dealt":
     eventPlayer.healingDealt[true] = eventPlayer.healingDealt[false]
     eventPlayer.setHealingDealt(eventPlayer.healingDealt[true]) 
 
+rule "[Automation] STATUS Chase Amplified":
+    @Event eachPlayer
+    @Condition eventPlayer.hasSpawned()
+
+    chase(eventPlayer.amplifiedSTIMER, 0, rate=1, ChaseReeval.NONE)
+
+rule "[Automation] STATUS Chase Vulnerabled":
+    @Event eachPlayer
+    @Condition eventPlayer.hasSpawned()
+
+    chase(eventPlayer.vulnerabledSTIMER, 0, rate=1, ChaseReeval.NONE)
