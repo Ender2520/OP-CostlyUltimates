@@ -18,12 +18,8 @@ playervar parent
 playervar heroHUD
 playervar ultName
 playervar ultDesc
-playervar statusIcon
-playervar statusName
-playervar statusTimer
 playervar statusColor
 playervar isStatused
-playervar statusLoop
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
@@ -37,6 +33,7 @@ playervar ultimateDuration
 playervar matrixSize
 playervar matrixVictims
 playervar matrixEffect
+playervar amplifiedSTIMER
 # bastion
 playervar missileTimer
 playervar missileAOEVisual
@@ -112,6 +109,7 @@ playervar vulnerabledVictims
 playervar empRadius
 playervar empEffect
 playervar victimEffects
+playervar vulnerabledSTIMER
 # symmetra 
 playervar turretPos
 playervar turretEffects
