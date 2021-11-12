@@ -21,8 +21,7 @@ def Cleanup():
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.RELOAD)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
-    if any([p for p in eventPlayer if eventPlayer.getCurrentHero() != (Hero.DOOMFIST or Hero.ECHO or Hero.PHARAH or Hero.SOLDIER or Hero.SOMBRA or Hero.SYMMETRA or Hero.TORBJORN)]):
-        eventPlayer.allowButton(Button.ULTIMATE)
+    eventPlayer.allowButton(Button.ULTIMATE)
 	# reset base stats
     eventPlayer.setKnockbackReceived(100)
     eventPlayer.setKnockbackDealt(100)
@@ -54,11 +53,18 @@ def Cleanup():
 	eventPlayer.bombCenterPoint = vect(false, false, false)
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
     eventPlayer.overHealthPool = null
-	eventPlayer.isStatused = []
-	eventPlayer.statusName = []
-	eventPlayer.statusIcon = []
-	eventPlayer.statusTimer = []
-	eventPlayer.statusColor = []
+	eventPlayer.isStatused[0] = false
+    eventPlayer.isStatused[1] = false
+    eventPlayer.isStatused[2] = false
+    eventPlayer.isStatused[3] = false
+    eventPlayer.isStatused[4] = false
+    eventPlayer.isStatused[5] = false
+	eventPlayer.statusColor[0] = rgba(100,100,100,100)
+    eventPlayer.statusColor[1] = rgba(100,100,100,100)
+    eventPlayer.statusColor[2] = rgba(100,100,100,100)
+    eventPlayer.statusColor[3] = rgba(100,100,100,100)
+    eventPlayer.statusColor[4] = rgba(100,100,100,100)
+    eventPlayer.statusColor[5] = rgba(100,100,100,100)
 
 def animationCleanup():
     @Name "SUB Bastion Animation Cleanup"
@@ -119,10 +125,3 @@ def superChargerPulsingEffect():
     wait(2.75, Wait.ABORT_WHEN_FALSE)
     if eventPlayer.superchargerSize >= 30:
         async(superChargerPulsingEffect(), AsyncBehavior.RESTART)
-
-def statusTimerBaptisteAmplified():
-    @Name "[STATUS] Baptiste Amplified"
-
-    for eventPlayer.statusLoop in range(40):
-        eventPlayer.statusTimer[eventPlayer.statusName.index("AMPLIFIED")] -= 0.25
-        wait(0.25)
