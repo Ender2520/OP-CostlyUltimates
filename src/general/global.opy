@@ -3,7 +3,7 @@
 rule "[Global] Global 1":
     ultBoost = createWorkshopSetting(int[0:100], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) / 2
     devTools = createWorkshopSetting(bool, "DEV", "ENABLE DEV TOOLS", true, 1)
-    specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", "Spade"], "Credits", "Credits", 0, 2)
+    specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", " Spade", " T1mur4TR"], "Credits", "Credits", 0, 2)
     # create hud texts
     hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), "Overwatch OP & Costly Ultimates vALPHA | ---", HudPosition.RIGHT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
