@@ -10,7 +10,8 @@ rule "[Pharah] Artillery Strike Activate":
     @Condition eventPlayer.isMeleeing() != true
     @Condition eventPlayer.usingUltimateREAL != true
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
-    
+    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 10, BarrierLos.PASS_THROUGH_BARRIERS) == true
+
     # initalize
     eventPlayer.usingUltimateREAL = true
     eventPlayer.strikeCount = 0
@@ -86,7 +87,7 @@ rule "[Pharah] Move Camera Down":
     @Hero pharah
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true
     @Condition eventPlayer.usingUltimateREAL == true
-    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) <= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,80,0)
+    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) >= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,5,0)
     
     eventPlayer.camPos = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition()
 
@@ -95,7 +96,7 @@ rule "[Pharah] Move Camera Up":
     @Hero pharah
     @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
     @Condition eventPlayer.usingUltimateREAL == true
-    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) >= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,5,0)
+    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) <= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,80,0)
     
     eventPlayer.camPos = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition()
 
