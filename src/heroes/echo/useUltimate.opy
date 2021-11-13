@@ -16,7 +16,7 @@ rule "[Echo] Detect Ultimate Use":
     eventPlayer.setUltCharge(0+ultBoost)
     wait()
     # create effects
-    chase(eventPlayer.counterpoiseSize, 200, duration=1, ChaseReeval.NONE)
+    chase(eventPlayer.counterpoiseSize, 100, duration=1, ChaseReeval.NONE)
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.SKY_BLUE, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.counterpoiseEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -41,8 +41,8 @@ rule "[Echo] Decrease Enemy Ultimate Charge":
     @Condition any([player.isAlive() and player.usingUltimateREAL == true for player in getPlayersOnHero(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam()))])
 
     # decrease enemy ult charge by a certain percent of their current charge depending on there distance from echo.
-    # graph demo here: https://www.desmos.com/calculator/wudcnjsrwc
-    eventPlayer.setUltCharge(eventPlayer.getUltCharge() * (1-((1.5**(-0.12*(distance(eventPlayer, getPlayersOnHero(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam()))))+11.35775))/100)))
+    # graph demo here: https://www.desmos.com/calculator/trd2dryhzd (thanks to T1mur4TR for the equation)
+    eventPlayer.setUltCharge(eventPlayer.getUltCharge() * (1-((((2756.25)/(distance(eventPlayer, getPlayersOnHero(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam())))+22.5))-22.5)/100)))
     eventPlayer.isStatused[1] = true
     wait(1)
     eventPlayer.isStatused[1] = false
