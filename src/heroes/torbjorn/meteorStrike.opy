@@ -10,7 +10,8 @@ rule "[Torbjorn] Meteor Strike Activate":
     @Condition eventPlayer.isMeleeing() != true
     @Condition eventPlayer.usingUltimateREAL != true
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
-    
+    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 10, BarrierLos.PASS_THROUGH_BARRIERS) == true
+
     # initalize
     eventPlayer.usingUltimateREAL = true
     eventPlayer.strikeCount = 0
