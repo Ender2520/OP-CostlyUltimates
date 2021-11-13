@@ -42,7 +42,7 @@ rule "[Sombra] Apply vulnerabled effect":
         #createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
     eventPlayer.vulnerabledVictims.damageReceived *= 1.65
-    eventPlayer.vulnerabledVictims.isStatused[0] = true
+    eventPlayer.vulnerabledVictims.isStatused[4] = true
     eventPlayer.vulnerabledVictims.vulnerabledSTIMER = 5
     # destroy effect
     destroyEffect(eventPlayer.empEffect)
@@ -50,6 +50,7 @@ rule "[Sombra] Apply vulnerabled effect":
     wait(5)
     # revert changes
     destroyEffect(eventPlayer.victimEffects)
+    eventPlayer.vulnerabledVictims.isStatused[4] = false
     eventPlayer.victimEffects = null
     eventPlayer.vulnerabledVictims.damageReceived /= 1.65
     eventPlayer.vulnerabledVictims = null
