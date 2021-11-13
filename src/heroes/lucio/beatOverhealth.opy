@@ -6,6 +6,8 @@ rule "[Lucio] Provide Health to Teammates from Beat":
     @Condition eventPlayer.isUsingUltimate()
     @Condition eventPlayer.usingUltimateREAL != true
     
+    # prevent pre-emptive beat
+    wait(0.128)
     # dont beat until on ground
     waitUntil(eventPlayer.isOnGround(), 99999)
     # prevent multiple overhealth assignments
