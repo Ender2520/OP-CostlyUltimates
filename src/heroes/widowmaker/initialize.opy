@@ -8,3 +8,4 @@ rule "[Widowmaker] Info":
     wait(0.2) 
     eventPlayer.ultName = " Chamber"
     eventPlayer.ultDesc = " Widowmaker is given a new sniper that a massive\n amount of damage through walls. She also keeps her Infra-Sight."
+    eventPlayer.ultTooltip = "Chamber's damage is not affected by\n the power amount."
