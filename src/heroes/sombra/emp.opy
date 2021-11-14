@@ -20,7 +20,7 @@ rule "[Sombra] Apply vulnerabled effect":
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
-    eventPlayer.applyImpulse(Vector.UP, 1.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
+    eventPlayer.applyImpulse(Vector.UP, 0.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
     eventPlayer.setGravity(10)
     eventPlayer.setKnockbackReceived(25)
     # sound/visual queue
@@ -41,7 +41,7 @@ rule "[Sombra] Apply vulnerabled effect":
         eventPlayer.victimEffects.append(getLastCreatedEntity())
         #createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
-    eventPlayer.vulnerabledVictims.damageReceived *= 1.65
+    eventPlayer.vulnerabledVictims.damageReceived *= 1.50
     eventPlayer.vulnerabledVictims.isStatused[4] = true
     eventPlayer.vulnerabledVictims.vulnerabledSTIMER = 5
     # destroy effect
@@ -52,7 +52,7 @@ rule "[Sombra] Apply vulnerabled effect":
     destroyEffect(eventPlayer.victimEffects)
     eventPlayer.vulnerabledVictims.isStatused[4] = false
     eventPlayer.victimEffects = null
-    eventPlayer.vulnerabledVictims.damageReceived /= 1.65
+    eventPlayer.vulnerabledVictims.damageReceived /= 1.50
     eventPlayer.vulnerabledVictims = null
     eventPlayer.usingUltimateREAL = false
     eventPlayer.i = 0
