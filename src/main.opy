@@ -97,3 +97,6 @@
 
 #!include "heroes/widowmaker/initialize.opy"
 #!include "heroes/widowmaker/chamber.opy"
+
+#!include "heroes/winston/initialize.opy"
+#!include "heroes/winston/primalRage.opy"
