@@ -132,7 +132,8 @@ settings {
                 "symmetra",
                 "torbjorn",
                 "tracer",
-                "widowmaker"
+                "widowmaker",
+                "winston"
             ]
         }
     }
