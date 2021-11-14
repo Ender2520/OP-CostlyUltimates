@@ -1,5 +1,15 @@
 #!mainFile "../main.opy"
 
+rule "[Automation] Prevent Server Crash":
+    @Event global
+    @Condition getServerLoad() >= 250
+
+    wait(0.1, Wait.ABORT_WHEN_FALSE)
+    setSlowMotion(10)
+    waitUntil(getServerLoad() < 250, 9999)
+    wait(0.1)
+    setSlowMotion(100)
+
 rule "[Automation] Every Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
