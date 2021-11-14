@@ -12,12 +12,12 @@ playervar damageDealt
 playervar damageReceived
 playervar healingDealt
 playervar ultimateIcon
-playervar ultimateIconColor
 playervar i
 playervar parent
 playervar heroHUD
 playervar ultName
 playervar ultDesc
+playervar ultTooltip
 playervar statusColor
 playervar isStatused
 globalvar TESTBOT
@@ -52,7 +52,6 @@ playervar bombCenterPoint
 playervar bombEyePos
 playervar bombDuration
 playervar bombInitNormal
-playervar dmgToggle
 subroutine normalTracking
 subroutine downwardsTracking
 # doomfist
@@ -85,10 +84,12 @@ playervar superchargerHoT
 subroutine superChargerPulsingEffect
 # pharah / torbjorn
 playervar strikeCount
+playervar strikeTimer
 playervar camPos
 playervar strikeEffects
 playervar strikeEffects_
 playervar strikeTexts
+playervar strikeTexts_
 playervar strikeAvailable
 playervar strikeLaunch1
 playervar strikeLaunch2
@@ -118,3 +119,12 @@ playervar turretTexts
 playervar turretTarget
 playervar turretTimer
 playervar turretEntity
+# tracer
+playervar manipulateDuration
+playervar manipulateEffects
+playervar manipulateTexts
+# widowmaker
+playervar chamberEffects
+playervar chamberCast_Start
+playervar chamberCast_Direction
+playervar chamberCast_DistRemaining
