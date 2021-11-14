@@ -91,3 +91,9 @@
 
 #!include "heroes/torbjorn/initialize.opy"
 #!include "heroes/torbjorn/meteorStrike.opy"
+
+#!include "heroes/tracer/initialize.opy"
+#!include "heroes/tracer/manipulativeReality.opy"
+
+#!include "heroes/widowmaker/initialize.opy"
+#!include "heroes/widowmaker/chamber.opy"
