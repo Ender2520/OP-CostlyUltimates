@@ -32,7 +32,7 @@ settings {
                 "ultGen%": 70
             },
             "bastion": {
-                "ultGen%": 60,
+                "ultGen%": 65,
                 "ultDuration%": 50
             },
             "brigitte": {
@@ -98,6 +98,12 @@ settings {
             "symmetra": {
                 "ultGen%": 90
             },
+            "torbjorn": {
+                "ultGen%": 70
+            },
+            "tracer": {
+                "ultGen%": 75
+            },
             "enabledHeroes": [
                 "ana",
                 "ashe",
@@ -125,6 +131,8 @@ settings {
                 "sombra",
                 "symmetra",
                 "torbjorn",
+                "tracer",
+                "widowmaker"
             ]
         }
     }
