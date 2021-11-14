@@ -33,8 +33,10 @@ rule "[Tracer] Manipulative Reality Activate":
     # revert changes
     stopChasingVariable(eventPlayer.manipulateDuration)
     eventPlayer.usingUltimateREAL = false
+    # leave tracer with no abilities or ammo
     eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.setAbilityCharge(Button.ABILITY_1, 0)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 12)
     eventPlayer.setAmmo(0, 0)
 
 rule "[Tracer] Cooldown Decrease DASH":
