@@ -8,6 +8,7 @@ rule "[Echo] Info":
     wait(0.2) 
     eventPlayer.ultName = " Counterpoise"
     eventPlayer.ultDesc = " Decrease enemy ultimate charges based\n on their distance from you."
+    eventPlayer.ultTooltip = null
 
 rule "[Echo] Disallow Ultimate Button":
     @Event eachPlayer

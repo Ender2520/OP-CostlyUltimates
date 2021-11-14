@@ -8,3 +8,4 @@ rule "[Orisa] Info":
     wait(0.2) 
     eventPlayer.ultName = " Supercharger"
     eventPlayer.ultDesc = " Orisa takes control of a large area of the map that weakens enemies\n within the radius and strengthens teammates\n within the radius."
+    eventPlayer.ultTooltip = null

@@ -8,3 +8,4 @@ rule "[Junkrat] Info":
     wait(0.2) 
     eventPlayer.ultName = " RIP-Tire"
     eventPlayer.ultDesc = " Instantly kills enemies within range.\n Increased RIP-Tire speed."
+    eventPlayer.ultTooltip = null

@@ -8,6 +8,7 @@ rule "[Soldier 76] Info":
     wait(0.2) 
     eventPlayer.ultName = " Helix Pack"
     eventPlayer.ultDesc = " Soldier equips a Helix Pack that fires several\n Helix Rockets in quick succession from\n your shoulders."
+    eventPlayer.ultTooltip = "Helix Rockets from the Helix Pack deal\n very little damage to shields."
 
 rule "[Soldier 76] Initialize":
     @Event eachPlayer

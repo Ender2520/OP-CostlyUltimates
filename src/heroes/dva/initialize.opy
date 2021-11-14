@@ -8,3 +8,4 @@ rule "[D.VA] Info":
     wait(0.2) 
     eventPlayer.ultName = " Atomic Bomb"
     eventPlayer.ultDesc = " Deals damage through walls"
+    eventPlayer.ultTooltip = "Atomic Bomb is not blocked by shields."

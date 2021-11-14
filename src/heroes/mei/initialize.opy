@@ -8,3 +8,4 @@ rule "[Mei] Info":
     wait(0.2) 
     eventPlayer.ultName = " Blizzard"
     eventPlayer.ultDesc = " Instantly freezes enemies within the radius."
+    eventPlayer.ultTooltip = null

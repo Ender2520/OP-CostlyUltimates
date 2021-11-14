@@ -8,3 +8,4 @@ rule "[Lucio] Info":
     wait(0.2) 
     eventPlayer.ultName = " Sound Barrier"
     eventPlayer.ultDesc = " Provides teammates with 400 temporary overhealth."
+    eventPlayer.ultTooltip = "This overhealth lasts until damaged by an enemy."

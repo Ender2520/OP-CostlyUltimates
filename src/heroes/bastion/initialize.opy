@@ -8,3 +8,4 @@ rule "[Bastion] Info":
     wait(0.2) 
     eventPlayer.ultName = " Heat-Seeking Missile"
     eventPlayer.ultDesc = " Bastion turns into an explosive with increased movement speed\n that after a short fuse explodes and deals massive damage\n to nearby enemies."
+    eventPlayer.ultTooltip = "Bastion will die when he explodes."

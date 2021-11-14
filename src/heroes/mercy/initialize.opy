@@ -8,6 +8,7 @@ rule "[Mercy] Info":
     wait(0.2) 
     eventPlayer.ultName = " Golden Gun"
     eventPlayer.ultDesc = " Mercy's pistol now instantly kills any enemies hit.\n Shots are on a short cooldown."
+    eventPlayer.ultTooltip = null
 
 rule "[Mercy] Initialize":
     @Event eachPlayer

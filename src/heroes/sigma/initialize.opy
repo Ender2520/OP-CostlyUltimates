@@ -8,3 +8,4 @@ rule "[Sigma] Info":
     wait(0.2) 
     eventPlayer.ultName = " Gravitic Flux"
     eventPlayer.ultDesc = " Enemies slightly outside the range of Gravitic Flux\n get pulled towards the center."
+    eventPlayer.ultTooltip = null
