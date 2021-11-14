@@ -10,7 +10,7 @@ rule "[Torbjorn] Meteor Strike Activate":
     @Condition eventPlayer.isMeleeing() != true
     @Condition eventPlayer.usingUltimateREAL != true
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
-    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 10, BarrierLos.PASS_THROUGH_BARRIERS) == true
+    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 7.5, BarrierLos.PASS_THROUGH_BARRIERS) == true
 
     # initalize
     eventPlayer.usingUltimateREAL = true
@@ -24,6 +24,7 @@ rule "[Torbjorn] Meteor Strike Activate":
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.disallowButton(Button.MELEE)
     eventPlayer.moveSpeed[false] /= 1000
+    eventPlayer.strikeTimer = 1
     # create camera
     eventPlayer.camPos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 50, null, getAllPlayers(), true).getHitPosition()
     wait(0.1)
@@ -35,28 +36,55 @@ rule "[Torbjorn] Meteor Strike Activate":
     eventPlayer.strikeEffects[0] = getLastCreatedEntity()
     createEffect(eventPlayer, Effect.LIGHT_SHAFT, Color.GRAY, raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 100, null, getAllPlayers(), true).getHitPosition(), 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects[1] = getLastCreatedEntity()
-    createInWorldText(eventPlayer, "{0} Fire                                         {1} Zoom Out | Zoom In {2}".format(buttonString(Button.PRIMARY_FIRE), buttonString(Button.SECONDARY_FIRE), buttonString(Button.CROUCH)), updateEveryTick(eventPlayer.camPos + Vector.DOWN * 15), 1.5, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.ORANGE, SpecVisibility.DEFAULT)
+    createInWorldText(eventPlayer, "                                      {0} Fire                                                                      Zoom | Out [{1}] - In [{2}]".format(buttonString(Button.PRIMARY_FIRE), buttonString(Button.SECONDARY_FIRE), buttonString(Button.CROUCH)), updateEveryTick(eventPlayer.camPos + Vector.DOWN * 15), 1.5, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.ORANGE, SpecVisibility.DEFAULT)
     eventPlayer.strikeTexts = getLastCreatedText()
+    createProgressBarInWorldText(eventPlayer, eventPlayer.strikeTimer * 100, "", updateEveryTick(eventPlayer.camPos + Vector.DOWN * 15), 0.5, Clip.NONE, Color.ORANGE, Color.ORANGE, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
+    eventPlayer.strikeTexts_ = getLastCreatedText()
     # start camera
     eventPlayer.startCamera(eventPlayer.camPos, updateEveryTick(eventPlayer.camPos + Vector.DOWN * 1), 100)
-    waitUntil(eventPlayer.strikeCount == 1 or eventPlayer.isDead(), 99999)
-    eventPlayer.setUltCharge(0+ultBoost)
-    # destroy effects
-    destroyInWorldText(eventPlayer.strikeTexts)
-    destroyEffect(eventPlayer.strikeEffects[0])
-    destroyEffect(eventPlayer.strikeEffects[1])
-    wait(0.5)
-    # revert changes
-    eventPlayer.stopCamera()
-    eventPlayer.moveSpeed[false] *= 1000
-    eventPlayer.setFacing(Vector.FORWARD, Relativity.TO_PLAYER)
-    eventPlayer.allowButton(Button.JUMP)
-    eventPlayer.allowButton(Button.CROUCH)
-    eventPlayer.allowButton(Button.ABILITY_1)
-    eventPlayer.allowButton(Button.ABILITY_2)
-    eventPlayer.allowButton(Button.SECONDARY_FIRE)
-    eventPlayer.allowButton(Button.MELEE)
-    eventPlayer.setKnockbackReceived(100)
+    # start time
+    chase(eventPlayer.strikeTimer, 0, duration=15, ChaseReeval.NONE)
+    waitUntil(eventPlayer.strikeCount == 1 or eventPlayer.isDead() or eventPlayer.strikeTimer == 0, 99999)
+    stopChasingVariable(eventPlayer.strikeTimer)
+    # determine whether to use ultimate or not
+    if (eventPlayer.strikeCount == 1): # successfully ulted
+        # destroy effects
+        destroyInWorldText(eventPlayer.strikeTexts)
+        destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
+        destroyEffect(eventPlayer.strikeEffects)
+        wait(0.5)
+        # revert changes
+        eventPlayer.stopCamera()
+        eventPlayer.moveSpeed[false] *= 1000
+        eventPlayer.stopFacing()
+        eventPlayer.setFacing(Vector.FORWARD, Relativity.TO_PLAYER)
+        eventPlayer.allowButton(Button.JUMP)
+        eventPlayer.allowButton(Button.CROUCH)
+        eventPlayer.allowButton(Button.ABILITY_1)
+        eventPlayer.allowButton(Button.ABILITY_2)
+        eventPlayer.allowButton(Button.SECONDARY_FIRE)
+        eventPlayer.allowButton(Button.MELEE)
+        eventPlayer.setKnockbackReceived(100)
+    else: # player died mid-ultimate
+        # destroy effects
+        destroyInWorldText(eventPlayer.strikeTexts)
+        destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
+        destroyEffect(eventPlayer.strikeEffects)
+        wait(0.5)
+        # revert changes
+        eventPlayer.stopCamera()
+        eventPlayer.moveSpeed[false] *= 1000
+        eventPlayer.stopFacing()
+        eventPlayer.setFacing(Vector.FORWARD, Relativity.TO_PLAYER)
+        eventPlayer.allowButton(Button.JUMP)
+        eventPlayer.allowButton(Button.CROUCH)
+        eventPlayer.allowButton(Button.ABILITY_1)
+        eventPlayer.allowButton(Button.ABILITY_2)
+        eventPlayer.allowButton(Button.SECONDARY_FIRE)
+        eventPlayer.allowButton(Button.MELEE)
+        eventPlayer.setKnockbackReceived(100)
+        eventPlayer.usingUltimateREAL = false
+        eventPlayer.setUltCharge(0+ultBoost)
 
 rule "[Torbjorn] Horizontal Camera Movement":
     @Event eachPlayer
@@ -71,24 +99,23 @@ rule "[Torbjorn] Horizontal Camera Movement":
     if RULE_CONDITION:
         goto RULE_START
 
-rule "[Torbjorn] Move Camera Down":
+rule "[Torbjorn] Move Camera Up":
     @Event eachPlayer
     @Hero torbjorn
     @Condition eventPlayer.isHoldingButton(Button.SECONDARY_FIRE) == true
     @Condition eventPlayer.usingUltimateREAL == true
-    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) <= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,100,0)
+    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition().y <= (eventPlayer.getPosition() + vect(0,50,0)).y
     
     eventPlayer.camPos = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.UP * 5, null, eventPlayer, true).getHitPosition()
 
-rule "[Torbjorn] Move Camera Up":
+rule "[Torbjorn] Move Camera Down":
     @Event eachPlayer
     @Hero torbjorn
     @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
     @Condition eventPlayer.usingUltimateREAL == true
-    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition() * vect(0,1,0) >= (eventPlayer.getPosition() * vect(0,1,0)) + vect(0,5,0)
-    
-    eventPlayer.camPos = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition()
+    @Condition raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition().y >= (eventPlayer.getPosition() + vect(0,5,0)).y
 
+    eventPlayer.camPos = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 5, null, eventPlayer, true).getHitPosition()
 
 rule "[Torbjorn] Meteor Strike Fired":
     @Event eachPlayer
