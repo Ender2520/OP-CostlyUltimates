@@ -19,7 +19,7 @@ rule "[Orisa] Create Large Zone":
     eventPlayer.superchargerEffect.append(getLastCreatedEntity())
     superChargerPulsingEffect()
     # expand supercharger radius
-    chase(eventPlayer.superchargerSize, 30, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
+    chase(eventPlayer.superchargerSize, 32, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
     waitUntil(not eventPlayer.isUsingUltimate(), 9999)
     # reverse expansion
     chase(eventPlayer.superchargerSize, 0, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
