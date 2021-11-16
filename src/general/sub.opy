@@ -123,5 +123,5 @@ def superChargerPulsingEffect():
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.superchargerPosition, eventPlayer.superchargerSize * 2)
     playEffect(getPlayersInRadius(eventPlayer.superchargerPosition, 35, Team.ALL, LosCheck.OFF), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, Color.GREEN, eventPlayer.superchargerPosition, 200) 
     wait(2.75, Wait.ABORT_WHEN_FALSE)
-    if eventPlayer.superchargerSize >= 30:
+    if eventPlayer.superchargerSize >= 32:
         async(superChargerPulsingEffect(), AsyncBehavior.RESTART)
