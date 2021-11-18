@@ -5,10 +5,10 @@ rule "[Winston] Primal Rage Activated":
     @Hero winston
     @Condition eventPlayer.isUsingUltimate()
 
-    eventPlayer.damageDealt[false] *= 2.5
+    eventPlayer.damageDealt[false] *= 2.0
     eventPlayer.setKnockbackDealt(0)
     waitUntil(eventPlayer.isUsingUltimate() != true, 9999)
-    eventPlayer.damageDealt[false] /= 2.5
+    eventPlayer.damageDealt[false] /= 2.0
     eventPlayer.setKnockbackDealt(0)
 
 rule "[Winston] On Primal Rage Hit":

@@ -18,39 +18,19 @@ rule "[Symmetra] Create Super Turret":
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
     eventPlayer.turretTimer = 1
-    # create entity
-    #createDummy(Hero.HAMMOND, getOppositeTeam(eventPlayer.getTeam()), -1, vect(0,100,0), vect(0,100,0))
-    createDummy(Hero.HAMMOND, eventPlayer.getTeam(), -1, vect(0,100,0), vect(0,100,0))
-    eventPlayer.turretEntity = getLastCreatedEntity()
-    wait()
-    # modify entity received
-    eventPlayer.turretEntity.setDamageReceived(70)
-    eventPlayer.turretEntity.setHealingReceived(0)
-    # modify entity stats
-    eventPlayer.turretEntity.setInvisibility(Invis.ALL)
-    eventPlayer.turretEntity.startModifyingVoicelinePitch(0.01, false)
-    eventPlayer.turretEntity.setStatusEffect(null, Status.UNKILLABLE, 9999)
-    eventPlayer.turretEntity.startForcingPosition(eventPlayer.turretPos - vect(0,1.95,0), false)
-    eventPlayer.turretEntity.disableEnvironmentCollision(true)
-    eventPlayer.turretEntity.startScalingSize(2.2, false)
-    eventPlayer.turretEntity.startForcingName("Super Turret")
-    eventPlayer.turretEntity.setGravity(0)
-    while not eventPlayer.turretEntity.isInAlternateForm():
-        eventPlayer.turretEntity.forceButtonPress(Button.ABILITY_1)
-        wait(0.05)
     wait()
     # create/play effects (ACTUAL TURRET)
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 15, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.BAD_AURA, Color.AQUA, eventPlayer.turretPos, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.BAD_AURA, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 15, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.BAD_AURA, Color.RED, eventPlayer.turretPos, 2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.BAD_AURA, Color.RED, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (ORBS)
     createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos, 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -79,14 +59,34 @@ rule "[Symmetra] Create Super Turret":
     createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos - vect(0,1,0) + ((angleToDirection(getTotalTimeElapsed() * 270, 0)) * /*top distance*/0.5), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (HP BAR)
-    createProgressBarInWorldText(getPlayers(eventPlayer.getTeam()), updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,3,0), 1, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    createProgressBarInWorldText([p for p in getPlayers(eventPlayer.getTeam()) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
     eventPlayer.turretTexts.append(getLastCreatedText())
-    createProgressBarInWorldText(getPlayers(getOppositeTeam(eventPlayer.getTeam())), updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,3,0), 1, Clip.NONE, Color.RED, Color.RED, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    createProgressBarInWorldText([p for p in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.RED, Color.RED, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
     eventPlayer.turretTexts.append(getLastCreatedText())
     # create/play effects (SPAWN EFFECTS)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.turretPos, 2)
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, Color.RED, eventPlayer.turretPos, 2)
     wait()
+    # create entity
+    #createDummy(Hero.HAMMOND, getOppositeTeam(eventPlayer.getTeam()), -1, vect(0,100,0), vect(0,100,0))
+    createDummy(Hero.HAMMOND, eventPlayer.getTeam(), -1, vect(0,100,0), vect(0,100,0))
+    eventPlayer.turretEntity = getLastCreatedEntity()
+    wait()
+    # modify entity received
+    eventPlayer.turretEntity.setDamageReceived(70)
+    eventPlayer.turretEntity.setHealingReceived(0)
+    # modify entity stats
+    eventPlayer.turretEntity.setInvisibility(Invis.ALL)
+    eventPlayer.turretEntity.startModifyingVoicelinePitch(0.01, false)
+    eventPlayer.turretEntity.setStatusEffect(null, Status.UNKILLABLE, 9999)
+    eventPlayer.turretEntity.startForcingPosition(eventPlayer.turretPos - vect(0,1.425,0), false)
+    eventPlayer.turretEntity.disableEnvironmentCollision(true)
+    eventPlayer.turretEntity.startScalingSize(1.68, false)
+    eventPlayer.turretEntity.startForcingName("Super Turret")
+    eventPlayer.turretEntity.setGravity(0)
+    while not eventPlayer.turretEntity.isInAlternateForm():
+        eventPlayer.turretEntity.forceButtonPress(Button.ABILITY_1)
+        wait(0.05)
     # start timer
     chase(eventPlayer.turretTimer, 0, duration=20, ChaseReeval.NONE)
     waitUntil(eventPlayer.turretTimer == 0 or eventPlayer.turretEntity.getHealth() < 5 and eventPlayer.turretEntity != null, 25)
@@ -116,6 +116,6 @@ rule "[Symmetra] Slow Turret Target":
     @Event eachPlayer
     @Condition eventPlayer == [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if player.getCurrentHero() == Hero.SYMMETRA and player.usingUltimateREAL == true].turretTarget
 
-    eventPlayer.moveSpeed[false] *= 0.5
+    eventPlayer.moveSpeed[false] *= 0.6
     waitUntil(eventPlayer != [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if player.getCurrentHero() == Hero.SYMMETRA and player.usingUltimateREAL == true].turretTarget, 9999)
-    eventPlayer.moveSpeed[false] /= 0.5
+    eventPlayer.moveSpeed[false] /= 0.6

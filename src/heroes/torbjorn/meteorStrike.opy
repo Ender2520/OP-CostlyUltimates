@@ -193,7 +193,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     eventPlayer.strikeEffects_[12] = getLastCreatedEntity()
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.RING, Color.TURQUOISE, eventPlayer.strikeLaunch1, 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects_[13] = getLastCreatedEntity()
-    wait(8)
+    wait(10)
     eventPlayer.usingUltimateREAL = false
     eventPlayer.setUltCharge(0+ultBoost)
     destroyEffect(eventPlayer.strikeEffects_[6])

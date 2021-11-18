@@ -13,19 +13,19 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.setUltCharge(0)
     eventPlayer.usingUltimateREAL = true
     eventPlayer.disallowButton(Button.ABILITY_1)
-    eventPlayer.disallowButton(Button.ABILITY_2)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.setAmmo(0, 30)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0)
     # create bot
-    createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), directionTowards(eventPlayer, eventPlayer.getFacingDirection() * 50))
+    createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 50, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition())
     eventPlayer.helixBot[0] = getLastCreatedEntity()
-    createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), directionTowards(eventPlayer, eventPlayer.getFacingDirection() * 50))
+    createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 50, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition())
     eventPlayer.helixBot[1] = getLastCreatedEntity()
     wait()
     # modify bot
     # stats / initialize
-    eventPlayer.helixBot[0].setDamageDealt(1)
-    eventPlayer.helixBot[1].setDamageDealt(1)
+    eventPlayer.helixBot[0].setDamageDealt(50)
+    eventPlayer.helixBot[1].setDamageDealt(50)
     eventPlayer.helixBot[0].setStatusEffect(null, Status.INVINCIBLE, 9999)
     eventPlayer.helixBot[1].setStatusEffect(null, Status.INVINCIBLE, 9999)
     eventPlayer.helixBot[0].disableEnvironmentCollision(true)
@@ -43,8 +43,8 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.helixBot[1].attachTo(eventPlayer, vect(-0.5,0.4,0.5))
     eventPlayer.helixBot[0].startForcingPosition(updateEveryTick(worldVector(vect(1,1,0), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), true)
     eventPlayer.helixBot[1].startForcingPosition(updateEveryTick(worldVector(vect(-1,1,0), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), true)
-    eventPlayer.helixBot[0].startFacing(updateEveryTick(eventPlayer.getFacingDirection()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
-    eventPlayer.helixBot[1].startFacing(updateEveryTick(eventPlayer.getFacingDirection()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
+    eventPlayer.helixBot[0].startFacing(directionTowards(eventPlayer.helixBot[0].getEyePosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
+    eventPlayer.helixBot[1].startFacing(directionTowards(eventPlayer.helixBot[1].getEyePosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
     # create effects
     createEffect(getAllPlayers(), Effect.SPHERE, Color.BLUE, updateEveryTick(worldVector(vect(0.25,1.55,0), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), 0.20, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.autoHelixEffects.append(getLastCreatedEntity())
@@ -67,11 +67,11 @@ rule "[Soldier 76] Spam Helix Rockets":
     # automatic helix rockets
     for eventPlayer.i in range(10):
         eventPlayer.helixBot[0].setAbilityCooldown(Button.SECONDARY_FIRE, 0)
-        wait(0.25)
+        wait(0.5)
         eventPlayer.helixBot[0].forceButtonPress(Button.SECONDARY_FIRE)
         #
         eventPlayer.helixBot[1].setAbilityCooldown(Button.SECONDARY_FIRE, 0)
-        wait(0.25)
+        wait(0.5)
         eventPlayer.helixBot[1].forceButtonPress(Button.SECONDARY_FIRE)
     # revert changes
     destroyEffect(eventPlayer.autoHelixEffects)
@@ -89,4 +89,4 @@ rule "[Soldier 76] Deal Helix Bot Damage":
     @Condition eventPlayer.isDummy()
     @Condition eventPlayer.parent.helixBot[0] == eventPlayer or eventPlayer.parent.helixBot[1] == eventPlayer
 
-    damage(victim, eventPlayer.parent, 100)
+    damage(victim, eventPlayer.parent, 20)

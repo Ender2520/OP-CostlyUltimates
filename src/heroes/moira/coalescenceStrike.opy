@@ -40,16 +40,16 @@ rule "[Moira] Call Coalnado":
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.tornadoPos, 8)
     playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.tornadoPos, 8)
     # chase pos and height
-    chase(eventPlayer.tornadoPos, eventPlayer.tornadoPos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=3.0, ChaseReeval.NONE)
-    chase(eventPlayer.tornadoHeight, 75, duration=2, ChaseReeval.NONE)
+    chase(eventPlayer.tornadoPos, eventPlayer.tornadoPos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=4.0, ChaseReeval.NONE)
+    chase(eventPlayer.tornadoHeight, 70, duration=1.5, ChaseReeval.NONE)
     # duration
     wait(10)
     # stop ultimate
     eventPlayer.usingUltimateREAL = false
     wait()
     # stop animation
-    chase(eventPlayer.tornadoHeight, 0, duration=2, ChaseReeval.NONE)
-    wait(2)
+    chase(eventPlayer.tornadoHeight, 0, duration=1.5, ChaseReeval.NONE)
+    wait(1.5)
     stopChasingVariable(eventPlayer.tornadoHeight)
     stopChasingVariable(eventPlayer.tornadoPos)
     eventPlayer.tornadoPos = vect(0,-1000,0)
@@ -69,9 +69,9 @@ rule "[Moira] Ultimate Loop":
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.TEAM_1, eventPlayer.tornadoPos, 15)
     # damage and heal over time
     [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 8].startDoT(eventPlayer, 0.5, 70)
-    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startDoT(eventPlayer, 0.5, 105)
+    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startDoT(eventPlayer, 0.5, 35)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.5, 140)
-    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startHoT(eventPlayer, 0.5, 210)
+    [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startHoT(eventPlayer, 0.5, 702)
     if distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) < 7 and (raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.tornadoPos * vect(0,1,0):
         eventPlayer.tornadoPos = raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()
     wait(0.5)

@@ -12,11 +12,11 @@ rule "[Cassidy] Deadeye Changes":
     eventPlayer.cassidyShieldBot = getLastCreatedEntity()
     wait()
     # modify dummy bot
-    eventPlayer.cassidyShieldBot.startScalingBarriers(20, false)
+    eventPlayer.cassidyShieldBot.startScalingBarriers(10, false)
     eventPlayer.cassidyShieldBot.startScalingSize(0.1, false)
     eventPlayer.cassidyShieldBot.startForcingName("Deadeye Shield")
-    eventPlayer.cassidyShieldBot.attachTo(eventPlayer, vect(0,0.75,1.25))
-    eventPlayer.cassidyShieldBot.startForcingPosition(updateEveryTick(worldVector(vect(0,0.75,1.25), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), true)
+    eventPlayer.cassidyShieldBot.attachTo(eventPlayer, vect(0,0.75,1))
+    eventPlayer.cassidyShieldBot.startForcingPosition(updateEveryTick(worldVector(vect(0,0.75,1), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), true)
     eventPlayer.cassidyShieldBot.startFacing(updateEveryTick(eventPlayer.getFacingDirection()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
     eventPlayer.cassidyShieldBot.setStatusEffect(null, Status.PHASED_OUT, 9999)
     # shield bot hold up shield

@@ -21,5 +21,5 @@ rule "[Sigma] Pull Enemies Towards Gravitic Flux":
 
     waitUntil([player.fluxCenter != null for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))], 9999)
     wait(0.5)
-    if any([distance(eventPlayer, player.fluxCenter) <= 12 for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))]) == true:
-        eventPlayer.applyImpulse(directionTowards(eventPlayer, getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam())).fluxCenter  + vect(0, 1, 0)), 15, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
+    if any([distance(eventPlayer, player.fluxCenter + vect(0,0.5,0)) <= 15 and isInLoS(player, eventPlayer, BarrierLos.PASS_THROUGH_BARRIERS) for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))]) == true:
+        eventPlayer.applyImpulse(directionTowards(eventPlayer, getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam())).fluxCenter  + vect(0,0.5,0)), 12, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)

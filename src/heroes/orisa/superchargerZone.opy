@@ -17,7 +17,7 @@ rule "[Orisa] Create Large Zone":
     eventPlayer.superchargerEffect.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.ORANGE, eventPlayer.superchargerPosition, eventPlayer.superchargerSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.superchargerEffect.append(getLastCreatedEntity())
-    superChargerPulsingEffect()
+    async(superChargerPulsingEffect(), AsyncBehavior.NOOP)
     # expand supercharger radius
     chase(eventPlayer.superchargerSize, 32, duration=0.8, ChaseReeval.DESTINATION_AND_DURATION)
     waitUntil(not eventPlayer.isUsingUltimate(), 9999)
