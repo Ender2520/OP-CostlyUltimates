@@ -104,6 +104,12 @@ settings {
             "tracer": {
                 "ultGen%": 75
             },
+            "widowmaker": {
+                "ultGen%": 50
+            },
+            "winston": {
+                "ultGen%": 75
+            },
             "enabledHeroes": [
                 "ana",
                 "ashe",

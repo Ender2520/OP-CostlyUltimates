@@ -23,6 +23,7 @@ playervar isStatused
 globalvar TESTBOT
 globalvar ultBoost
 globalvar devTools
+globalvar highPerformanceMode
 globalvar colorArray
 globalvar specialThanks
 #
@@ -128,3 +129,5 @@ playervar chamberEffects
 playervar chamberCast_Start
 playervar chamberCast_Direction
 playervar chamberCast_DistRemaining
+playervar chamberCharge
+playervar chamberTexts
