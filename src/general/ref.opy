@@ -39,6 +39,7 @@ playervar amplifiedSTIMER
 playervar missileTimer
 playervar missileAOEVisual
 playervar missileEffect
+playervar armorPool
 subroutine animationCleanup
 # brigitte
 playervar brigSpeedBoost

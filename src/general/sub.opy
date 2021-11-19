@@ -73,11 +73,14 @@ def animationCleanup():
     destroyEffect(eventPlayer.missileEffect)
     eventPlayer.missileEffect = []
     eventPlayer.moveSpeed /= 1.75
+    eventPlayer.setMaxHealth(100)
+    removeHealthPool(eventPlayer.armorPool)
     kill(eventPlayer, eventPlayer)
     wait(1)
     eventPlayer.stopCamera()
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.setSecondaryFireEnabled(true)
+    eventPlayer.armorPool = null
 
 def normalTracking():
     @Name "SUB Dva normalTracking"

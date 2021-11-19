@@ -10,6 +10,10 @@ rule "[Bastion] Heat Seeking Missile":
     eventPlayer.missileTimer = 1
     eventPlayer.missileAOEVisual = 0
     eventPlayer.startCamera(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + worldVector(vect(0, 3, 0), eventPlayer, Transform.ROTATION) + eventPlayer.getFacingDirection() * -5, getAllPlayers(), eventPlayer, false).getHitPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getAllPlayers(), eventPlayer, false).getHitPosition(), 20)
+    eventPlayer.setMaxHealth(25)
+    eventPlayer.setHealth(99999)
+    eventPlayer.addHealthPool(Health.ARMOR, 225, true, false)
+    eventPlayer.armorPool = getLastCreatedHealthPool()
     wait(1.5)
     chase(eventPlayer.missileTimer, 0, duration=4, ChaseReeval.NONE)
     chase(eventPlayer.missileAOEVisual, 7, duration=4, ChaseReeval.NONE)
