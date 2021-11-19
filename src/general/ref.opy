@@ -30,6 +30,8 @@ globalvar specialThanks
 playervar stateSpeed
 playervar usingUltimateREAL
 playervar ultimateDuration
+# ana
+playervar megaBoosted
 # baptiste
 playervar matrixSize
 playervar matrixVictims
