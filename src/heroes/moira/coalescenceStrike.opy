@@ -72,8 +72,10 @@ rule "[Moira] Ultimate Loop":
     [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startDoT(eventPlayer, 0.512, 35)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 8].startHoT(eventPlayer, 0.512, 140)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startHoT(eventPlayer, 0.512, 70)
-    if distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25 and distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) < 7 and (raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.tornadoPos * vect(0,1,0):
-        eventPlayer.tornadoPos = raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()
+    if distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25:
+        if distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) < 7:
+            if (raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) * vect(0,1,0) <= eventPlayer.tornadoPos * vect(0,1,0):
+            eventPlayer.tornadoPos = raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()
     wait(0.512)
     if RULE_CONDITION:
         goto RULE_START

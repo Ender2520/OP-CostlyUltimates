@@ -20,11 +20,9 @@ rule "[Global] Global 1":
     hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n", HudPosition.TOP, 18, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     # testing hud texts
     if devTools == true:
-        hudHeader(getAllPlayers(), "Bot Ult Charge : {0}".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.RED, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudHeader(getAllPlayers(), "Bot Distance : {0}".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudHeader(getAllPlayers(), "Player Is Using Ult : {0}".format(localPlayer.isUsingUltimate()), HudPosition.RIGHT, 7, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudHeader(getAllPlayers(), "Effects/Entities : {0}".format(getNumberOfEntityIds()), HudPosition.RIGHT, 8, Color.YELLOW, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudHeader(getAllPlayers(), "Texts : {0}".format(getNumberOfTextIds()), HudPosition.RIGHT, 9, Color.GREEN, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "ULT - {0}%".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "DIST - {0}m".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.GRAY, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "FX/ENTITY - {0} | TXT - {1}".format(getNumberOfEntityIds(), getNumberOfTextIds()), HudPosition.RIGHT, 8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     else:
         disableInspector()
     # set global variables
