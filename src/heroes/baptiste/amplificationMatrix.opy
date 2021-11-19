@@ -16,13 +16,13 @@ rule "[Baptiste] Create Amplification Matrix":
     # initialize Amp. Matrix
     eventPlayer.usingUltimateREAL = true
     eventPlayer.matrixSize = 0
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.LIME_GREEN, eventPlayer.getPosition(), eventPlayer.matrixSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.SPHERE, Color.LIME_GREEN, evalOnce(eventPlayer.getPosition()), eventPlayer.matrixSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION, Color.LIME_GREEN, eventPlayer.getPosition(), 40)
     playEffect(getAllPlayers(), DynamicEffect.BAPTISTE_BIOTIC_LAUNCHER_EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 180)
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 120)
     eventPlayer.matrixEffect = getLastCreatedEntity()
     # expand Amp. Matrix
-    chase(eventPlayer.matrixSize, 20, duration=0.5, ChaseReeval.DESTINATION_AND_DURATION)
+    chase(eventPlayer.matrixSize, 20, duration=0.5, ChaseReeval.NONE)
     wait(1)
     # remove effects and reset variables
     stopChasingVariable(eventPlayer.matrixSize)

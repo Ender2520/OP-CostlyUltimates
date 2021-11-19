@@ -89,6 +89,7 @@ playervar strikeTimer
 playervar camPos
 playervar strikeEffects
 playervar strikeEffects_
+playervar strikeEffects__
 playervar strikeTexts
 playervar strikeTexts_
 playervar strikeAvailable

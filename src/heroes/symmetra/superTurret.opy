@@ -13,13 +13,13 @@ rule "[Symmetra] Create Super Turret":
 
     # get turret position
     eventPlayer.turretPos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 30, null, getAllPlayers(), false).getHitPosition()
-    wait()
     # initalize
+    wait()
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
     eventPlayer.turretTimer = 1
-    wait()
     # create/play effects (ACTUAL TURRET)
+    wait()
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 15, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -44,6 +44,7 @@ rule "[Symmetra] Create Super Turret":
     createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos - vect(0,1,0) + ((angleToDirection(getTotalTimeElapsed() * 270, 0)) * /*top distance*/0.5), 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (BEAMS)
+    wait()
     createEffect(getAllPlayers(), Effect.ENERGY_SOUND, eventPlayer.getTeam(), eventPlayer.turretPos, 70, EffectReeval.VISIBILITY)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers() if eventPlayer.turretTarget != null else null, Effect.BEACON_SOUND, eventPlayer.getTeam(), eventPlayer.turretPos, 200, EffectReeval.VISIBILITY)
@@ -66,13 +67,12 @@ rule "[Symmetra] Create Super Turret":
     # create/play effects (SPAWN EFFECTS)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.turretPos, 2)
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, Color.RED, eventPlayer.turretPos, 2)
-    wait()
     # create entity
     #createDummy(Hero.HAMMOND, getOppositeTeam(eventPlayer.getTeam()), -1, vect(0,100,0), vect(0,100,0))
     createDummy(Hero.HAMMOND, eventPlayer.getTeam(), -1, vect(0,100,0), vect(0,100,0))
     eventPlayer.turretEntity = getLastCreatedEntity()
-    wait()
     # modify entity received
+    wait()
     eventPlayer.turretEntity.setDamageReceived(70)
     eventPlayer.turretEntity.setHealingReceived(0)
     # modify entity stats
@@ -84,6 +84,7 @@ rule "[Symmetra] Create Super Turret":
     eventPlayer.turretEntity.startScalingSize(1.68, false)
     eventPlayer.turretEntity.startForcingName("Super Turret")
     eventPlayer.turretEntity.setGravity(0)
+    wait()
     while not eventPlayer.turretEntity.isInAlternateForm():
         eventPlayer.turretEntity.forceButtonPress(Button.ABILITY_1)
         wait(0.05)
@@ -107,8 +108,11 @@ rule "[Symmetra] Ultimate Loop":
     # sounds
     playEffect(getAllPlayers(), DynamicEffect.ECHO_STICKY_BOMB_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.turretPos, 40)
     eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.5, 120)
-    wait(0.5)
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120)
+    wait(0.256)
+    eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120)
+    wait(0.256)
     if RULE_CONDITION:
         goto RULE_START
 

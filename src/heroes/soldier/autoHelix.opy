@@ -17,13 +17,14 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.setAmmo(0, 30)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0)
     # create bot
+    wait()
     createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 50, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition())
     eventPlayer.helixBot[0] = getLastCreatedEntity()
     createDummy(Hero.SOLDIER, eventPlayer.getTeam(), -1, eventPlayer.getPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 50, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition())
     eventPlayer.helixBot[1] = getLastCreatedEntity()
-    wait()
     # modify bot
     # stats / initialize
+    wait()
     eventPlayer.helixBot[0].setDamageDealt(50)
     eventPlayer.helixBot[1].setDamageDealt(50)
     eventPlayer.helixBot[0].setStatusEffect(null, Status.INVINCIBLE, 9999)
@@ -34,7 +35,8 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.helixBot[1].setStatusEffect(null, Status.PHASED_OUT, 9999)
     eventPlayer.helixBot[0].parent = eventPlayer
     eventPlayer.helixBot[1].parent = eventPlayer
-    # visuals
+    # bot visuals and mech
+    wait()
     eventPlayer.helixBot[0].setInvisibility(Invis.ALL)
     eventPlayer.helixBot[1].setInvisibility(Invis.ALL)
     eventPlayer.helixBot[0].startForcingName("Helix Bot 1.0")
@@ -46,6 +48,7 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.helixBot[0].startFacing(directionTowards(eventPlayer.helixBot[0].getEyePosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
     eventPlayer.helixBot[1].startFacing(directionTowards(eventPlayer.helixBot[1].getEyePosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), true).getHitPosition()), 99999, Relativity.TO_WORLD, FacingReeval.DIRECTION_AND_TURN_RATE)
     # create effects
+    wait()
     createEffect(getAllPlayers(), Effect.SPHERE, Color.BLUE, updateEveryTick(worldVector(vect(0.25,1.55,0), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), 0.20, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.autoHelixEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.SPHERE, Color.BLUE, updateEveryTick(worldVector(vect(-0.25,1.55,0), eventPlayer, Transform.ROTATION_AND_TRANSLATION)), 0.20, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -54,7 +57,7 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.autoHelixEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.BAD_AURA, getOppositeTeam(eventPlayer.getTeam()), eventPlayer, 0.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.autoHelixEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.GOOD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.GOOD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer, 200, EffectReeval.VISIBILITY)
     eventPlayer.autoHelixEffects.append(getLastCreatedEntity())
     # play effects
     # activation visuals
@@ -65,6 +68,7 @@ rule "[Soldier 76] Spam Helix Rockets":
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_TRANSLOCATOR_REAPPEAR_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 160)
     playEffect(getAllPlayers(), DynamicEffect.BUFF_IMPACT_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 200)
     # automatic helix rockets
+    wait()
     for eventPlayer.i in range(10):
         eventPlayer.helixBot[0].setAbilityCooldown(Button.SECONDARY_FIRE, 0)
         wait(0.5)

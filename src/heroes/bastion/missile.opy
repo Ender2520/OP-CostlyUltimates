@@ -11,8 +11,8 @@ rule "[Bastion] Heat Seeking Missile":
     eventPlayer.missileAOEVisual = 0
     eventPlayer.startCamera(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + worldVector(vect(0, 3, 0), eventPlayer, Transform.ROTATION) + eventPlayer.getFacingDirection() * -5, getAllPlayers(), eventPlayer, false).getHitPosition(), raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 100, getAllPlayers(), eventPlayer, false).getHitPosition(), 20)
     wait(1.5)
-    chase(eventPlayer.missileTimer, 0, duration=4, ChaseReeval.DESTINATION_AND_DURATION)
-    chase(eventPlayer.missileAOEVisual, 7, duration=4, ChaseReeval.DESTINATION_AND_DURATION)
+    chase(eventPlayer.missileTimer, 0, duration=4, ChaseReeval.NONE)
+    chase(eventPlayer.missileAOEVisual, 7, duration=4, ChaseReeval.NONE)
     eventPlayer.moveSpeed[false] *= 1.75
     #
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, updateEveryTick(eventPlayer.getEyePosition()), eventPlayer.missileAOEVisual, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)

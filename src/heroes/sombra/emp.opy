@@ -15,11 +15,12 @@ rule "[Sombra] Apply vulnerabled effect":
     eventPlayer.setUltCharge(0)
     eventPlayer.empRadius = 0
     eventPlayer.i = 0
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, evalOnce(eventPlayer.getPosition()), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, evalOnce(eventPlayer.getPosition()), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.empEffect.append(getLastCreatedEntity())
     # make that little floating effect when using default EMP
+    wait()
     eventPlayer.applyImpulse(Vector.UP, 0.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
     eventPlayer.setGravity(10)
     eventPlayer.setKnockbackReceived(25)
@@ -37,7 +38,7 @@ rule "[Sombra] Apply vulnerabled effect":
     # give vulnerability and player-specific queues to victims
     playEffect(eventPlayer.vulnerabledVictims, DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims.getPosition(), 200)
     for eventPlayer.i in range(len(eventPlayer.vulnerabledVictims)):
-        createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_LOOPING, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_LOOPING, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)], 1, EffectReeval.VISIBILITY)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
         #createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.victimEffects.append(getLastCreatedEntity())

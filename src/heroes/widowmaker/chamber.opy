@@ -43,6 +43,7 @@ rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     createBeam(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Beam.BAD, evalOnce(eventPlayer.chamberCast_Start), evalOnce(eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction), Color.RED, EffectReeval.VISIBILITY)
     eventPlayer.chamberEffects.append(getLastCreatedEntity())
     # play effects
+    wait()
     playEffect(getAllPlayers(), DynamicEffect.LUCIO_SOUND_BARRIER_CAST_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 100)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 150)
     playEffect(getAllPlayers(), DynamicEffect.MCCREE_FLASHBANG_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 200)

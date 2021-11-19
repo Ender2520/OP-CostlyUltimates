@@ -16,11 +16,11 @@ rule "[Doomfist] Detect Ultimate Use":
     eventPlayer.damageIncrease = 1
     chase(eventPlayer.ultimateDuration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     # create effects
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.WINSTON_TESLA_CANNON_TARGET, eventPlayer.getTeam(), eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.WINSTON_TESLA_CANNON_TARGET, eventPlayer.getTeam(), eventPlayer, 1, EffectReeval.VISIBILITY)
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.WINSTON_TESLA_CANNON_TARGET, getOppositeTeam(eventPlayer.getTeam()), eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.WINSTON_TESLA_CANNON_TARGET, getOppositeTeam(eventPlayer.getTeam()), eventPlayer, 1, EffectReeval.VISIBILITY)
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.BAD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer, 120, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.ENERGY_SOUND, eventPlayer.getTeam(), eventPlayer, 100, EffectReeval.VISIBILITY)
     eventPlayer.overdriveEffects.append(getLastCreatedEntity())
     # play effects
     # activation visuals
@@ -31,7 +31,7 @@ rule "[Doomfist] Detect Ultimate Use":
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 90)
     playEffect(getAllPlayers(), DynamicEffect.SIGMA_HYPERSPHERE_IMPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 70)
     # peri-ultimate
-    progressBarHud(eventPlayer, updateEveryTick(100 * (eventPlayer.ultimateDuration / 15)), "{0} Overdrive | Damage Increase {1}%".format(abilityIconString(Hero.DOOMFIST, Button.ULTIMATE), eventPlayer.damageIncrease * 100), HudPosition.TOP, -10, Color.RED, Color.WHITE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    progressBarHud(eventPlayer, updateEveryTick(100 * (eventPlayer.ultimateDuration / 15)), "{0} Overdrive | Damage Increase {1}%".format(abilityIconString(Hero.DOOMFIST, Button.ULTIMATE), eventPlayer.damageIncrease * 100), HudPosition.TOP, -10, Color.RED, Color.WHITE, ProgressHudReeval.VISIBILITY_AND_VALUES, SpecVisibility.ALWAYS)
     eventPlayer.ultimateBar = getLastCreatedText()
     eventPlayer.usingUltimateREAL = true
     waitUntil(eventPlayer.ultimateDuration == 0, 99999)

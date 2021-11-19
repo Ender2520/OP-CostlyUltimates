@@ -17,9 +17,9 @@ rule "[Echo] Detect Ultimate Use":
     wait()
     # create effects
     chase(eventPlayer.counterpoiseSize, 100, duration=1, ChaseReeval.NONE)
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.SKY_BLUE, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.SKY_BLUE, evalOnce(eventPlayer.getPosition()), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.counterpoiseEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.getPosition(), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, evalOnce(eventPlayer.getPosition()), eventPlayer.counterpoiseSize, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.counterpoiseEffects.append(getLastCreatedEntity())
     # play effects
     # activation visuals
