@@ -10,7 +10,7 @@ rule "[Doomfist] Detect Ultimate Use":
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
 
     # pre-ultimate
-    eventPlayer.setUltCharge(0+ultBoost)
+    eventPlayer.setUltCharge(0)
     eventPlayer.setUltEnabled(false)
     eventPlayer.ultimateDuration = 15
     eventPlayer.damageIncrease = 1
@@ -61,7 +61,6 @@ rule "[Doomfist] Detect Ultimate Use":
     destroyProgressBarHud(eventPlayer.ultimateBar)
     destroyEffect(eventPlayer.overdriveEffects)
     stopChasingVariable(eventPlayer.ultimateDuration)
-    eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.setUltEnabled(true)
     eventPlayer.usingUltimateREAL = false
     eventPlayer.ultimateBar = []

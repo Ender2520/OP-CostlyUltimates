@@ -6,6 +6,7 @@
 #!extension beamEffects
 
 playervar hero_
+playervar firstSpawn
 playervar spawnedREAL
 playervar moveSpeed
 playervar damageDealt
@@ -18,7 +19,6 @@ playervar heroHUD
 playervar ultName
 playervar ultDesc
 playervar ultTooltip
-playervar statusColor
 playervar isStatused
 globalvar TESTBOT
 globalvar ultBoost
@@ -77,7 +77,6 @@ playervar goldenGunCooldown
 playervar tornadoPos
 playervar tornadoHeight
 playervar tornadoEffects
-playervar tornadoTexts
 # orisa
 playervar superchargerSize
 playervar superchargerEffect
@@ -134,4 +133,4 @@ playervar chamberCast_Start
 playervar chamberCast_Direction
 playervar chamberCast_DistRemaining
 playervar chamberCharge
-playervar chamberTexts
+playervar chamberText

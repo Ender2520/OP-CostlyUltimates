@@ -11,7 +11,7 @@ rule "[Baptiste] Create Amplification Matrix":
 
     # cancel default ultimate
     eventPlayer.cancelPrimaryAction()
-    eventPlayer.setUltCharge(0+ultBoost)
+    eventPlayer.setUltCharge(0)
     wait()
     # initialize Amp. Matrix
     eventPlayer.usingUltimateREAL = true
