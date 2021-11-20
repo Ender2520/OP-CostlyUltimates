@@ -18,6 +18,7 @@ rule "[Symmetra] Create Super Turret":
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
     eventPlayer.turretTimer = 1
+    eventPlayer.turretTexts = []
     # create/play effects (ACTUAL TURRET)
     wait()
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -60,9 +61,9 @@ rule "[Symmetra] Create Super Turret":
     createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos - vect(0,1,0) + ((angleToDirection(getTotalTimeElapsed() * 270, 0)) * /*top distance*/0.5), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (HP BAR)
-    createProgressBarInWorldText([p for p in getPlayers(eventPlayer.getTeam()) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    createProgressBarInWorldText([p for p in getPlayers(eventPlayer.getTeam()) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
     eventPlayer.turretTexts.append(getLastCreatedText())
-    createProgressBarInWorldText([p for p in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.RED, Color.RED, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.ALWAYS)
+    createProgressBarInWorldText([p for p in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.RED, Color.RED, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
     eventPlayer.turretTexts.append(getLastCreatedText())
     # create/play effects (SPAWN EFFECTS)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.turretPos, 2)
@@ -94,7 +95,7 @@ rule "[Symmetra] Create Super Turret":
     # revert changes
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.turretEffects)
-    destroyAllProgressBarInWorldTexts()
+    destroyProgressBarInWorldText(eventPlayer.turretTexts)
     destroyDummy(eventPlayer.turretEntity.getTeam(), eventPlayer.turretEntity.getSlot())
     eventPlayer.turretEffects = []
     eventPlayer.turretTexts = []

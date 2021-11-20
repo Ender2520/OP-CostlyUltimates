@@ -29,9 +29,9 @@ rule "[Torbjorn] Meteor Strike Activate":
     eventPlayer.camPos = raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 50, null, getAllPlayers(), true).getHitPosition()
     wait(0.1)
     # create eventPlayer effects
-    playEffect(getAllPlayers(), DynamicEffect.REINHARDT_FIRE_STRIKE_TARGET_IMPACT_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 100)
+    playEffect(getAllPlayers(), DynamicEffect.REINHARDT_FIRE_STRIKE_TARGET_IMPACT_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 150)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 100)
-    playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 100)
+    playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getPosition(), 75)
     createEffect(eventPlayer, Effect.LIGHT_SHAFT, Color.GRAY, raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 100, null, getAllPlayers(), true).getHitPosition(), 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects[0] = getLastCreatedEntity()
     createInWorldText(eventPlayer, "                                      {0} Fire                                                                      Zoom | Out [{1}] - In [{2}]".format(buttonString(Button.PRIMARY_FIRE), buttonString(Button.SECONDARY_FIRE), buttonString(Button.CROUCH)), updateEveryTick(eventPlayer.camPos + Vector.DOWN * 15), 1.5, Clip.NONE, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.ORANGE, SpecVisibility.DEFAULT)
@@ -191,7 +191,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     
 rule "[Torbjorn] Lava Pit Damage":
     @Event eachPlayer
-    @Condition any([player.strikeDrop1 == player.strikeLaunch1 and player.strikeDrop1 != null and player.isAlive() and player.usingUltimateREAL == true and eventPlayer.getPosition().y >= player.strikeLaunch1.y - 2 and distance(player.strikeLaunch1, eventPlayer) < 12 and player != eventPlayer for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))])
+    @Condition any([player.strikeDrop1 == player.strikeLaunch1 and player.strikeDrop1 != null and player.isAlive() and player.usingUltimateREAL == true and eventPlayer.getPosition().y <= player.strikeLaunch1.y + 2 and eventPlayer.getPosition().y >= player.strikeLaunch1.y - 2 and distance(player.strikeLaunch1, eventPlayer) < 12 and player != eventPlayer for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))])
 
     eventPlayer.setStatusEffect([player for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))], Status.BURNING, 9999)
     eventPlayer.startDoT([player for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))], 9999, 75)

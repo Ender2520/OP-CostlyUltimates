@@ -7,6 +7,8 @@ def HeroCleanup(): # EVERY SPAWN PER HERO
         eventPlayer.cassidyShieldBot = null
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
+    elif eventPlayer.hero_ == Hero.SYMMETRA:
+        eventPlayer.turretTexts = null
 
 def SwapCleanup(): # SWAPPING OFF A HERO
     @Name "SUB Swap Cleanup"
@@ -15,6 +17,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         wait()
         eventPlayer.matrixEffect = null
         eventPlayer.matrixSize = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.BASTION:
         destroyEffect(eventPlayer.missileAOEVisual)
         destroyEffect(eventPlayer.missileEffect)
@@ -24,12 +27,15 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.missileEffect = null
         eventPlayer.missileTimer = null
         eventPlayer.armorPool = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.BRIGITTE:
         getPlayers(eventPlayer.getTeam()).brigSpeedBoost = false
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.MCCREE:
         destroyDummy(eventPlayer.getTeam(), eventPlayer.cassidyShieldBot.getSlot())
         wait()
         eventPlayer.cassidyShieldBot = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.DOOMFIST:
         destroyProgressBarHud(eventPlayer.ultimateBar)
         destroyEffect(eventPlayer.overdriveEffects)
@@ -37,13 +43,16 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.damageIncrease = null
         eventPlayer.ultimateBar = null
         eventPlayer.overdriveEffects = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.ECHO:
         destroyEffect(eventPlayer.counterpoiseEffects)
         wait()
         eventPlayer.counterpoiseEffects = null
         eventPlayer.counterpoiseSize = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.HANZO:
         eventPlayer.dragonStrikeCharges = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
         destroyHudText(eventPlayer.goldenGunHUD)
@@ -51,9 +60,13 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.goldenGunReloaded = null
         eventPlayer.goldenGunHUD = null
         eventPlayer.goldenGunCooldown = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.PHARAH:
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
+        destroyEffect(eventPlayer.strikeEffects)
+        destroyEffect(eventPlayer.strikeEffects_)
+        destroyEffect(eventPlayer.strikeEffects__)
         wait()
         eventPlayer.camPos = null
         eventPlayer.strikeAvailable = null
@@ -65,19 +78,33 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.strikeDrop2 = null
         eventPlayer.strikeDrop3 = null
         eventPlayer.strikeDrop4 = null
+        eventPlayer.strikeTexts = null
+        eventPlayer.strikeTexts_ = null
+        eventPlayer.strikeEffects = null
+        eventPlayer.strikeEffects_ = null
+        eventPlayer.strikeEffects__ = null
     elif eventPlayer.hero_ == Hero.TORBJORN:
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
+        destroyEffect(eventPlayer.strikeEffects)
+        destroyEffect(eventPlayer.strikeEffects_)
+        destroyEffect(eventPlayer.strikeEffects__)
         wait()
         eventPlayer.camPos = null
         eventPlayer.strikeAvailable = null
         eventPlayer.strikeLaunch1 = null
         eventPlayer.strikeDrop1 = null
+        eventPlayer.strikeTexts = null
+        eventPlayer.strikeTexts_ = null
+        eventPlayer.strikeEffects = null
+        eventPlayer.strikeEffects_ = null
+        eventPlayer.strikeEffects__ = null
     elif eventPlayer.hero_ == Hero.SIGMA:
         destroyEffect(eventPlayer.fluxExtraRangeEffect)
         wait()
         eventPlayer.fluxCenter = null
         eventPlayer.fluxExtraRangeEffect = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOLDIER:
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
@@ -85,6 +112,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         wait()
         eventPlayer.fluxCenter = null
         eventPlayer.fluxExtraRangeEffect = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOMBRA:
         destroyEffect(eventPlayer.empEffect)
         destroyEffect(eventPlayer.victimEffects)
@@ -93,8 +121,10 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.empEffect = null
         eventPlayer.victimEffects = null
     elif eventPlayer.hero_ == Hero.SYMMETRA:
+        destroyEffect(eventPlayer.turretEffects)
         destroyDummy(eventPlayer.getTeam(), eventPlayer.turretEntity.getSlot())
-        destroyProgressBarInWorldText(eventPlayer.turretTexts)
+        destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
+        destroyProgressBarInWorldText(eventPlayer.turretTexts[1])
         stopChasingVariable(eventPlayer.turretTimer)
         wait()
         eventPlayer.turretEffects = null
@@ -103,6 +133,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.turretTarget = null
         eventPlayer.turretTexts = null
         eventPlayer.turretTimer = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.TRACER:
         destroyEffect(eventPlayer.manipulateEffects)
         destroyProgressBarHud(eventPlayer.manipulateTexts)
@@ -110,6 +141,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.manipulateDuration = null
         eventPlayer.manipulateEffects = null
         eventPlayer.manipulateTexts = null
+        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.WIDOWMAKER:
         destroyEffect(eventPlayer.chamberEffects)
         destroyProgressBarHud(eventPlayer.chamberText)
@@ -118,6 +150,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.chamberCast_Direction = null
         eventPlayer.chamberCast_DistRemaining = null
         eventPlayer.chamberCharge = null
+        eventPlayer.usingUltimateREAL = false
 
 def RespawnCleanup(): # EVERY SPAWN GLOBAL
     @Name "SUB Respawn Cleanup"
