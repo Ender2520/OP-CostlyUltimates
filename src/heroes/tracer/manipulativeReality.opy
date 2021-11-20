@@ -12,7 +12,7 @@ rule "[Tracer] Manipulative Reality Activate":
 
     # initialize
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.manipulateDuration = 1
     eventPlayer.setAmmo(0, 999)
     # create effects
@@ -35,6 +35,7 @@ rule "[Tracer] Manipulative Reality Activate":
     stopChasingVariable(eventPlayer.manipulateDuration)
     eventPlayer.usingUltimateREAL = false
     # leave tracer with no abilities or ammo
+    eventPlayer.setUltCharge(0+ultBoost)
     eventPlayer.setAbilityCharge(Button.ABILITY_1, 0)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 12)
     eventPlayer.setAmmo(0, 0)

@@ -43,7 +43,6 @@ rule "[Torbjorn] Meteor Strike Activate":
     # start time
     chase(eventPlayer.strikeTimer, 0, duration=15, ChaseReeval.NONE)
     waitUntil(eventPlayer.strikeCount == 1 or eventPlayer.isDead() or eventPlayer.strikeTimer == 0, 99999)
-    eventPlayer.setUltCharge(0)
     stopChasingVariable(eventPlayer.strikeTimer)
     # determine whether to use ultimate or not
     if (eventPlayer.strikeCount == 1): # successfully ulted
@@ -83,6 +82,7 @@ rule "[Torbjorn] Meteor Strike Activate":
         eventPlayer.allowButton(Button.MELEE)
         eventPlayer.setKnockbackReceived(100)
         eventPlayer.usingUltimateREAL = false
+        eventPlayer.setUltCharge(0+ultBoost)
 
 rule "[Torbjorn] Horizontal Camera Movement":
     @Event eachPlayer
@@ -192,6 +192,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     eventPlayer.strikeEffects_[15] = getLastCreatedEntity()
     wait(10)
     eventPlayer.usingUltimateREAL = false
+    eventPlayer.setUltCharge(0+ultBoost)
     destroyEffect(eventPlayer.strikeEffects_)
     destroyEffect(eventPlayer.strikeEffects__)
     eventPlayer.strikeEffects_ = []

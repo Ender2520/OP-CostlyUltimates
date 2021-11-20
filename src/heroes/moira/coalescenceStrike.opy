@@ -55,6 +55,7 @@ rule "[Moira] Call Coalnado":
     eventPlayer.tornadoPos = vect(0,-1000,0)
     destroyEffect(eventPlayer.tornadoEffects)
     eventPlayer.tornadoEffects = []
+    eventPlayer.tornadoTexts = []
 
 rule "[Moira] Ultimate Loop":
     @Event eachPlayer

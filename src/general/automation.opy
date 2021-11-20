@@ -1,6 +1,7 @@
 #!mainFile "../main.opy"
 
 rule "[Automation] Prevent Server Crash":
+    @Event global
     @Condition highPerformanceMode == true
     @Condition getServerLoad() >= 250
 
@@ -10,51 +11,20 @@ rule "[Automation] Prevent Server Crash":
     wait(0.25)
     setSlowMotion(100)
 
-rule "[Automation] First Spawn":
-    @Event eachPlayer
-    @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn == true
-
-    FullCleanup()
-
 rule "[Automation] Every Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn == false
+    @Condition eventPlayer.isDummy() != true
 
-    RespawnCleanup()
-    wait()
-    HeroCleanup()
+    Cleanup()
 
-rule "[Automation] Hero Swap":
+rule "[Automation] Swapped":
     @Event eachPlayer
     @Condition eventPlayer.hero_ != eventPlayer.getCurrentHero()
     @Condition eventPlayer.isDummy() != true
     
-    SwapCleanup()
-    eventPlayer.spawnedREAL = true
-    eventPlayer.hero_ = eventPlayer.getCurrentHero()
-    wait()
     eventPlayer.spawnedREAL = false
-
-rule "[Automation] Ultimate Boost":
-    @Event eachPlayer
-    @Condition eventPlayer.getUltCharge() < ultBoost
-    
-    eventPlayer.setUltCharge(ultBoost)
-    wait(0.016)
-    if RULE_CONDITION:
-        goto RULE_START
-
-rule "[Automation] Prevent Ultimate Charge Gain During Ultimate":
-    @Event eachPlayer
-    @Condition eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true
-    @Condition eventPlayer.hero_ != Hero.LUCIO or eventPlayer.hero_ != Hero.BASTION or eventPlayer.hero_ != Hero.BRIGITTE or eventPlayer.hero_ != Hero.DVA
-    
-    while eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true:
-        if eventPlayer.getUltCharge() >= ultBoost + 0.4:
-            eventPlayer.setUltCharge(ultBoost)
-        wait(0.096)
+    Cleanup()
 
 rule "[Automation] Move Speed":
     @Event eachPlayer
