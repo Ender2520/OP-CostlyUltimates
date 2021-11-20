@@ -128,8 +128,6 @@ rule "[Torbjorn] Meteor Strike Fired":
     eventPlayer.strikeCount += 1
     eventPlayer.strikeDrop1 = raycast(eventPlayer.camPos, eventPlayer.camPos + Vector.DOWN * 1000, null, getAllPlayers(), true).getHitPosition()
     eventPlayer.strikeLaunch1 = eventPlayer.strikeDrop1 + vect(0, 500, 0)
-    wait(0.85)
-    eventPlayer.strikeAvailable = true
 
 rule "[Torbjorn] Meteor Strike Dropped":
     @Event eachPlayer
@@ -138,7 +136,7 @@ rule "[Torbjorn] Meteor Strike Dropped":
     
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.RING, Color.AQUA, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects__[0] = getLastCreatedEntity()
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.ORANGE, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects__[1] = getLastCreatedEntity()
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.LIGHT_SHAFT, Color.AQUA, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects_[2] = getLastCreatedEntity()
@@ -174,28 +172,20 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     @Condition eventPlayer.strikeCount == 1
     @Condition eventPlayer.strikeLaunch1 == eventPlayer.strikeDrop1
 
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeLaunch1, 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[8] = getLastCreatedEntity()
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeLaunch1 + (vect(1,0,0) * 4), 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[9] = getLastCreatedEntity()
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeLaunch1+ (vect(-1,0,0) * 4), 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[10] = getLastCreatedEntity()
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeLaunch1+ (vect(0,0,1) * 4), 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[11] = getLastCreatedEntity()
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeLaunch1+ (vect(0,0,-1) * 4), 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[12] = getLastCreatedEntity()
-    createEffect(getAllPlayers(), Effect.CLOUD, Color.RED, eventPlayer.strikeLaunch1, 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[13] = getLastCreatedEntity()
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.RING, Color.AQUA, eventPlayer.strikeLaunch1, 12, EffectReeval.VISIBILITY)
-    eventPlayer.strikeEffects_[14] = getLastCreatedEntity()
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeLaunch1, 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.strikeEffects_[15] = getLastCreatedEntity()
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.CLOUD, Color.AQUA, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
+    eventPlayer.strikeEffects__[2] = getLastCreatedEntity()
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.CLOUD, Color.BLUE, eventPlayer.strikeDrop1 - Vector.DOWN * 0.5, 12, EffectReeval.VISIBILITY)
+    eventPlayer.strikeEffects__[3] = getLastCreatedEntity()
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.CLOUD, Color.ORANGE, eventPlayer.strikeDrop1, 12, EffectReeval.VISIBILITY)
+    eventPlayer.strikeEffects__[4] = getLastCreatedEntity()
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.CLOUD, Color.RED, eventPlayer.strikeDrop1 - Vector.DOWN * 0.5, 12, EffectReeval.VISIBILITY)
+    eventPlayer.strikeEffects__[5] = getLastCreatedEntity()
     wait(10)
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.strikeEffects_)
     destroyEffect(eventPlayer.strikeEffects__)
-    eventPlayer.strikeEffects_ = []
-    eventPlayer.strikeEffects__ = []
+    eventPlayer.strikeEffects_ = null
+    eventPlayer.strikeEffects__ = null
     eventPlayer.strikeDrop1 = null
     eventPlayer.strikeLaunch1 = null
     
