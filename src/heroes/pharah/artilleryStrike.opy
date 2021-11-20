@@ -46,6 +46,7 @@ rule "[Pharah] Artillery Strike Activate":
     # start time
     chase(eventPlayer.strikeTimer, 0, duration=15, ChaseReeval.NONE)
     waitUntil(eventPlayer.strikeCount == 4 or eventPlayer.isDead() or eventPlayer.strikeTimer == 0, 99999)
+    eventPlayer.setUltCharge(0)
     stopChasingVariable(eventPlayer.strikeTimer)
     # determine whether to use ultimate or not
     if (eventPlayer.strikeCount == 4): # successfully ulted
@@ -76,7 +77,6 @@ rule "[Pharah] Artillery Strike Activate":
         eventPlayer.setKnockbackReceived(100)
         wait(3)
         eventPlayer.usingUltimateREAL = false
-        eventPlayer.setUltCharge(0+ultBoost)
     else: # player died mid-ultimate
         # destroy effects
         destroyInWorldText(eventPlayer.strikeTexts)
@@ -96,7 +96,11 @@ rule "[Pharah] Artillery Strike Activate":
         eventPlayer.allowButton(Button.MELEE)
         eventPlayer.setKnockbackReceived(100)
         eventPlayer.usingUltimateREAL = false
-        eventPlayer.setUltCharge(0+ultBoost)
+    eventPlayer.strikeEffects = null
+    eventPlayer.strikeTexts = null
+    eventPlayer.strikeTexts_ = null
+    eventPlayer.strikeCount = null
+    eventPlayer.strikeTimer = null
 
 rule "[Pharah] Horizontal Camera Movement":
     @Event eachPlayer
