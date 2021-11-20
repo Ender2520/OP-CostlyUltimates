@@ -78,12 +78,27 @@ rule "[Soldier 76] Spam Helix Rockets":
         wait(0.5)
         eventPlayer.helixBot[1].forceButtonPress(Button.SECONDARY_FIRE)
     # revert changes
+    eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.autoHelixEffects)
     eventPlayer.setUltCharge(0)
     eventPlayer.allowButton(Button.ABILITY_1)
     eventPlayer.allowButton(Button.ABILITY_2)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)
+    eventPlayer.autoHelixEffects = []
+    destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
+    destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
+
+rule "[Soldier 76] Dies During Ultimate":
+    @Event eachPlayer
+    @Condition eventPlayer.usingUltimateREAL == true
+    @Condition eventPlayer.isDead()
+
     eventPlayer.usingUltimateREAL = false
+    destroyEffect(eventPlayer.autoHelixEffects)
+    eventPlayer.setUltCharge(0)
+    eventPlayer.allowButton(Button.ABILITY_1)
+    eventPlayer.allowButton(Button.ABILITY_2)
+    eventPlayer.allowButton(Button.SECONDARY_FIRE)
     eventPlayer.autoHelixEffects = []
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
@@ -93,4 +108,4 @@ rule "[Soldier 76] Deal Helix Bot Damage":
     @Condition eventPlayer.isDummy()
     @Condition eventPlayer.parent.helixBot[0] == eventPlayer or eventPlayer.parent.helixBot[1] == eventPlayer
 
-    damage(victim, eventPlayer.parent, 20)
+    damage(victim, eventPlayer.parent, 60)
