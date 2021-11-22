@@ -8,7 +8,7 @@ rule "[Symmetra] Info":
     wait(0.2) 
     eventPlayer.ultName = " Super Turret"
     eventPlayer.ultDesc = " Symmetra creates a large turret that locks onto nearby\n enemies within LoS, deals constant damage, and\n provides a movement debuff to the target."
-    eventPlayer.ultTooltip = "Symmetra's Super Turret can be destroyed by the enemy team."
+    eventPlayer.ultTooltip = "Super Turret can be destroyed by the enemy team."
 
 rule "[Symmetra] Initialize":
     @Event eachPlayer
