@@ -42,7 +42,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
     eventPlayer.trappedPlayers.moveSpeed[false] *= 0.35
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.STUNNED, 0.5)
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.BURNING, 9999)
-    eventPlayer.trappedPlayers.startDoT(eventPlayer, 9999, 20)
+    eventPlayer.trappedPlayers.startDoT(eventPlayer, 9999, 13.33333)
     eventPlayer.trappedPlayers.trappedSTIMER = 7.5
     eventPlayer.trappedPlayers.isStatused[5] = true
     smallMessage(eventPlayer.trappedPlayers, "{0} ELIMINATE THE HAMSTER {0}".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE)))
@@ -52,7 +52,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
     eventPlayer.i = 0
     waitUntil(eventPlayer.isDead() or eventPlayer.trapTime == 0, 9999)
     if eventPlayer.isAlive():
-        damage(eventPlayer.trappedPlayers, eventPlayer, 400)
+        damage(eventPlayer.trappedPlayers, eventPlayer, 600 if eventPlayer.megaBoosted == true else 400)
         for eventPlayer.i in range(len(eventPlayer.trappedPlayers)):
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.GOOD_EXPLOSION, Color.ORANGE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 2)
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 150)
