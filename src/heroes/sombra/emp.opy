@@ -31,29 +31,30 @@ rule "[Sombra] Apply vulnerabled effect":
     # expand sphere
     chase(eventPlayer.empRadius, 15, duration=0.25, ChaseReeval.NONE)
     eventPlayer.vulnerabledVictims = getPlayersInRadius(eventPlayer, 15, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES)
-    wait(0.25)
-    # revert floating effect
-    eventPlayer.setGravity(100)
-    eventPlayer.setKnockbackReceived(100)
+    wait(0.1)
     # give vulnerability and player-specific queues to victims
-    playEffect(eventPlayer.vulnerabledVictims, DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims.getPosition(), 200)
     for eventPlayer.i in range(len(eventPlayer.vulnerabledVictims)):
         createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_LOOPING, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)], 1, EffectReeval.VISIBILITY)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
-        #createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_SOUND, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        eventPlayer.victimEffects.append(getLastCreatedEntity())
+        playEffect(eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)], DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 200)
     eventPlayer.vulnerabledVictims.damageReceived *= 1.50
     eventPlayer.vulnerabledVictims.isStatused[4] = true
     eventPlayer.vulnerabledVictims.vulnerabledSTIMER = 5
+    wait(0.1)
+    # revert floating effect
+    eventPlayer.setGravity(100)
+    eventPlayer.setKnockbackReceived(100)
+    wait()
     # destroy effect
     destroyEffect(eventPlayer.empEffect)
     eventPlayer.empEffect = null
-    wait(5)
+    wait(4.9)
     # revert changes
     destroyEffect(eventPlayer.victimEffects)
     eventPlayer.vulnerabledVictims.isStatused[4] = false
     eventPlayer.victimEffects = null
     eventPlayer.vulnerabledVictims.damageReceived /= 1.50
+    eventPlayer.i = 0
+    wait()
     eventPlayer.vulnerabledVictims = null
     eventPlayer.usingUltimateREAL = false
-    eventPlayer.i = 0

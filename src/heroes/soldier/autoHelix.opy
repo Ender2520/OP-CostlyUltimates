@@ -12,8 +12,8 @@ rule "[Soldier 76] Spam Helix Rockets":
 
     eventPlayer.setUltCharge(0)
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.disallowButton(Button.ABILITY_1)
-    eventPlayer.disallowButton(Button.SECONDARY_FIRE)
+    eventPlayer.setAbility1Enabled(false)
+    eventPlayer.setSecondaryFireEnabled(false)
     eventPlayer.setAmmo(0, 30)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0)
     # create bot
@@ -81,24 +81,23 @@ rule "[Soldier 76] Spam Helix Rockets":
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.autoHelixEffects)
     eventPlayer.setUltCharge(0)
-    eventPlayer.allowButton(Button.ABILITY_1)
-    eventPlayer.allowButton(Button.ABILITY_2)
-    eventPlayer.allowButton(Button.SECONDARY_FIRE)
+    eventPlayer.setAbility1Enabled(true)
+    eventPlayer.setSecondaryFireEnabled(true)
     eventPlayer.autoHelixEffects = []
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
 
 rule "[Soldier 76] Dies During Ultimate":
     @Event eachPlayer
+    @Hero soldier
     @Condition eventPlayer.usingUltimateREAL == true
     @Condition eventPlayer.isDead()
 
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.autoHelixEffects)
     eventPlayer.setUltCharge(0)
-    eventPlayer.allowButton(Button.ABILITY_1)
-    eventPlayer.allowButton(Button.ABILITY_2)
-    eventPlayer.allowButton(Button.SECONDARY_FIRE)
+    eventPlayer.setAbility1Enabled(true)
+    eventPlayer.setSecondaryFireEnabled(true)
     eventPlayer.autoHelixEffects = []
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
     destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())

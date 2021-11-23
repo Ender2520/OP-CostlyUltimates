@@ -17,4 +17,4 @@ rule "[Winston] On Primal Rage Hit":
     @Condition eventPlayer.isUsingUltimate()
     @Condition eventAbility == Button.ULTIMATE
     
-    victim.applyImpulse(attacker.getFacingDirection() + ((Vector.UP + attacker.getFacingDirection()) / 2), 30, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
+    victim.applyImpulse(attacker.getFacingDirection() + ((Vector.UP + attacker.getFacingDirection()) / 2), 45, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)

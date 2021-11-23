@@ -44,5 +44,5 @@ rule "[Echo] Decrease Enemy Ultimate Charge":
     # graph demo here: https://www.desmos.com/calculator/trd2dryhzd (thanks to T1mur4TR for the equation)
     eventPlayer.setUltCharge(eventPlayer.getUltCharge() * (1-((((2756.25)/(distance(eventPlayer, getPlayersOnHero(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam())))+22.5))-22.5)/100)))
     eventPlayer.isStatused[1] = true
-    wait(1)
+    wait(2)
     eventPlayer.isStatused[1] = false
