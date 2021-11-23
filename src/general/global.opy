@@ -10,16 +10,16 @@ rule "[Global] Global 1":
     if highPerformanceMode == true:
         setSlowMotion(95)
     # create hud texts
-    hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), "Overwatch OP & Costly Ultimates vALPHA | ---", HudPosition.RIGHT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), "Original by u/Ender | Code: -----", HudPosition.RIGHT, 2, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudText(getAllPlayers(), "Discord", "Join for Updates and to Give Feedback", "bit.ly/ENDERSWORKSHOP (all caps)", HudPosition.RIGHT, 3, rgb(188,103,245), rgb(243,224,255), rgb(243,224,255), HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     #
     hudSubheader(getAllPlayers(), "", HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
-    hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n", HudPosition.TOP, 18, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 18, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     # testing hud texts
     if devTools == true:
+        hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
         hudSubtext(getAllPlayers(), "ULT - {0}%".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
         hudSubtext(getAllPlayers(), "DIST - {0}m".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.GRAY, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
         hudSubtext(getAllPlayers(), "FX/ENTITY - {0} | TXT - {1}".format(getNumberOfEntityIds(), getNumberOfTextIds()), HudPosition.RIGHT, 8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
@@ -41,10 +41,11 @@ rule "[Global] Player HUD":
     eventPlayer.heroHUD = getLastCreatedText()
     # status hud
     hudSubtext(eventPlayer if eventPlayer.isStatused[0] == true else null, "                                                                                                 {1} | {0} Amplified {0} | {1}".format(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE), (eventPlayer.amplifiedSTIMER if eventPlayer.amplifiedSTIMER > 0 else "-")), HudPosition.TOP, 3 if eventPlayer.isStatused[0] == true else 13, Color.LIME_GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext(eventPlayer if eventPlayer.isStatused[1] == true else null, "                                                                                                 {0} | Counterpoised | {0}".format(abilityIconString(Hero.BASTION, Button.ABILITY_1)), HudPosition.TOP, 4 if eventPlayer.isStatused[1] == true else 14, Color.SKY_BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext(eventPlayer if eventPlayer.isStatused[2] == true else null, "                                                                                                 {0} | Strengthened | {0}".format(abilityIconString(Hero.ORISA, Button.ABILITY_2)), HudPosition.TOP, 5 if eventPlayer.isStatused[2] == true else 15, Color.GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext(eventPlayer if eventPlayer.isStatused[3] == true else null, "                                                                                                 {0} | Weakened | {0}".format(abilityIconString(Hero.REINHARDT, Button.ULTIMATE)), HudPosition.TOP, 6 if eventPlayer.isStatused[3] == true else 16, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
-    hudSubtext(eventPlayer if eventPlayer.isStatused[4] == true else null, "                                                                                                 {1} | {0} Vulnerabled {0} | {1}".format(abilityIconString(Hero.GENJI, Button.JUMP), (eventPlayer.vulnerabledSTIMER if eventPlayer.vulnerabledSTIMER > 0 else "-")), HudPosition.TOP, 7 if eventPlayer.isStatused[4] == true else 17, Color.PURPLE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if eventPlayer.isStatused[1] == true else null, "                                                                                                 {0} | Counterpoised | {0}".format(abilityIconString(Hero.BASTION, Button.ABILITY_1)), HudPosition.TOP, 4 if eventPlayer.isStatused[1] == true else 9, Color.SKY_BLUE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if eventPlayer.isStatused[2] == true else null, "                                                                                                 {0} | Strengthened | {0}".format(abilityIconString(Hero.ORISA, Button.ABILITY_2)), HudPosition.TOP, 5 if eventPlayer.isStatused[2] == true else 10, Color.GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if eventPlayer.isStatused[3] == true else null, "                                                                                                 {0} | Weakened | {0}".format(abilityIconString(Hero.REINHARDT, Button.ULTIMATE)), HudPosition.TOP, 6 if eventPlayer.isStatused[3] == true else 11, Color.ORANGE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if eventPlayer.isStatused[4] == true else null, "                                                                                                 {1} | {0} Vulnerabled {0} | {1}".format(abilityIconString(Hero.GENJI, Button.JUMP), (eventPlayer.vulnerabledSTIMER if eventPlayer.vulnerabledSTIMER > 0 else "-")), HudPosition.TOP, 7 if eventPlayer.isStatused[4] == true else 12, Color.PURPLE, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
+    hudSubtext(eventPlayer if eventPlayer.isStatused[5] == true else null, "                                                                                                 {1} | {0} Trapped {0} | {1}".format(abilityIconString(Hero.HAMMOND, Button.ULTIMATE), (eventPlayer.trappedSTIMER if eventPlayer.trappedSTIMER > 0 else "-")), HudPosition.TOP, 8 if eventPlayer.isStatused[5] == true else 13, rgb(100,60,50), HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)
 
 rule "[Global] Ultimate Indicator":
     @Event eachPlayer
@@ -58,3 +59,13 @@ rule "[Global] Remove Indicators on Leave":
     @Event playerLeft
 
     destroyInWorldText(eventPlayer.ultimateIcon)
+
+rule "[Global] Role Lock on Tanks":
+    @Event eachPlayer
+    @Condition eventPlayer.getCurrentHero() in getTankHeroes()
+
+    [p for p in getPlayers(eventPlayer.getTeam()) if p != eventPlayer].setAllowedHeroes(getAllHeroes() - getTankHeroes())
+    eventPlayer.setAllowedHeroes(getTankHeroes())
+    waitUntil(eventPlayer.getCurrentHero() not in getTankHeroes(), 9999)
+    getPlayers(eventPlayer.getTeam()).setAllowedHeroes(getAllHeroes())
+    
