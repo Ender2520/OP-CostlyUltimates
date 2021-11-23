@@ -134,3 +134,10 @@ playervar chamberCast_Direction
 playervar chamberCast_DistRemaining
 playervar chamberCharge
 playervar chamberText
+# wrecking ball
+playervar trappedPlayers
+playervar trappedEffects
+playervar trappedText
+playervar trapTime
+playervar trapDOT
+playervar trappedSTIMER
