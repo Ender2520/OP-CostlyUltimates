@@ -59,7 +59,7 @@ rule "[Bastion] Heat Seeking Missile":
     wait(0.10, Wait.ABORT_WHEN_FALSE)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
     wait(0.10, Wait.ABORT_WHEN_FALSE)
-    playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
+    playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)300
     wait(0.10, Wait.ABORT_WHEN_FALSE)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
     wait(0.10, Wait.ABORT_WHEN_FALSE)
@@ -69,5 +69,5 @@ rule "[Bastion] Heat Seeking Missile":
     playEffect(getAllPlayers(), DynamicEffect.DVA_SELF_DESTRUCT_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.getPosition(), 200)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.getEyePosition(), 14)
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, Color.RED, eventPlayer.getEyePosition(), 14)
-    damage([p for p in getAllPlayers() if distance(p, eventPlayer.getEyePosition()) <= 7 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and p.getTeam() == getOppositeTeam(eventPlayer.getTeam()) and p.isAlive()], eventPlayer, 500)
-    damage([p for p in getAllPlayers() if distance(p, eventPlayer.getEyePosition()) <= 5 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and p.getTeam() == getOppositeTeam(eventPlayer.getTeam()) and p.isAlive()], eventPlayer, 500)
+    damage([p for p in getAllPlayers() if distance(p, eventPlayer.getEyePosition()) <= 7 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and p.getTeam() == getOppositeTeam(eventPlayer.getTeam()) and p.isAlive()], eventPlayer, 600 if eventPlayer.megaBoosted == true else 400)
+    damage([p for p in getAllPlayers() if distance(p, eventPlayer.getEyePosition()) <= 5 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and p.getTeam() == getOppositeTeam(eventPlayer.getTeam()) and p.isAlive()], eventPlayer, 600 if eventPlayer.megaBoosted == true else 400)
