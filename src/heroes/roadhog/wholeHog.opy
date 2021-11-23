@@ -21,4 +21,4 @@ rule "[Roadhog] Reverse Whole Hog KB":
     @Condition eventAbility == Button.ULTIMATE
 
     # KB towards Roadhog
-    victim.applyImpulse(directionTowards(victim, attacker), 5, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
+    victim.applyImpulse(directionTowards(victim, attacker), 7.5 if eventPlayer.megaBoosted == true else 5.0, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
