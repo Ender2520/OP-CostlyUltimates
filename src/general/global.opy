@@ -64,8 +64,5 @@ rule "[Global] Role Lock on Tanks":
     @Event eachPlayer
     @Condition eventPlayer.getCurrentHero() in getTankHeroes()
 
-    [p for p in getPlayers(eventPlayer.getTeam()) if p != eventPlayer].setAllowedHeroes(getAllHeroes() - getTankHeroes())
+    [p for p in getPlayers(eventPlayer.getTeam()) if p != eventPlayer].setAllowedHeroes([h for h in getAllHeroes() if h not in getTankHeroes()])
     eventPlayer.setAllowedHeroes(getTankHeroes())
-    waitUntil(eventPlayer.getCurrentHero() not in getTankHeroes(), 9999)
-    getPlayers(eventPlayer.getTeam()).setAllowedHeroes(getAllHeroes())
-    
