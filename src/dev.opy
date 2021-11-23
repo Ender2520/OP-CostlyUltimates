@@ -7,16 +7,16 @@ rule "[Dev] Create bots":
     @Condition eventPlayer.isHoldingButton(Button.RELOAD) == true
     
     wait(0.333, Wait.ABORT_WHEN_FALSE)
-    createDummy(random.choice(getAllHeroes()), getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
-    createDummy(random.choice(getAllHeroes()), eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
-    #createDummy(Hero.ECHO, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
+    #createDummy(random.choice(getAllHeroes()), getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
+    #createDummy(random.choice(getAllHeroes()), eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
+    createDummy(Hero.TRACER, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
     #createDummy(Hero.SYMMETRA, eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), vect(0,100,0))
     TESTBOT = getLastCreatedEntity()
     wait()
     #TESTBOT.startForcingThrottle(1,1,0,0,0,0)
-    #TESTBOT.setUltCharge(100)
-    #wait(1)
-    #TESTBOT.forceButtonPress(Button.ULTIMATE)
+    TESTBOT.setUltCharge(100)
+    wait(1)
+    TESTBOT.startForcingButton(Button.ULTIMATE)
 
 rule "[Dev] Destroy bots":
     @Event eachPlayer
@@ -34,5 +34,5 @@ rule "[Dev] Free ultimate":
     @Condition "{0}".format(eventPlayer) == "Ender"
     @Condition eventPlayer.isCommunicating(Comms.ULTIMATE_STATUS) == true
     @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
-    
+
     getAllPlayers().setUltCharge(100)
