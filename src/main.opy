@@ -100,3 +100,6 @@
 
 #!include "heroes/winston/initialize.opy"
 #!include "heroes/winston/primalRage.opy"
+
+#!include "heroes/wreckingball/initialize.opy"
+#!include "heroes/wreckingball/trapTransfer.opy"

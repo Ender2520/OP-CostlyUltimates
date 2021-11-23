@@ -110,6 +110,9 @@ settings {
             "winston": {
                 "ultGen%": 75
             },
+            "hammond": {
+                "ultGen%": 75
+            },
             "enabledHeroes": [
                 "ana",
                 "ashe",
@@ -139,7 +142,8 @@ settings {
                 "torbjorn",
                 "tracer",
                 "widowmaker",
-                "winston"
+                "winston",
+                "hammond"
             ]
         }
     }
