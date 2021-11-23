@@ -151,6 +151,14 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.chamberCast_DistRemaining = null
         eventPlayer.chamberCharge = null
         eventPlayer.usingUltimateREAL = false
+    elif eventPlayer.hero_ == Hero.HAMMOND:
+        destroyEffect(eventPlayer.trappedEffects)
+        destroyProgressBarHud(eventPlayer.trappedText)
+        eventPlayer.allowButton(Button.ULTIMATE)
+    # update huds
+    eventPlayer.spawnedREAL = true
+    wait()
+    eventPlayer.spawnedREAL = false
 
 def RespawnCleanup(): # EVERY SPAWN GLOBAL
     @Name "SUB Respawn Cleanup"
@@ -175,7 +183,7 @@ def RespawnCleanup(): # EVERY SPAWN GLOBAL
  
 def FullCleanup(): # FIRST SPAWN
     @Name "SUB Full Cleanup"
-	# reset changeable variables
+    # reset changeable variables
     eventPlayer.moveSpeed[false] = 100
     eventPlayer.damageDealt[false] = 100
     eventPlayer.damageReceived[false] = 100
@@ -225,6 +233,11 @@ def FullCleanup(): # FIRST SPAWN
     eventPlayer.isStatused[3] = false
     eventPlayer.isStatused[4] = false
     eventPlayer.isStatused[5] = false
+    eventPlayer.firstSpawn = 1
+    # update huds
+    eventPlayer.spawnedREAL = true
+    wait()
+    eventPlayer.spawnedREAL = false
 
 def animationCleanup():
     @Name "SUB Bastion Animation Cleanup"

@@ -13,29 +13,32 @@ rule "[Automation] Prevent Server Crash":
 rule "[Automation] First Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn == true
+    @Condition eventPlayer.firstSpawn == null
 
+    printLog("FullCleanup()")
     FullCleanup()
+    eventPlayer.hero_ = eventPlayer.getCurrentHero()
 
 rule "[Automation] Every Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn == false
+    @Condition eventPlayer.firstSpawn != null
 
+    printLog("RespawnCleanup()")
     RespawnCleanup()
     wait()
+    printLog("HeroCleanup()")
     HeroCleanup()
 
 rule "[Automation] Hero Swap":
     @Event eachPlayer
     @Condition eventPlayer.hero_ != eventPlayer.getCurrentHero()
+    @Condition eventPlayer.hero_ != null
     @Condition eventPlayer.isDummy() != true
     
+    printLog("SwapCleanup()")
     SwapCleanup()
-    eventPlayer.spawnedREAL = true
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
-    wait()
-    eventPlayer.spawnedREAL = false
 
 rule "[Automation] Ultimate Boost":
     @Event eachPlayer
@@ -99,3 +102,9 @@ rule "[Automation] STATUS Chase Vulnerabled":
     @Condition eventPlayer.hasSpawned()
 
     chase(eventPlayer.vulnerabledSTIMER, 0, rate=1, ChaseReeval.NONE)
+
+rule "[Automation] STATUS Chase Trapped":
+    @Event eachPlayer
+    @Condition eventPlayer.hasSpawned()
+
+    chase(eventPlayer.trappedSTIMER, 0, rate=1, ChaseReeval.NONE)
