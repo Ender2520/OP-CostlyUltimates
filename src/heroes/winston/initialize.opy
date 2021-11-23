@@ -1,6 +1,6 @@
 #!mainFile "../../main.opy"
 
-rule "[Widowmaker] Info":
+rule "[Winston] Info":
     @Event eachPlayer
     @Hero winston
     @Condition eventPlayer.spawnedREAL == true
