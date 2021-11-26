@@ -41,6 +41,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
     elif eventPlayer.hero_ == Hero.DVA:
         eventPlayer.bombEffect = null
     elif eventPlayer.hero_ == Hero.DOOMFIST:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyProgressBarHud(eventPlayer.ultimateBar)
         destroyEffect(eventPlayer.overdriveEffects)
         wait()
@@ -49,6 +50,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.overdriveEffects = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.ECHO:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.counterpoiseEffects)
         wait()
         eventPlayer.counterpoiseEffects = null
@@ -66,6 +68,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.goldenGunCooldown = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.PHARAH:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
         destroyEffect(eventPlayer.strikeEffects)
@@ -88,6 +91,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.strikeEffects_ = null
         eventPlayer.strikeEffects__ = null
     elif eventPlayer.hero_ == Hero.TORBJORN:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
         destroyEffect(eventPlayer.strikeEffects)
@@ -110,6 +114,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.fluxExtraRangeEffect = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOLDIER:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
         eventPlayer.helixBot = null
@@ -118,6 +123,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.fluxExtraRangeEffect = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOMBRA:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.empEffect)
         destroyEffect(eventPlayer.victimEffects)
         wait()
@@ -125,6 +131,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.empEffect = null
         eventPlayer.victimEffects = null
     elif eventPlayer.hero_ == Hero.SYMMETRA:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.turretEffects)
         destroyDummy(eventPlayer.getTeam(), eventPlayer.turretEntity.getSlot())
         destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
@@ -139,6 +146,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.turretTimer = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.TRACER:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.manipulateEffects)
         destroyProgressBarHud(eventPlayer.manipulateTexts)
         wait()
@@ -147,6 +155,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.manipulateTexts = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.WIDOWMAKER:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.chamberEffects)
         destroyProgressBarHud(eventPlayer.chamberText)
         wait()
@@ -156,9 +165,16 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.chamberCharge = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.HAMMOND:
+        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.trappedEffects)
         destroyProgressBarHud(eventPlayer.trappedText)
+    elif eventPlayer.hero_ == Hero.ZARYA:
         eventPlayer.allowButton(Button.ULTIMATE)
+        destroyEffect(eventPlayer.pitEffects)
+        destroyEffect(eventPlayer.pitSinkEffect)
+        destroyProgressBarHud(eventPlayer.pitTexts)
+        wait()
+        eventPlayer.pitPosition = null
     # update huds
     eventPlayer.spawnedREAL = true
     wait()
