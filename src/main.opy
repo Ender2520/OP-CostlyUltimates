@@ -106,3 +106,6 @@
 
 #!include "heroes/zarya/initialize.opy"
 #!include "heroes/zarya/gravitonPit.opy"
+
+#!include "heroes/zenyatta/initialize.opy"
+#!include "heroes/zenyatta/blindingLight.opy"
