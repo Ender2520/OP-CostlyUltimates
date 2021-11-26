@@ -143,7 +143,8 @@ settings {
                 "tracer",
                 "widowmaker",
                 "winston",
-                "hammond"
+                "hammond",
+                "zarya",
             ]
         }
     }
