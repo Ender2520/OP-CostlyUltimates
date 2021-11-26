@@ -142,3 +142,8 @@ playervar trappedText
 playervar trapTime
 playervar trapDOT
 playervar trappedSTIMER
+# zarya
+playervar pitPosition
+playervar pitEffects
+playervar pitTexts
+playervar pitSinkEffect
