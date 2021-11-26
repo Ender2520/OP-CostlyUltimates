@@ -59,7 +59,7 @@ rule "[Bastion] Heat Seeking Missile":
     wait(0.10, Wait.ABORT_WHEN_FALSE)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
     wait(0.10, Wait.ABORT_WHEN_FALSE)
-    playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)300
+    playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
     wait(0.10, Wait.ABORT_WHEN_FALSE)
     playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.RED, eventPlayer.getPosition(), 100)
     wait(0.10, Wait.ABORT_WHEN_FALSE)
