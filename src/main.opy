@@ -103,3 +103,6 @@
 
 #!include "heroes/wreckingball/initialize.opy"
 #!include "heroes/wreckingball/trapTransfer.opy"
+
+#!include "heroes/zarya/initialize.opy"
+#!include "heroes/zarya/gravitonPit.opy"
