@@ -113,6 +113,12 @@ settings {
             "hammond": {
                 "ultGen%": 75
             },
+            "zarya": {
+                "ultGen%": 70
+            },
+            "zenyatta": {
+                "ultGen%": 80
+            },
             "enabledHeroes": [
                 "ana",
                 "ashe",
@@ -145,6 +151,7 @@ settings {
                 "winston",
                 "hammond",
                 "zarya",
+                "zenyatta",
             ]
         }
     }
