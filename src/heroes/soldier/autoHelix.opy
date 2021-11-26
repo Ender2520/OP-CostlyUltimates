@@ -107,4 +107,4 @@ rule "[Soldier 76] Deal Helix Bot Damage":
     @Condition eventPlayer.isDummy()
     @Condition eventPlayer.parent.helixBot[0] == eventPlayer or eventPlayer.parent.helixBot[1] == eventPlayer
 
-    damage(victim, eventPlayer.parent, 120 if parent.megaBoosted == true else 60)
+    damage(victim, eventPlayer.parent, 120 if eventPlayer.parent.megaBoosted == true else 60)
