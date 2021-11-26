@@ -7,7 +7,7 @@ rule "[Zarya] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Graviton Pit"
-    eventPlayer.ultDesc = " Graviton Pit drags enemies within range below the ground,\n after being fully suffocated it will deal\n massives amount of damage."
+    eventPlayer.ultDesc = " Graviton Pit drags enemies within range below the ground, after\n being fully suffocated it will deal massives amount of damage."
     eventPlayer.ultTooltip = null
 
 rule "[Zarya] Initialize":
