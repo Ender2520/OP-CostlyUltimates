@@ -147,3 +147,7 @@ playervar pitPosition
 playervar pitEffects
 playervar pitTexts
 playervar pitSinkEffect
+# zenyatta
+playervar zenVisible
+playervar lightEffects
+playervar blindVictims
