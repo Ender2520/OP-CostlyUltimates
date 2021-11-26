@@ -5,6 +5,8 @@ def HeroCleanup(): # EVERY SPAWN PER HERO
     if eventPlayer.hero_ == Hero.MCCREE:
         destroyDummy(eventPlayer.getTeam(), eventPlayer.cassidyShieldBot.getSlot())
         eventPlayer.cassidyShieldBot = null
+    elif eventPlayer.hero_ == Hero.DVA:
+        eventPlayer.bombCenterPoint = vect(false,false,false)
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
     elif eventPlayer.hero_ == Hero.SYMMETRA:
@@ -36,6 +38,8 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         wait()
         eventPlayer.cassidyShieldBot = null
         eventPlayer.usingUltimateREAL = false
+    elif eventPlayer.hero_ == Hero.DVA:
+        eventPlayer.bombEffect = null
     elif eventPlayer.hero_ == Hero.DOOMFIST:
         destroyProgressBarHud(eventPlayer.ultimateBar)
         destroyEffect(eventPlayer.overdriveEffects)
@@ -254,43 +258,6 @@ def animationCleanup():
     eventPlayer.setSecondaryFireEnabled(true)
     eventPlayer.armorPool = null
     eventPlayer.missileEffect = null
-
-def normalTracking():
-    @Name "SUB Dva normalTracking"
-    
-    eventPlayer.damageDealt /= 1000000
-    for eventPlayer.bombDuration in range(188):
-        eventPlayer.bombPointPos = raycast(eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * bombRadius, eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * -1 * 0.5, eventPlayer, null, true).getHitPosition()
-        eventPlayer.bombHitNormal = raycast(eventPlayer.bombPointPos + eventPlayer.bombInitNormal * 0.3, eventPlayer.bombPointPos + eventPlayer.bombInitNormal * -1 * 1, eventPlayer, null, true).getNormal()
-        eventPlayer.bombCenterPoint = eventPlayer.bombPointPos + eventPlayer.bombHitNormal * bombRadius * -1
-        wait(false)
-    eventPlayer.damageDealt *= 1000000
-    wait(0.064)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 25, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 10, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 5, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
-
-def downwardsTracking():
-    @Name "SUB Dva downwardsTracking"
-    
-    eventPlayer.damageDealt /= 1000000
-    for eventPlayer.bombDuration in range(188):
-        if eventPlayer.bombDuration > 160:
-            eventPlayer.bombPointPos = raycast(eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * 2, eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * -1 * 2, eventPlayer, null, true).getHitPosition()
-            eventPlayer.bombHitNormal = raycast(eventPlayer.bombPointPos + eventPlayer.bombInitNormal * 0.3, eventPlayer.bombPointPos + eventPlayer.bombInitNormal * -1 * 1, eventPlayer, null, true).getNormal()
-            eventPlayer.bombCenterPoint = eventPlayer.bombPointPos + eventPlayer.bombHitNormal * bombRadius * -1
-        else:
-            eventPlayer.bombPointPos = raycast(eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * 1, eventPlayer.bombCenterPoint + eventPlayer.bombInitNormal * -1 * 1, eventPlayer, null, true).getHitPosition()
-            eventPlayer.bombHitNormal = raycast(eventPlayer.bombPointPos + eventPlayer.bombInitNormal * 0.3, eventPlayer.bombPointPos + eventPlayer.bombInitNormal * -1 * 1, eventPlayer, null, true).getNormal()
-            eventPlayer.bombCenterPoint = eventPlayer.bombPointPos + eventPlayer.bombHitNormal * bombRadius * -1
-        wait(false)
-    eventPlayer.damageDealt *= 1000000
-    wait(0.064)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 25, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 50)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 20, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 150)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 10, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
-    damage(getPlayersInRadius(eventPlayer.bombCenterPoint, 5, getOppositeTeam(eventPlayer.getTeam()), LosCheck.OFF), eventPlayer, 400)
 
 def superChargerPulsingEffect():
     @Name "[Orisa] SUB Supercharger Pulsing Effect"

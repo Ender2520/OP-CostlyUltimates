@@ -37,7 +37,7 @@ rule "[Global] Player HUD":
 
     # hero hud
     hudText(eventPlayer, " {0} ".format(heroIcon(eventPlayer.hero_)), "{0}".format(eventPlayer.ultName), "{0}".format(eventPlayer.ultDesc), HudPosition.LEFT, 0, colorArray[colorArray.index(eventPlayer.hero_) + 1], colorArray[colorArray.index(eventPlayer.hero_) + 1], Color.WHITE, HudReeval.VISIBILITY_STRING_AND_COLOR)
-    hudSubheader(eventPlayer if eventPlayer.ultTooltip != null else null, "{0} Tooltip: {1}".format(iconString(Icon.QUESTION_MARK), eventPlayer.ultTooltip), HudPosition.LEFT, 2, Color.GRAY, HudReeval.VISIBILITY_AND_STRING)
+    hudSubheader(eventPlayer if eventPlayer.ultTooltip != null else null, " \n{0} Tooltip: {1}".format(iconString(Icon.QUESTION_MARK), eventPlayer.ultTooltip), HudPosition.LEFT, 2, Color.GRAY, HudReeval.VISIBILITY_AND_STRING)
     eventPlayer.heroHUD = getLastCreatedText()
     # status hud
     hudSubtext(eventPlayer if eventPlayer.isStatused[0] == true else null, "                                                                                                 {1} | {0} Amplified {0} | {1}".format(abilityIconString(Hero.BAPTISTE, Button.ULTIMATE), (eventPlayer.amplifiedSTIMER if eventPlayer.amplifiedSTIMER > 0 else "-")), HudPosition.TOP, 3 if eventPlayer.isStatused[0] == true else 13, Color.LIME_GREEN, HudReeval.VISIBILITY_SORT_ORDER_AND_STRING, SpecVisibility.DEFAULT)

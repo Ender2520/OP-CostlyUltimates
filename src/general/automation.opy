@@ -52,7 +52,7 @@ rule "[Automation] Ultimate Boost":
 rule "[Automation] Prevent Ultimate Charge Gain During Ultimate":
     @Event eachPlayer
     @Condition eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true
-    @Condition eventPlayer.hero_ != Hero.LUCIO or eventPlayer.hero_ != Hero.BASTION or eventPlayer.hero_ != Hero.BRIGITTE or eventPlayer.hero_ != Hero.DVA
+    @Condition eventPlayer.hero_ not in [Hero.LUCIO, Hero.BASTION, Hero.BRIGITTE, Hero.DVA]
     
     while eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true:
         if eventPlayer.getUltCharge() >= ultBoost + 0.4:

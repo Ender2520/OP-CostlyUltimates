@@ -48,6 +48,7 @@ playervar brigSpeedBoost
 # cassidy
 playervar cassidyShieldBot
 # dva
+playervar bombEffect
 globalvar bombRadius
 globalvar bombOutsideRange
 playervar bombPointPos
