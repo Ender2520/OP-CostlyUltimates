@@ -22,30 +22,30 @@ settings {
     "heroes": {
         "allTeams": {
             "ana": {
-                "ultGen%": 90
+                "ultGen%": 85
             },
             "ashe": {
                 "enableInfiniteUlt": true,
                 "ultGen%": 70
             },
             "baptiste": {
-                "ultGen%": 70
+                "ultGen%": 75
             },
             "bastion": {
                 "ultGen%": 65,
                 "ultDuration%": 50
             },
             "brigitte": {
-                "ultGen%": 80
+                "ultGen%": 85
             },
             "dva": {
                 "ultGen%": 75
             },
             "doomfist": {
-                "ultGen%": 70
+                "ultGen%": 65
             },
             "echo": {
-                "ultGen%": 50
+                "ultGen%": 60
             },
             "genji": {
                 "ultGen%": 65
@@ -57,16 +57,16 @@ settings {
                 "ultGen%": 75
             },
             "lucio": {
-                "ultGen%": 70
+                "ultGen%": 80
             },
             "mccree": {
                 "ultGen%": 70
             },
             "mei": {
-                "ultGen%": 80
+                "ultGen%": 75
             },
             "mercy": {
-                "ultGen%": 70
+                "ultGen%": 75
             },
             "moira": {
                 "ultGen%": 75
@@ -81,29 +81,29 @@ settings {
                 "ultGen%": 80
             },
             "reinhardt": {
-                "ultGen%": 85
+                "ultGen%": 75
             },
             "roadhog": {
-                "ultGen%": 75
+                "ultGen%": 70
             },
             "sigma": {
                 "ultGen%": 85
             },
             "soldier": {
-                "ultGen%": 70
+                "ultGen%": 60
             },
             "sombra": {
                 "ultGen%": 70
             },
             "symmetra": {
-                "ultGen%": 90
+                "ultGen%": 80
             },
             "torbjorn": {
-                "ultGen%": 70,
+                "ultGen%": 65,
                 "ultDuration%": 25
             },
             "tracer": {
-                "ultGen%": 75
+                "ultGen%": 70
             },
             "widowmaker": {
                 "ultGen%": 50
@@ -115,7 +115,7 @@ settings {
                 "ultGen%": 75
             },
             "zarya": {
-                "ultGen%": 70
+                "ultGen%": 75
             },
             "zenyatta": {
                 "ultGen%": 80
