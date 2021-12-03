@@ -21,6 +21,7 @@ rule "[Torbjorn] Meteor Strike Activate":
     eventPlayer.disallowButton(Button.CROUCH)
     eventPlayer.disallowButton(Button.ABILITY_1)
     eventPlayer.disallowButton(Button.ABILITY_2)
+    eventPlayer.disallowButton(Button.PRIMARY_FIRE)
     eventPlayer.disallowButton(Button.SECONDARY_FIRE)
     eventPlayer.disallowButton(Button.MELEE)
     eventPlayer.moveSpeed[false] /= 1000
@@ -43,10 +44,14 @@ rule "[Torbjorn] Meteor Strike Activate":
     # start time
     chase(eventPlayer.strikeTimer, 0, duration=15, ChaseReeval.NONE)
     waitUntil(eventPlayer.strikeCount == 1 or eventPlayer.isDead() or eventPlayer.strikeTimer == 0, 99999)
-    eventPlayer.setUltCharge(0)
     stopChasingVariable(eventPlayer.strikeTimer)
     # determine whether to use ultimate or not
     if (eventPlayer.strikeCount == 1): # successfully ulted
+        # ultimate voice line
+        eventPlayer.allowButton(Button.ULTIMATE)
+        eventPlayer.forceButtonPress(Button.ULTIMATE)
+        eventPlayer.disallowButton(Button.ULTIMATE)
+        eventPlayer.setUltCharge(0)
         # destroy effects
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
@@ -62,9 +67,13 @@ rule "[Torbjorn] Meteor Strike Activate":
         eventPlayer.allowButton(Button.ABILITY_1)
         eventPlayer.allowButton(Button.ABILITY_2)
         eventPlayer.allowButton(Button.SECONDARY_FIRE)
+        eventPlayer.allowButton(Button.PRIMARY_FIRE)
         eventPlayer.allowButton(Button.MELEE)
         eventPlayer.setKnockbackReceived(100)
+        wait(0.5)
+        eventPlayer.cancelPrimaryAction()
     else: # player died mid-ultimate
+        eventPlayer.setUltCharge(0)
         # destroy effects
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
@@ -83,6 +92,7 @@ rule "[Torbjorn] Meteor Strike Activate":
         eventPlayer.allowButton(Button.MELEE)
         eventPlayer.setKnockbackReceived(100)
         eventPlayer.usingUltimateREAL = false
+
 
 rule "[Torbjorn] Horizontal Camera Movement":
     @Event eachPlayer
@@ -182,6 +192,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     eventPlayer.strikeEffects__[5] = getLastCreatedEntity()
     wait(10)
     eventPlayer.usingUltimateREAL = false
+    eventPlayer.setUltCharge(0)
     destroyEffect(eventPlayer.strikeEffects_)
     destroyEffect(eventPlayer.strikeEffects__)
     eventPlayer.strikeEffects_ = null

@@ -7,9 +7,9 @@ rule "[Dev] Create bots":
     @Condition eventPlayer.isHoldingButton(Button.RELOAD) == true
     
     wait(0.333, Wait.ABORT_WHEN_FALSE)
-    createDummy(random.choice(getAllHeroes()), getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
+    #createDummy(random.choice(getAllHeroes()), getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
     #createDummy(random.choice(getAllHeroes()), eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), eventPlayer.getFacingDirection())
-    #createDummy(Hero.ANA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
+    #createDummy(Hero.ZENYATTA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getEyePosition(), vect(0,100,0))
     #createDummy(Hero.ANA, eventPlayer.getTeam(), -1, eventPlayer.getEyePosition(), vect(0,100,0))
     #TESTBOT = getLastCreatedEntity()
     #wait()

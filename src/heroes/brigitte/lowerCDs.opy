@@ -6,7 +6,7 @@ rule "[Brigitte] Rally Cooldown Decrease PRIMARY":
     
     if any([player.isAlive() and player.isUsingUltimate() and distance(player, eventPlayer) < 8.5 and isInLoS(player, eventPlayer, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) for player in getPlayersOnHero(Hero.BRIGITTE, eventPlayer.getTeam())]):
         #Lower the cooldown
-        eventPlayer.setAbilityCooldown(Button.PRIMARY_FIRE, 0.65 * eventPlayer.getAbilityCooldown(Button.PRIMARY_FIRE))
+        eventPlayer.setAbilityCooldown(Button.PRIMARY_FIRE,(0.65 if eventPlayer.megaBoosted != true else 0.5) * eventPlayer.getAbilityCooldown(Button.PRIMARY_FIRE))
 
 rule "[Brigitte] Rally Cooldown Decrease SECONDARY":
     @Event eachPlayer
@@ -14,7 +14,7 @@ rule "[Brigitte] Rally Cooldown Decrease SECONDARY":
     
     if any([player.isAlive() and player.isUsingUltimate() and distance(player, eventPlayer) < 8.5 and isInLoS(player, eventPlayer, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) for player in getPlayersOnHero(Hero.BRIGITTE, eventPlayer.getTeam())]):
         #Lower the cooldown
-        eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, 0.65 * eventPlayer.getAbilityCooldown(Button.SECONDARY_FIRE))
+        eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, (0.65 if eventPlayer.megaBoosted != true else 0.5) * eventPlayer.getAbilityCooldown(Button.SECONDARY_FIRE))
 
 rule "[Brigitte] Rally Cooldown Decrease ABILITY1":
     @Event eachPlayer
@@ -22,7 +22,7 @@ rule "[Brigitte] Rally Cooldown Decrease ABILITY1":
     
     if any([player.isAlive() and player.isUsingUltimate() and distance(player, eventPlayer) < 8.5 and isInLoS(player, eventPlayer, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) for player in getPlayersOnHero(Hero.BRIGITTE, eventPlayer.getTeam())]):
         #Lower the cooldown
-        eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0.65 * eventPlayer.getAbilityCooldown(Button.ABILITY_1))
+        eventPlayer.setAbilityCooldown(Button.ABILITY_1, (0.65 if eventPlayer.megaBoosted != true else 0.5) * eventPlayer.getAbilityCooldown(Button.ABILITY_1))
 
 rule "[Brigitte] Rally Cooldown Decrease ABILITY2":
     @Event eachPlayer
@@ -30,4 +30,4 @@ rule "[Brigitte] Rally Cooldown Decrease ABILITY2":
     
     if any([player.isAlive() and player.isUsingUltimate() and distance(player, eventPlayer) < 8.5 and isInLoS(player, eventPlayer, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) for player in getPlayersOnHero(Hero.BRIGITTE, eventPlayer.getTeam())]):
         #Lower the cooldown
-        eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0.65 * eventPlayer.getAbilityCooldown(Button.ABILITY_2))
+        eventPlayer.setAbilityCooldown(Button.ABILITY_2, (0.65 if eventPlayer.megaBoosted != true else 0.5) * eventPlayer.getAbilityCooldown(Button.ABILITY_2))

@@ -230,6 +230,7 @@ rule "[Pharah] First Artillery Shot Dropped":
     damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 200)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 100)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 100)
+    eventPlayer.setUltCharge(0)
 
 rule "[Pharah] Second Artillery Shot Dropped":
     @Event eachPlayer
@@ -262,6 +263,7 @@ rule "[Pharah] Second Artillery Shot Dropped":
     damage(getPlayersInRadius(eventPlayer.strikeLaunch2, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch2, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch2, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
+    eventPlayer.setUltCharge(0)
 
 rule "[Pharah] Third Artillery Shot Dropped":
     @Event eachPlayer
@@ -294,6 +296,7 @@ rule "[Pharah] Third Artillery Shot Dropped":
     damage(getPlayersInRadius(eventPlayer.strikeLaunch3, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch3, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch3, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
+    eventPlayer.setUltCharge(0)
 
 rule "[Pharah] Fourth Artillery Shot Dropped":
     @Event eachPlayer
@@ -326,4 +329,5 @@ rule "[Pharah] Fourth Artillery Shot Dropped":
     damage(getPlayersInRadius(eventPlayer.strikeLaunch4, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch4, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     damage(getPlayersInRadius(eventPlayer.strikeLaunch4, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
+    eventPlayer.setUltCharge(0)
     

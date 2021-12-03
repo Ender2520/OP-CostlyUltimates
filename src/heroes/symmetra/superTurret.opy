@@ -109,10 +109,10 @@ rule "[Symmetra] Ultimate Loop":
     # sounds
     playEffect(getAllPlayers(), DynamicEffect.ECHO_STICKY_BOMB_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.turretPos, 40)
     eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 180 if eventPlayer.megaBoosted == true else 120)
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120 if eventPlayer.megaBoosted != true else 180)
     wait(0.256)
     eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 180 if eventPlayer.megaBoosted == true else 120)
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120 if eventPlayer.megaBoosted != true else 180)
     wait(0.256)
     if RULE_CONDITION:
         goto RULE_START

@@ -8,7 +8,7 @@ rule "[Genji] Cooldown Decrease DASH":
     @Condition eventPlayer.isUsingUltimate()
     
     # remove cooldown
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0.5)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0.5 if eventPlayer.megaBoosted != true else 0)
 
 rule "[Genji] Cooldown Decrease DEFLECT":
     @Event eachPlayer
@@ -18,4 +18,4 @@ rule "[Genji] Cooldown Decrease DEFLECT":
     @Condition eventPlayer.isUsingUltimate()
     
     # remove cooldown
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0.5)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0.5 if eventPlayer.megaBoosted != true else 0)

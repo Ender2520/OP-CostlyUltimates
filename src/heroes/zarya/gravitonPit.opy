@@ -22,9 +22,13 @@ rule "[Zarya] Graviton Pit Cast":
     waitUntil(eventPlayer.isDead() or eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or eventPlayer.isHoldingButton(Button.SECONDARY_FIRE), 99999)
     if eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) == true:
         destroyInWorldText(eventPlayer.pitTexts[0])
-        eventPlayer.usingUltimateREAL = true
-        eventPlayer.setUltCharge(0)
         stopChasingVariable(eventPlayer.pitPosition)
+        eventPlayer.setUltCharge(0)
+        # pit animation
+        playEffect(getAllPlayers(), DynamicEffect.TRACER_RECALL_REAPPEAR_SOUND, Color.WHITE, eventPlayer.pitPosition, 200)
+        playEffect(getAllPlayers(), DynamicEffect.ZARYA_PARTICLE_CANNON_EXPLOSION_SOUND, Color.WHITE, eventPlayer.pitPosition, 150)
+        playEffect(getAllPlayers(), DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.pitPosition, 75)
+        playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.DEBUFF_IMPACT_SOUND, Color.WHITE, eventPlayer.pitPosition, 50)
         eventPlayer.pitEffects[2] = getLastCreatedEntity()
         createEffect(getPlayers(eventPlayer.getTeam()), Effect.BAD_AURA, Color.PURPLE, eventPlayer.pitPosition, 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[3] = getLastCreatedEntity()
@@ -34,14 +38,15 @@ rule "[Zarya] Graviton Pit Cast":
         eventPlayer.pitEffects[5] = getLastCreatedEntity()
         createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.pitPosition, 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[6] = getLastCreatedEntity()
-        createEffect(getPlayers(eventPlayer.getTeam()), Effect.LIGHT_SHAFT, Color.PURPLE, eventPlayer.pitPosition - vect(0,15,0), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        wait(1.5)
+        eventPlayer.usingUltimateREAL = true
+        # pit actual effects
+        createEffect(getPlayers(eventPlayer.getTeam()), Effect.LIGHT_SHAFT, Color.PURPLE, eventPlayer.pitPosition - vect(0,12,0), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[7] = getLastCreatedEntity()
-        createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.LIGHT_SHAFT, Color.RED, eventPlayer.pitPosition - vect(0,15,0), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.LIGHT_SHAFT, Color.RED, eventPlayer.pitPosition - vect(0,12,0), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[8] = getLastCreatedEntity()
-        createEffect(getAllPlayers(), Effect.GOOD_AURA, Color.BLACK, eventPlayer.pitPosition, 4, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+        createEffect(getAllPlayers(), Effect.ENERGY_SOUND, Color.WHITE, eventPlayer.pitPosition, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[9] = getLastCreatedEntity()
-        createEffect(getAllPlayers(), Effect.ENERGY_SOUND, Color.WHITE, eventPlayer.pitPosition, 150, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-        eventPlayer.pitEffects[10] = getLastCreatedEntity()
         playEffect(getAllPlayers(), DynamicEffect.RING_EXPLOSION_SOUND, Color.WHITE, eventPlayer.pitPosition, 200)
         playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_PICKUP_EFFECT, Color.PURPLE, eventPlayer.pitPosition, 8)
         playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_PICKUP_EFFECT, Color.RED, eventPlayer.pitPosition, 8)
@@ -82,7 +87,7 @@ rule "[Zarya] Sink Enemies":
     # apply debuffs
     eventPlayer.disableEnvironmentCollision(true)
     eventPlayer.setKnockbackReceived(0)
-    eventPlayer.moveSpeed[false] *= 0.2
+    eventPlayer.moveSpeed[false] *= 0.5
     # create pit effects
     createEffect(getAllPlayers(), Effect.WIDOWMAKER_VENOM_MINE_TARGET, Color.WHITE, eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.pitSinkEffect = getLastCreatedEntity()
@@ -101,6 +106,6 @@ rule "[Zarya] Sink Enemies":
     # revert debuffs
     eventPlayer.enableEnvironmentCollision()
     eventPlayer.setKnockbackReceived(100)
-    eventPlayer.moveSpeed[false] /= 0.2
+    eventPlayer.moveSpeed[false] /= 0.5
     # bring enemy back to surface if they survived
     eventPlayer.teleport(vect(eventPlayer.getPosition().x,getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y,eventPlayer.getPosition().z))

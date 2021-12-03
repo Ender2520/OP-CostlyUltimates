@@ -31,7 +31,7 @@ rule "[Moira] Call Coalnado":
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.BAD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer.tornadoPos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/7 + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + angleToDirection(120 * getTotalTimeElapsed(), 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/7 + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + angleToDirection(getTotalTimeElapsed() * 120, 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
     createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + ((angleToDirection(/*rotation*/120 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/7) + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())

@@ -22,7 +22,7 @@ rule "[Baptiste] Create Amplification Matrix":
     playEffect(getAllPlayers(), DynamicEffect.EXPLOSION_SOUND, Color.LIME_GREEN, eventPlayer.getPosition(), 120)
     eventPlayer.matrixEffect = getLastCreatedEntity()
     # expand Amp. Matrix
-    chase(eventPlayer.matrixSize, 20, duration=0.5, ChaseReeval.NONE)
+    chase(eventPlayer.matrixSize, 20 if eventPlayer.megaBoosted != true else 30, duration=0.5, ChaseReeval.NONE)
     wait(1)
     # remove effects and reset variables
     stopChasingVariable(eventPlayer.matrixSize)

@@ -99,7 +99,8 @@ settings {
                 "ultGen%": 90
             },
             "torbjorn": {
-                "ultGen%": 70
+                "ultGen%": 70,
+                "ultDuration%": 25
             },
             "tracer": {
                 "ultGen%": 75
