@@ -10,6 +10,16 @@ rule "[Automation] Prevent Server Crash":
     wait(0.25)
     setSlowMotion(100)
 
+rule "[Automation] Assembling Heroes (not first spawn)":
+    @Event eachPlayer
+    @Condition eventPlayer.hasSpawned()
+    @Condition isAssemblingHeroes()
+    @Condition eventPlayer.firstSpawn != null
+
+    printLog("FullCleanup() (AH)")
+    FullCleanup()
+    eventPlayer.hero_ = eventPlayer.getCurrentHero()
+
 rule "[Automation] First Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
