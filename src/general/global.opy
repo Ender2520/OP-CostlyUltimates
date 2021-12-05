@@ -1,6 +1,14 @@
 #!mainFile "../main.opy"
 
 rule "[Global] Global 1":
+    # testing hud texts
+    if devTools == true:
+        hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "ULT - {0}%".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "DIST - {0}m".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.GRAY, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+        hudSubtext(getAllPlayers(), "FX/ENTITY - {0} | TXT - {1}".format(getNumberOfEntityIds(), getNumberOfTextIds()), HudPosition.RIGHT, 8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
+    else:
+        disableInspector()
     # workshop settings
     highPerformanceMode = createWorkshopSetting(bool, "SETTINGS", "ENABLE HIGH PERFORMANCE MODE (if server load is too high)", false, 1)
     ultBoost = 100 - (100 / ((createWorkshopSetting(int[0:400], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) + 100) / 100))
@@ -17,14 +25,6 @@ rule "[Global] Global 1":
     hudSubheader(getAllPlayers(), "", HudPosition.LEFT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), " \n\n\n\n\n\n\n\n\n\n\n", HudPosition.TOP, 18, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
-    # testing hud texts
-    if devTools == true:
-        hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudSubtext(getAllPlayers(), "ULT - {0}%".format(TESTBOT.getUltCharge()), HudPosition.RIGHT, 5, Color.SKY_BLUE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudSubtext(getAllPlayers(), "DIST - {0}m".format(distance(localPlayer, TESTBOT)), HudPosition.RIGHT, 6, Color.GRAY, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-        hudSubtext(getAllPlayers(), "FX/ENTITY - {0} | TXT - {1}".format(getNumberOfEntityIds(), getNumberOfTextIds()), HudPosition.RIGHT, 8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
-    else:
-        disableInspector()
     # set global variables
     bombRadius = true
     bombOutsideRange = true
