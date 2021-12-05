@@ -1,5 +1,3 @@
-#!mainFile "main.opy"
-
 settings {
     "main": {
         "description": "All the ultimates are very OP but they are expensive. This is kind of a testing ground for my planned gamemode ReWatch, so please provide feedback in my discord.",
@@ -10,39 +8,48 @@ settings {
         "team2Slots": 5
     },
     "gamemodes": {
-        "assault": {},
-        "control": {},
-        "escort": {},
-        "hybrid": {},
+        "escort": {
+            "enableCompetitiveRules": true,
+            "payloadSpeed%": 90
+        },
+        "hybrid": {
+            "captureSpeed%": 90,
+            "enableCompetitiveRules": true,
+            "payloadSpeed%": 90
+        },
         "general": {
             "gamemodeStartTrigger": "manual",
-            "roleLimit": "2OfEachRolePerTeam"
+            "roleLimit": "2OfEachRolePerTeam",
+            "respawnTime%": 75
         }
     },
     "heroes": {
         "allTeams": {
             "ana": {
-                "ultGen%": 85
+                "ultGen%": 80
             },
             "ashe": {
                 "enableInfiniteUlt": true,
-                "ultGen%": 70
+                "ultGen%": 75
             },
             "baptiste": {
                 "ultGen%": 75
             },
             "bastion": {
-                "ultGen%": 65,
-                "ultDuration%": 50
+                "ultDuration%": 50,
+                "ultGen%": 75
             },
             "brigitte": {
                 "ultGen%": 85
             },
+            "mccree": {
+                "ultGen%": 80
+            },
             "dva": {
-                "ultGen%": 75
+                "ultGen%": 70
             },
             "doomfist": {
-                "ultGen%": 65
+                "ultGen%": 75
             },
             "echo": {
                 "ultGen%": 60
@@ -54,13 +61,10 @@ settings {
                 "ultGen%": 50
             },
             "junkrat": {
-                "ultGen%": 75
+                "ultGen%": 85
             },
             "lucio": {
-                "ultGen%": 80
-            },
-            "mccree": {
-                "ultGen%": 70
+                "ultGen%": 85
             },
             "mei": {
                 "ultGen%": 75
@@ -69,91 +73,57 @@ settings {
                 "ultGen%": 75
             },
             "moira": {
-                "ultGen%": 75
+                "ultGen%": 85
             },
             "orisa": {
                 "ultGen%": 70
             },
             "pharah": {
-                "ultGen%": 80
-            },
-            "reaper": {
-                "ultGen%": 80
-            },
-            "reinhardt": {
-                "ultGen%": 75
-            },
-            "roadhog": {
-                "ultGen%": 70
-            },
-            "sigma": {
                 "ultGen%": 85
             },
+            "reaper": {
+                "ultGen%": 85
+            },
+            "reinhardt": {
+                "ultGen%": 70
+            },
+            "roadhog": {
+                "ultGen%": 75
+            },
+            "sigma": {
+                "ultGen%": 90
+            },
             "soldier": {
-                "ultGen%": 60
+                "ultGen%": 70
             },
             "sombra": {
-                "ultGen%": 70
+                "ultGen%": 75
             },
             "symmetra": {
                 "ultGen%": 80
             },
             "torbjorn": {
-                "ultGen%": 65,
-                "ultDuration%": 25
+                "ultDuration%": 25,
+                "ultGen%": 70
             },
             "tracer": {
-                "ultGen%": 70
+                "ultGen%": 65
             },
             "widowmaker": {
                 "ultGen%": 50
             },
             "winston": {
-                "ultGen%": 75
+                "ultGen%": 85
             },
             "hammond": {
-                "ultGen%": 75
+                "ultGen%": 60
             },
             "zarya": {
-                "ultGen%": 75
+                "ultGen%": 70
             },
             "zenyatta": {
-                "ultGen%": 80
-            },
-            "enabledHeroes": [
-                "ana",
-                "ashe",
-                "baptiste",
-                "bastion",
-                "brigitte",
-                "dva",
-                "doomfist",
-                "echo",
-                "genji",
-                "hanzo",
-                "junkrat",
-                "lucio",
-                "mccree",
-                "mei",
-                "mercy",
-                "moira",
-                "orisa",
-                "pharah",
-                "reaper",
-                "reinhardt",
-                "roadhog",
-                "sigma",
-                "soldier",
-                "sombra",
-                "symmetra",
-                "torbjorn",
-                "tracer",
-                "widowmaker",
-                "winston",
-                "hammond",
-                "zarya",
-                "zenyatta",
-            ]
+                "ultGen%": 75
+            }
         }
     }
 }
