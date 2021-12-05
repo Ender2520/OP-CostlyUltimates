@@ -51,12 +51,14 @@ rule "[Torbjorn] Meteor Strike Activate":
         eventPlayer.allowButton(Button.ULTIMATE)
         eventPlayer.forceButtonPress(Button.ULTIMATE)
         eventPlayer.disallowButton(Button.ULTIMATE)
+        eventPlayer.disallowButton(Button.PRIMARY_FIRE)
         eventPlayer.setUltCharge(0)
         # destroy effects
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
         destroyEffect(eventPlayer.strikeEffects)
-        wait(0.5)
+        # cancel ultimate
+        wait(1.675)
         # revert changes
         eventPlayer.stopCamera()
         eventPlayer.moveSpeed[false] *= 1000
@@ -70,8 +72,6 @@ rule "[Torbjorn] Meteor Strike Activate":
         eventPlayer.allowButton(Button.PRIMARY_FIRE)
         eventPlayer.allowButton(Button.MELEE)
         eventPlayer.setKnockbackReceived(100)
-        wait(0.5)
-        eventPlayer.cancelPrimaryAction()
     else: # player died mid-ultimate
         eventPlayer.setUltCharge(0)
         # destroy effects
