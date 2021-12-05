@@ -191,7 +191,7 @@ def RespawnCleanup(): # EVERY SPAWN GLOBAL
     eventPlayer.stopAllDoT()
     eventPlayer.stopAllHoT()
     # remove health pools
-    removeHealthPool(eventPlayer.overHealthPool)
+    eventPlayer.removeAllHealthPools()
     # reset variables
     eventPlayer.overHealthPool = null
 	eventPlayer.isStatused[0] = false
@@ -211,7 +211,7 @@ def FullCleanup(): # FIRST SPAWN
 	# stop chasing variables
     stopChasingVariable(eventPlayer.goldenGunCooldown)
 	# remove health pools
-    removeHealthPool(eventPlayer.overHealthPool)
+    eventPlayer.removeAllHealthPools()
 	# allow buttons
     eventPlayer.allowButton(Button.ABILITY_1)
     eventPlayer.allowButton(Button.ABILITY_2)
