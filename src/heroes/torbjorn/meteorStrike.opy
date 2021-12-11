@@ -210,3 +210,20 @@ rule "[Torbjorn] Lava Pit Damage":
     waitUntil(any([player.isAlive() and player.usingUltimateREAL == true and distance(player.strikeLaunch1, eventPlayer) <= 12 and player != eventPlayer for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))]) != true or eventPlayer.isDead(), 9999)
     stopDoT(eventPlayer.lavaPitDoT)
     eventPlayer.clearStatusEffect(Status.BURNING)
+
+rule "[Torbjorn] Ultimate Loop":
+    @Event eachPlayer
+    @Hero torbjorn
+    @Condition eventPlayer.usingUltimateREAL == true
+    @Condition eventPlayer.strikeLaunch1 == eventPlayer.strikeDrop1
+
+    # sounds
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.RED, eventPlayer.strikeDrop1, 24)
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.strikeDrop1, 23)
+    playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.BLUE, eventPlayer.strikeDrop1, 24)
+    playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.AQUA, eventPlayer.strikeDrop1, 23)
+    playEffect(getAllPlayers(), DynamicEffect.ASHE_DYNAMITE_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.strikeDrop1, 60)
+    playEffect(getAllPlayers(), DynamicEffect.PHARAH_BARRAGE_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.strikeDrop1, 30)
+    wait(0.512)
+    if RULE_CONDITION:
+        goto RULE_START
