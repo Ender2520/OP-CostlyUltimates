@@ -7,5 +7,5 @@ rule "[Baptiste] Info":
 
     wait(0.2) 
     eventPlayer.ultName = " Amplification Matrix"
-    eventPlayer.ultDesc = " Creates a zone that greatly increases teammates healing and damage dealt."
+    eventPlayer.ultDesc = " Greatly increase nearby teammates healing and damage dealt."
     eventPlayer.ultTooltip = "Teammates must be within LoS."
