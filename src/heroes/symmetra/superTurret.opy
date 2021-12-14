@@ -62,9 +62,9 @@ rule "[Symmetra] Create Super Turret":
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (HP BAR)
     createProgressBarInWorldText([p for p in getPlayers(eventPlayer.getTeam()) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
-    eventPlayer.turretTexts.append(getLastCreatedText())
+    eventPlayer.turretTexts[0] = getLastCreatedText()
     createProgressBarInWorldText([p for p in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.RED, Color.RED, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
-    eventPlayer.turretTexts.append(getLastCreatedText())
+    eventPlayer.turretTexts[1] = getLastCreatedText()
     # create/play effects (SPAWN EFFECTS)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.turretPos, 2)
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, Color.RED, eventPlayer.turretPos, 2)
@@ -95,7 +95,8 @@ rule "[Symmetra] Create Super Turret":
     # revert changes
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.turretEffects)
-    destroyProgressBarInWorldText(eventPlayer.turretTexts)
+    destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
+    destroyProgressBarInWorldText(eventPlayer.turretTexts[1])
     destroyDummy(eventPlayer.turretEntity.getTeam(), eventPlayer.turretEntity.getSlot())
     eventPlayer.turretEffects = []
     eventPlayer.turretTexts = []
@@ -109,10 +110,10 @@ rule "[Symmetra] Ultimate Loop":
     # sounds
     playEffect(getAllPlayers(), DynamicEffect.ECHO_STICKY_BOMB_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.turretPos, 40)
     eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120 if eventPlayer.megaBoosted != true else 180)
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 100)
     wait(0.256)
     eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 120 if eventPlayer.megaBoosted != true else 180)
+    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 100)
     wait(0.256)
     if RULE_CONDITION:
         goto RULE_START

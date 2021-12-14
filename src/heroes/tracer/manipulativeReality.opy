@@ -26,7 +26,7 @@ rule "[Tracer] Manipulative Reality Activate":
     createEffect(getAllPlayers(), Effect.ENERGY_SOUND, Color.TURQUOISE, eventPlayer.getPosition(), 100, EffectReeval.VISIBILITY)
     eventPlayer.manipulateEffects.append(getLastCreatedEntity())
     # start timer
-    chase(eventPlayer.manipulateDuration, 0, duration=10, ChaseReeval.NONE)
+    chase(eventPlayer.manipulateDuration, 0, duration=12, ChaseReeval.NONE)
     waitUntil(eventPlayer.manipulateDuration == 0 or eventPlayer.isDead(), 9999)
     # remove effects
     destroyProgressBarHud(eventPlayer.manipulateTexts)
