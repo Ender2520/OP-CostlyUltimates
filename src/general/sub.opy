@@ -10,6 +10,8 @@ def HeroCleanup(): # EVERY SPAWN PER HERO
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
     elif eventPlayer.hero_ == Hero.SYMMETRA:
+        destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
+        destroyProgressBarInWorldText(eventPlayer.turretTexts[1])
         eventPlayer.turretTexts = null
 
 def SwapCleanup(): # SWAPPING OFF A HERO
