@@ -33,7 +33,7 @@ settings {
                 "ultGen%": 75
             },
             "baptiste": {
-                "ultGen%": 75
+                "ultGen%": 65
             },
             "bastion": {
                 "ultDuration%": 50,
@@ -49,7 +49,7 @@ settings {
                 "ultGen%": 70
             },
             "doomfist": {
-                "ultGen%": 75
+                "ultGen%": 70
             },
             "echo": {
                 "ultGen%": 60

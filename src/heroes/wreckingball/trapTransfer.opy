@@ -38,7 +38,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
         createEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, Effect.ENERGY_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getPosition(), (1-eventPlayer.trapTime) * 100 + 20, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.trappedEffects.append(getLastCreatedEntity())
     # stun, burn & slow(eventPlayer)
-    eventPlayer.moveSpeed[false] *= 1 - (0.25 + (6.25/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
+    eventPlayer.moveSpeed[false] *= 1 - (0.2 + (5/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
     eventPlayer.trappedPlayers.moveSpeed[false] *= 0.35
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.STUNNED, 0.5)
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.BURNING, 9999)
@@ -57,7 +57,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.GOOD_EXPLOSION, Color.ORANGE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 2)
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 150)
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 50)
-    eventPlayer.moveSpeed[false] /= 1 - (0.25 + (6.25/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
+    eventPlayer.moveSpeed[false] /= 1 - (0.2 + (5/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
     eventPlayer.trappedPlayers.moveSpeed[false] /= 0.35
     eventPlayer.trappedPlayers.isStatused[5] = false
     eventPlayer.trappedPlayers.clearStatusEffect(Status.ROOTED)

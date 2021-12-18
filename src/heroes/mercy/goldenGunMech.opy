@@ -13,7 +13,7 @@ rule "[Mercy] Golden Gun Fire Rate":
     if eventPlayer.megaBoosted == true:
         eventPlayer.goldenGunCooldown = 1.33333
     else:
-        eventPlayer.goldenGunCooldown = 2.0
+        eventPlayer.goldenGunCooldown = 2.5
     waitUntil(eventPlayer.goldenGunCooldown == 0, 9999)
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.allowButton(Button.SECONDARY_FIRE)

@@ -12,7 +12,7 @@ rule "[Doomfist] Detect Ultimate Use":
     # pre-ultimate
     eventPlayer.setUltCharge(0)
     eventPlayer.setUltEnabled(false)
-    eventPlayer.ultimateDuration = 15
+    eventPlayer.ultimateDuration = 16
     eventPlayer.damageIncrease = 1
     chase(eventPlayer.ultimateDuration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     # create effects
