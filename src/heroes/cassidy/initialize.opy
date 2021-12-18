@@ -9,3 +9,11 @@ rule "[Cassidy] Info":
     eventPlayer.ultName = " Deadeye"
     eventPlayer.ultDesc = " A shield appears in front of Cassidy.\n Movement speed debuff removed."
     eventPlayer.ultTooltip = null
+
+rule "[Cassidy] Initialize":
+    @Event eachPlayer
+    @Hero mccree
+    @Condition eventPlayer.hasSpawned()
+
+    wait(0.128)
+    eventPlayer.disallowButton(Button.ULTIMATE)

@@ -9,13 +9,10 @@ def HeroCleanup(): # EVERY SPAWN PER HERO
         eventPlayer.bombCenterPoint = vect(false,false,false)
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
-    elif eventPlayer.hero_ == Hero.SYMMETRA:
-        destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
-        destroyProgressBarInWorldText(eventPlayer.turretTexts[1])
-        eventPlayer.turretTexts = null
 
 def SwapCleanup(): # SWAPPING OFF A HERO
     @Name "SUB Swap Cleanup"
+    eventPlayer.usingUltimateREAL = false
     if eventPlayer.hero_ == Hero.BAPTISTE:
         destroyEffect(eventPlayer.matrixEffect)
         wait()
