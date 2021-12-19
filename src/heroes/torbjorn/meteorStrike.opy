@@ -219,7 +219,7 @@ rule "[Torbjorn] Ultimate Loop":
 
     # sounds
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.RED, eventPlayer.strikeDrop1, 24)
-    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.strikeDrop1, 23)
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.strikeDrop1, 22)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.BLUE, eventPlayer.strikeDrop1, 24)
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.AQUA, eventPlayer.strikeDrop1, 23)
     playEffect(getAllPlayers(), DynamicEffect.ASHE_DYNAMITE_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.strikeDrop1, 60)
