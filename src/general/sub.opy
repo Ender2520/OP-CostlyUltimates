@@ -156,12 +156,11 @@ def SwapCleanup(): # SWAPPING OFF A HERO
     elif eventPlayer.hero_ == Hero.WIDOWMAKER:
         eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.chamberEffects)
-        destroyProgressBarHud(eventPlayer.chamberText)
+        destroyEffect(eventPlayer.chamberEffects_)
         wait()
         eventPlayer.chamberCast_Start = null
         eventPlayer.chamberCast_Direction = null
         eventPlayer.chamberCast_DistRemaining = null
-        eventPlayer.chamberCharge = null
         eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.HAMMOND:
         eventPlayer.allowButton(Button.ULTIMATE)
@@ -264,10 +263,12 @@ def animationCleanup():
     # cleanup all bastion effects and changes from his ultimate
     destroyEffect(eventPlayer.missileEffect)
     eventPlayer.moveSpeed /= 1.75
+    removeHealthPool(eventPlayer.armorPool)
     eventPlayer.setMaxHealth(100)
+    eventPlayer.setHealth(99999)
+    wait()
     kill(eventPlayer, eventPlayer)
     wait(1)
-    removeHealthPool(eventPlayer.armorPool)
     eventPlayer.stopCamera()
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.setSecondaryFireEnabled(true)
@@ -279,7 +280,7 @@ def superChargerPulsingEffect():
 
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.GREEN, eventPlayer.superchargerPosition, eventPlayer.superchargerSize * 2)
     playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.RING_EXPLOSION, Color.ORANGE, eventPlayer.superchargerPosition, eventPlayer.superchargerSize * 2)
-    playEffect(getPlayersInRadius(eventPlayer.superchargerPosition, 35, Team.ALL, LosCheck.OFF), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, Color.GREEN, eventPlayer.superchargerPosition, 200) 
+    playEffect(getPlayersInRadius(eventPlayer.superchargerPosition, 28, Team.ALL, LosCheck.OFF), DynamicEffect.ORISA_HALT_IMPLOSION_SOUND, Color.GREEN, eventPlayer.superchargerPosition, 200) 
     wait(2.75, Wait.ABORT_WHEN_FALSE)
-    if eventPlayer.superchargerSize >= 32:
+    if eventPlayer.superchargerSize >= 28:
         async(superChargerPulsingEffect(), AsyncBehavior.RESTART)
