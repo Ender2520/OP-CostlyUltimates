@@ -130,11 +130,10 @@ playervar manipulateEffects
 playervar manipulateTexts
 # widowmaker
 playervar chamberEffects
+playervar chamberEffects_
 playervar chamberCast_Start
 playervar chamberCast_Direction
 playervar chamberCast_DistRemaining
-playervar chamberCharge
-playervar chamberText
 # wrecking ball
 playervar trappedPlayers
 playervar trappedEffects
