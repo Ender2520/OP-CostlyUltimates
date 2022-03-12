@@ -14,6 +14,7 @@ rule "[Tracer] Manipulative Reality Activate":
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setUltCharge(0)
     eventPlayer.manipulateDuration = 1
+    eventPlayer.setMaxAmmo(0, 999)
     eventPlayer.setAmmo(0, 999)
     # create effects
     wait()
@@ -28,15 +29,21 @@ rule "[Tracer] Manipulative Reality Activate":
     # start timer
     chase(eventPlayer.manipulateDuration, 0, duration=12, ChaseReeval.NONE)
     waitUntil(eventPlayer.manipulateDuration == 0 or eventPlayer.isDead(), 9999)
+    # explosion
+    playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.getPosition(), 100)
+    playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.BAD_EXPLOSION, Color.AQUA, eventPlayer.getPosition(), 3)
+    playEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), DynamicEffect.BAD_EXPLOSION, Color.RED, eventPlayer.getEyePosition(), 3)
+    damage([p for p in getAllPlayers() if distance(p, eventPlayer.getEyePosition()) <= 3 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and p.getTeam() == getOppositeTeam(eventPlayer.getTeam()) and p.isAlive()], eventPlayer, 200)
     # remove effects
     destroyProgressBarHud(eventPlayer.manipulateTexts)
     destroyEffect(eventPlayer.manipulateEffects)
     # revert changes
     stopChasingVariable(eventPlayer.manipulateDuration)
     eventPlayer.usingUltimateREAL = false
-    # leave tracer with no abilities or ammo
-    eventPlayer.setAbilityCharge(Button.ABILITY_1, 0)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 12)
+    # leave tracer with little abilities or ammo
+    eventPlayer.setAbilityCharge(Button.ABILITY_1, 1)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, 6)
+    eventPlayer.setMaxAmmo(0, 40)
     eventPlayer.setAmmo(0, 0)
 
 rule "[Tracer] Cooldown Decrease DASH":
@@ -45,9 +52,10 @@ rule "[Tracer] Cooldown Decrease DASH":
     @Condition eventPlayer.usingUltimateREAL == true
     
     # remove cooldown
-    while eventPlayer.getAbilityCharge(Button.ABILITY_1) < 420:
+    while eventPlayer.getAbilityCharge(Button.ABILITY_1) < 420 or eventPlayer.getAmmo(0) <= 499:
         wait(0.512)
         eventPlayer.setAbilityCharge(Button.ABILITY_1, 420)
+        eventPlayer.setAmmo(0, 999)
 
 rule "[Tracer] Ultimate Loop":
     @Event eachPlayer

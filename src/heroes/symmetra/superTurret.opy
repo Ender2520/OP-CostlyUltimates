@@ -23,42 +23,34 @@ rule "[Symmetra] Create Super Turret":
     wait()
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 15, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.AQUA, eventPlayer.turretPos, 25, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.BAD_AURA, Color.AQUA, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 15, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.SPHERE, Color.RED, eventPlayer.turretPos, 25, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.BAD_AURA, Color.RED, eventPlayer.turretPos, 1.5, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (ORBS)
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos, 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers() if eventPlayer.turretTarget != null else null, Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[0]) * 1, 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + ((angleToDirection(/*rotation*/180 + getTotalTimeElapsed() * 180, 0)) * /*top distance*/1), 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers() if eventPlayer.turretTarget != null else null, Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[1]) * 1, 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + ((angleToDirection(getTotalTimeElapsed() * 180, 0)) * /*top distance*/1), 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + vect(0,1,0) + ((angleToDirection(/*rotation*/180 + getTotalTimeElapsed() * 450, 0)) * /*top distance*/0.5), 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.SPHERE, Color.WHITE, eventPlayer.turretPos - vect(0,1,0) + ((angleToDirection(getTotalTimeElapsed() * 270, 0)) * /*top distance*/0.5), 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers() if eventPlayer.turretTarget != null else null, Effect.SPHERE, Color.WHITE, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[2]) * 1, 0.2, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (BEAMS)
     wait()
     createEffect(getAllPlayers(), Effect.ENERGY_SOUND, eventPlayer.getTeam(), eventPlayer.turretPos, 70, EffectReeval.VISIBILITY)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers() if eventPlayer.turretTarget != null else null, Effect.BEACON_SOUND, eventPlayer.getTeam(), eventPlayer.turretPos, 200, EffectReeval.VISIBILITY)
+    createEffect(getAllPlayers() if eventPlayer.turretTarget[0] != null else null, Effect.BEACON_SOUND, eventPlayer.getTeam(), eventPlayer.turretPos, 200, EffectReeval.VISIBILITY)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.TORBJORN_TURRET_SIGHT, eventPlayer.turretPos, eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[0]) * 1, eventPlayer.turretTarget[0], eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + ((angleToDirection(/*rotation*/180 + getTotalTimeElapsed() * 180, 0)) * /*top distance*/1), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[1]) * 1, eventPlayer.turretTarget[1], eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + ((angleToDirection(getTotalTimeElapsed() * 180, 0)) * /*top distance*/1), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + vect(0,1,0) + ((angleToDirection(/*rotation*/180 + getTotalTimeElapsed() * 450, 0)) * /*top distance*/0.5), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
-    eventPlayer.turretEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos - vect(0,1,0) + ((angleToDirection(getTotalTimeElapsed() * 270, 0)) * /*top distance*/0.5), eventPlayer.turretTarget, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers() if eventPlayer.turretTarget != null else null, Beam.SYMMETRA_TURRET, eventPlayer.turretPos + directionTowards(eventPlayer.turretPos, eventPlayer.turretTarget[2]) * 1, eventPlayer.turretTarget[2], eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.turretEffects.append(getLastCreatedEntity())
     # create/play effects (HP BAR)
     createProgressBarInWorldText([p for p in getPlayers(eventPlayer.getTeam()) if distance(p, eventPlayer.turretPos) <= 25 or isInLoS(p, eventPlayer.turretPos, BarrierLos.PASS_THROUGH_BARRIERS)], updateEveryTick((eventPlayer.turretEntity.getHealth() / 600) * 100), "Super Turret Health", eventPlayer.turretPos + vect(0,1,0), 0.8, Clip.NONE, Color.AQUA, Color.AQUA, ProgressWorldTextReeval.VISIBILITY_POSITION_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
@@ -109,18 +101,20 @@ rule "[Symmetra] Ultimate Loop":
 
     # sounds
     playEffect(getAllPlayers(), DynamicEffect.ECHO_STICKY_BOMB_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.turretPos, 40)
-    eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 100)
-    wait(0.256)
-    eventPlayer.turretTarget = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 15 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
-    eventPlayer.turretTarget.startDoT(eventPlayer, 0.256, 100)
-    wait(0.256)
+    for eventPlayer.i in range(0, 4, 1):
+        eventPlayer.turretTarget[0] = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 25 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[0]
+        eventPlayer.turretTarget[1] = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 25 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[1]
+        eventPlayer.turretTarget[2] = sorted([player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player, eventPlayer.turretPos) <= 25 and isInLoS(eventPlayer.turretPos, player, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS) and player != eventPlayer.turretEntity and player.isAlive()], lambda i: distance(eventPlayer.turretPos, i))[2]
+        eventPlayer.turretTarget[0].startDoT(eventPlayer, 0.128, 50)
+        eventPlayer.turretTarget[1].startDoT(eventPlayer, 0.128, 50)
+        eventPlayer.turretTarget[2].startDoT(eventPlayer, 0.128, 50)
+        wait(0.128)
     if RULE_CONDITION:
         goto RULE_START
 
 rule "[Symmetra] Slow Turret Target":
     @Event eachPlayer
-    @Condition eventPlayer == [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if player.getCurrentHero() == Hero.SYMMETRA and player.usingUltimateREAL == true].turretTarget
+    @Condition eventPlayer in [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if player.getCurrentHero() == Hero.SYMMETRA and player.usingUltimateREAL == true].turretTarget
 
     eventPlayer.moveSpeed[false] *= 0.6
     waitUntil(eventPlayer != [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if player.getCurrentHero() == Hero.SYMMETRA and player.usingUltimateREAL == true].turretTarget, 9999)

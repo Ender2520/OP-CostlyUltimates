@@ -30,7 +30,7 @@ settings {
             },
             "ashe": {
                 "enableInfiniteUlt": true,
-                "ultGen%": 75
+                "ultGen%": 82.5
             },
             "baptiste": {
                 "ultGen%": 65
@@ -52,10 +52,10 @@ settings {
                 "ultGen%": 70
             },
             "echo": {
-                "ultGen%": 60
+                "ultGen%": 72
             },
             "genji": {
-                "ultGen%": 65
+                "ultGen%": 61.75
             },
             "hanzo": {
                 "ultGen%": 50
@@ -73,10 +73,10 @@ settings {
                 "ultGen%": 75
             },
             "moira": {
-                "ultGen%": 85
+                "ultGen%": 93.5
             },
             "orisa": {
-                "ultGen%": 70
+                "ultGen%": 77
             },
             "pharah": {
                 "ultGen%": 85
@@ -85,19 +85,19 @@ settings {
                 "ultGen%": 85
             },
             "reinhardt": {
-                "ultGen%": 70
+                "ultGen%": 73.5
             },
             "roadhog": {
                 "ultGen%": 75
             },
             "sigma": {
-                "ultGen%": 90
+                "ultGen%": 85.5
             },
             "soldier": {
                 "ultGen%": 70
             },
             "sombra": {
-                "ultGen%": 75
+                "ultGen%": 90
             },
             "symmetra": {
                 "ultGen%": 80
@@ -110,7 +110,7 @@ settings {
                 "ultGen%": 65
             },
             "widowmaker": {
-                "ultGen%": 50
+                "ultGen%": 52.5
             },
             "winston": {
                 "ultGen%": 85
@@ -119,7 +119,7 @@ settings {
                 "ultGen%": 60
             },
             "zarya": {
-                "ultGen%": 70
+                "ultGen%": 73.5
             },
             "zenyatta": {
                 "ultGen%": 75

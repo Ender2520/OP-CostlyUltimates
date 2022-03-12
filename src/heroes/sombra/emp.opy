@@ -24,6 +24,7 @@ rule "[Sombra] Apply vulnerabled effect":
     eventPlayer.applyImpulse(Vector.UP, 0.5, Relativity.TO_PLAYER, Impulse.CANCEL_CONTRARY_MOTION)
     eventPlayer.setGravity(10)
     eventPlayer.setKnockbackReceived(25)
+    eventPlayer.moveSpeed[false] *= 0.1
     # sound/visual queue
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_LOGO_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
     playEffect(getAllPlayers(), DynamicEffect.SOMBRA_EMP_EXPLOSION_SOUND, Color.WHITE, eventPlayer.getPosition(), 200)
@@ -37,13 +38,14 @@ rule "[Sombra] Apply vulnerabled effect":
         createEffect(getAllPlayers(), Effect.SOMBRA_HACKED_LOOPING, eventPlayer.getTeam(), eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)], 1, EffectReeval.VISIBILITY)
         eventPlayer.victimEffects.append(getLastCreatedEntity())
         playEffect(eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)], DynamicEffect.ANA_BIOTIC_GRENADE_EXPLOSION_SOUND, Color.WHITE, eventPlayer.vulnerabledVictims[evalOnce(eventPlayer.i)].getPosition(), 200)
-    eventPlayer.vulnerabledVictims.damageReceived *= 1.50
+    eventPlayer.vulnerabledVictims.damageReceived *= 1.25
     eventPlayer.vulnerabledVictims.isStatused[4] = true
     eventPlayer.vulnerabledVictims.vulnerabledSTIMER = 5
     wait(0.1)
     # revert floating effect
     eventPlayer.setGravity(100)
     eventPlayer.setKnockbackReceived(100)
+    eventPlayer.moveSpeed[false] /= 0.1
     wait()
     # destroy effect
     destroyEffect(eventPlayer.empEffect)
@@ -53,7 +55,7 @@ rule "[Sombra] Apply vulnerabled effect":
     destroyEffect(eventPlayer.victimEffects)
     eventPlayer.vulnerabledVictims.isStatused[4] = false
     eventPlayer.victimEffects = null
-    eventPlayer.vulnerabledVictims.damageReceived /= 1.50
+    eventPlayer.vulnerabledVictims.damageReceived /= 1.25
     eventPlayer.i = 0
     wait()
     eventPlayer.vulnerabledVictims = null

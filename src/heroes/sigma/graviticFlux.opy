@@ -6,7 +6,7 @@ rule "[Sigma] Set Flux Center":
     @Condition eventPlayer.isUsingUltimate()
 
     wait(0.6)
-    createEffect(eventPlayer, Effect.RING, Color.BLUE, updateEveryTick(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 35, null, getAllPlayers(), false).getHitPosition()), 12, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(eventPlayer, Effect.RING, Color.BLUE, updateEveryTick(raycast(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 35, null, getAllPlayers(), false).getHitPosition()), 24, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.fluxExtraRangeEffect = getLastCreatedEntity()
     waitUntil(eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) or not eventPlayer.isUsingUltimate(), 9999)
     destroyEffect(eventPlayer.fluxExtraRangeEffect)
@@ -21,5 +21,5 @@ rule "[Sigma] Pull Enemies Towards Gravitic Flux":
 
     waitUntil([player.fluxCenter != null for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))], 9999)
     wait(0.5)
-    if any([distance(eventPlayer, player.fluxCenter + vect(0,0.5,0)) <= 15 and isInLoS(player, eventPlayer, BarrierLos.PASS_THROUGH_BARRIERS) for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))]) == true:
-        eventPlayer.applyImpulse(directionTowards(eventPlayer, getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam())).fluxCenter  + vect(0,0.5,0)), 12, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
+    if any([distance(eventPlayer, player.fluxCenter + vect(0,1,0)) <= 24 and isInLoS(player, eventPlayer, BarrierLos.PASS_THROUGH_BARRIERS) for player in getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam()))]) == true:
+        eventPlayer.applyImpulse(directionTowards(eventPlayer, getPlayersOnHero(Hero.SIGMA, getOppositeTeam(eventPlayer.getTeam())).fluxCenter  + vect(0,1,0)), 12, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)

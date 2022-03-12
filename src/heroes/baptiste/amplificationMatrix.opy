@@ -41,14 +41,14 @@ rule "[Baptiste] Detect Matrix Victims":
     # assign players withtin conditions to matrixVictims
     eventPlayer.matrixVictims = [p for p in getAllPlayers() if distance(eventPlayer, p) <= 20 and isInLoS(eventPlayer, p, BarrierLos.BLOCKED_BY_ALL_BARRIERS) and p.getTeam() == eventPlayer.getTeam() and p.isAlive()]
     # increase damage of those players
-    eventPlayer.matrixVictims.damageDealt[false] *= 1.75
-	eventPlayer.matrixVictims.healingDealt[false] *= 1.75
+    eventPlayer.matrixVictims.damageDealt[false] *= 1.60
+	eventPlayer.matrixVictims.healingDealt[false] *= 1.60
     # begin statuses
     eventPlayer.matrixVictims.isStatused[0] = true
     eventPlayer.matrixVictims.amplifiedSTIMER = 10
     waitUntil(eventPlayer.usingUltimateREAL != true, 9999)
     # reverse of above
-    eventPlayer.matrixVictims.damageDealt[false] /= 1.75
-	eventPlayer.matrixVictims.healingDealt[false] /= 1.75
+    eventPlayer.matrixVictims.damageDealt[false] /= 1.60
+	eventPlayer.matrixVictims.healingDealt[false] /= 1.60
     eventPlayer.matrixVictims.isStatused[0] = false
     eventPlayer.matrixVictims = []

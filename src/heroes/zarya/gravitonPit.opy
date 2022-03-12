@@ -38,7 +38,7 @@ rule "[Zarya] Graviton Pit Cast":
         eventPlayer.pitEffects[5] = getLastCreatedEntity()
         createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.pitPosition, 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.pitEffects[6] = getLastCreatedEntity()
-        wait(1.5)
+        wait(2)
         eventPlayer.usingUltimateREAL = true
         # pit actual effects
         createEffect(getPlayers(eventPlayer.getTeam()), Effect.LIGHT_SHAFT, Color.PURPLE, eventPlayer.pitPosition - vect(0,12,0), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
@@ -54,7 +54,7 @@ rule "[Zarya] Graviton Pit Cast":
         eventPlayer.allowButton(Button.PRIMARY_FIRE)
         eventPlayer.allowButton(Button.SECONDARY_FIRE)
         #graviton pit duration
-        wait(6)
+        wait(7.5)
         destroyEffect(eventPlayer.pitEffects)
         destroyInWorldText(eventPlayer.pitTexts[0])
         eventPlayer.usingUltimateREAL = false
@@ -81,17 +81,17 @@ rule "[Zarya] Explosion Effects":
 rule "[Zarya] Sink Enemies":
     @Event eachPlayer
     @Condition getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).usingUltimateREAL == true
-    @Condition distance(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) <= 8 
+    @Condition distance(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) <= 7.5
     @Condition eventPlayer.getPosition().y - getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y < 0.5
     
     # apply debuffs
     eventPlayer.disableEnvironmentCollision(true)
     eventPlayer.setKnockbackReceived(0)
-    eventPlayer.moveSpeed[false] *= 0.5
+    eventPlayer.moveSpeed[false] *= 0.6
     # create pit effects
     createEffect(getAllPlayers(), Effect.WIDOWMAKER_VENOM_MINE_TARGET, Color.WHITE, eventPlayer, 1, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.pitSinkEffect = getLastCreatedEntity()
-    while (distance(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) <= 8) and getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).usingUltimateREAL == true and eventPlayer.getPosition().y - getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y < 0.5:
+    while (distance(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) <= 7.5) and getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).usingUltimateREAL == true and eventPlayer.getPosition().y - getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y < 0.5:
         # impulse downwards
         eventPlayer.applyImpulse(directionTowards(eventPlayer, getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition - vect(0,5,0)), 0.2, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
         wait(0.04)
@@ -99,13 +99,13 @@ rule "[Zarya] Sink Enemies":
         eventPlayer.applyImpulse(Vector.UP, 0.1, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION)
         # damage player if deep enough
         if distance(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition * vect(0,1,0), eventPlayer.getPosition() * vect(0,1,0)) > 1.5 and eventPlayer.getPosition().y < getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y:
-            eventPlayer.startDoT(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())), 0.12, 200)
+            eventPlayer.startDoT(getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())), 0.12, 100)
         wait(0.08)
-    waitUntil(distance(getPlayersOnHero(Hero.ZARYA, eventPlayer.getTeam()).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) > 8 or getPlayersOnHero(Hero.ZARYA, eventPlayer.getTeam()).usingUltimateREAL == false, 8)
+    waitUntil(distance(getPlayersOnHero(Hero.ZARYA, eventPlayer.getTeam()).pitPosition * vect(1,0,1), eventPlayer.getPosition() * vect(1,0,1)) > 7.5 or getPlayersOnHero(Hero.ZARYA, eventPlayer.getTeam()).usingUltimateREAL == false, 7.5)
     destroyEffect(eventPlayer.pitSinkEffect)
     # revert debuffs
     eventPlayer.enableEnvironmentCollision()
     eventPlayer.setKnockbackReceived(100)
-    eventPlayer.moveSpeed[false] /= 0.5
+    eventPlayer.moveSpeed[false] /= 0.6
     # bring enemy back to surface if they survived
     eventPlayer.teleport(vect(eventPlayer.getPosition().x,getPlayersOnHero(Hero.ZARYA, getOppositeTeam(eventPlayer.getTeam())).pitPosition.y,eventPlayer.getPosition().z))

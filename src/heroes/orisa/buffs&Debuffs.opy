@@ -31,13 +31,11 @@ rule "[Orisa] Apply Buffs":
     @Condition eventPlayer.orisaBuffs == true
 
     # apply buffs
-    eventPlayer.damageDealt[false] *= 1.25
-    eventPlayer.damageReceived[false] *= 0.75
+    eventPlayer.moveSpeed[false] *= 1.20
     eventPlayer.startHoT([p for p in getPlayersOnHero(Hero.ORISA, eventPlayer.getTeam())], 9999, 14)
     eventPlayer.superchargerHoT = getLastHoT()
     waitUntil(eventPlayer.orisaBuffs != true, 999)
-    eventPlayer.damageDealt[false] /= 1.25
-    eventPlayer.damageReceived[false] /= 0.75
+    eventPlayer.moveSpeed[false] /= 1.20
     stopHoT(eventPlayer.superchargerHoT)
 
 rule "[Orisa] Apply Debuffs":
@@ -45,8 +43,8 @@ rule "[Orisa] Apply Debuffs":
     @Condition eventPlayer.orisaDebuffs == true
 
     # apply debuffs
-    eventPlayer.damageDealt[false] *= 0.75
-    eventPlayer.damageReceived[false] *= 1.25
+    eventPlayer.moveSpeed[false] /= 1.40
+    eventPlayer.setStatusEffect([p for p in getPlayersOnHero(Hero.ORISA, eventPlayer.getTeam())], Status.HACKED, 9999)
     waitUntil(eventPlayer.orisaDebuffs != true, 999)
-    eventPlayer.damageDealt[false] /= 0.75
-    eventPlayer.damageReceived[false] /= 1.25
+    eventPlayer.clearStatusEffect(Status.HACKED)
+    eventPlayer.moveSpeed[false] *= 1.40

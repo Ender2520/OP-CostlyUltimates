@@ -213,7 +213,7 @@ rule "[Pharah] First Artillery Shot Dropped":
     eventPlayer.strikeEffects_[1] = getLastCreatedEntity()
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeDrop1, 8, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects_[2] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=1.65, ChaseReeval.NONE)
+    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=2.0, ChaseReeval.NONE)
     while eventPlayer.strikeLaunch1 != eventPlayer.strikeDrop1:
         wait(0.096)
         playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, eventPlayer.getTeam(), eventPlayer.strikeLaunch1, 2)
@@ -227,9 +227,9 @@ rule "[Pharah] First Artillery Shot Dropped":
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.GOOD_EXPLOSION, Color.TURQUOISE, eventPlayer.strikeLaunch1, 8)
     destroyEffect(eventPlayer.strikeEffects_[1])
     destroyEffect(eventPlayer.strikeEffects_[2])
-    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 200)
-    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 100)
-    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 100)
+    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 2, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
+    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 4, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
+    damage(getPlayersInRadius(eventPlayer.strikeLaunch1, 8, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES), eventPlayer, 150)
     eventPlayer.setUltCharge(0)
 
 rule "[Pharah] Second Artillery Shot Dropped":
@@ -246,7 +246,7 @@ rule "[Pharah] Second Artillery Shot Dropped":
     eventPlayer.strikeEffects_[4] = getLastCreatedEntity()
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeDrop1, 8, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects_[5] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch2, eventPlayer.strikeDrop2, duration=1.65, ChaseReeval.NONE)
+    chase(eventPlayer.strikeLaunch2, eventPlayer.strikeDrop2, duration=2.0, ChaseReeval.NONE)
     while eventPlayer.strikeLaunch2 != eventPlayer.strikeDrop2:
         wait(0.096)
         playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, eventPlayer.getTeam(), eventPlayer.strikeLaunch2, 2)
@@ -279,7 +279,7 @@ rule "[Pharah] Third Artillery Shot Dropped":
     eventPlayer.strikeEffects_[7] = getLastCreatedEntity()
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeDrop1, 8, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects_[8] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch3, eventPlayer.strikeDrop3, duration=1.65, ChaseReeval.NONE)
+    chase(eventPlayer.strikeLaunch3, eventPlayer.strikeDrop3, duration=2.0, ChaseReeval.NONE)
     while eventPlayer.strikeLaunch3 != eventPlayer.strikeDrop3:
         wait(0.096)
         playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, eventPlayer.getTeam(), eventPlayer.strikeLaunch3, 2)
@@ -312,7 +312,7 @@ rule "[Pharah] Fourth Artillery Shot Dropped":
     eventPlayer.strikeEffects_[10] = getLastCreatedEntity()
     createEffect(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Effect.RING, Color.RED, eventPlayer.strikeDrop1, 8, EffectReeval.VISIBILITY)
     eventPlayer.strikeEffects_[11] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch4, eventPlayer.strikeDrop4, duration=1.65, ChaseReeval.NONE)
+    chase(eventPlayer.strikeLaunch4, eventPlayer.strikeDrop4, duration=2.0, ChaseReeval.NONE)
     while eventPlayer.strikeLaunch4 != eventPlayer.strikeDrop4:
         wait(0.096)
         playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, eventPlayer.getTeam(), eventPlayer.strikeLaunch4, 2)

@@ -5,20 +5,20 @@ rule "[Widowmaker] Chamber Activated":
     @Hero widowmaker
     @Condition eventPlayer.isUsingUltimate()
 
-    #progressBarHud([p for p in eventPlayer if eventPlayer.isFiringSecondaryFire() and eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) and eventPlayer.chamberCharge < 1], eventPlayer.chamberCharge * 100, "", HudPosition.TOP, 19, Color.PURPLE, Color.PURPLE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
-    #eventPlayer.chamberTexts = getLastCreatedText()
     eventPlayer.disallowButton(Button.PRIMARY_FIRE)
     eventPlayer.usingUltimateREAL = true
     eventPlayer.setMaxAmmo(0, 5)
     eventPlayer.setAmmo(0, 5)
-    #chase(eventPlayer.chamberCharge, 1, rate=10, ChaseReeval.NONE)
+    createBeam([p for p in getAllPlayers() if eventPlayer.isFiringSecondaryFire() and p != eventPlayer], Beam.TORBJORN_TURRET_SIGHT, updateEveryTick(eventPlayer.getEyePosition()), updateEveryTick(eventPlayer.getEyePosition() + eventPlayer.getFacingDirection() * 80), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_RADIUS_AND_COLOR)
+    eventPlayer.chamberEffects_.append(getLastCreatedEntity())
     waitUntil(eventPlayer.isUsingUltimate() != true or eventPlayer.isDead(), 9999)
-    #destroyProgressBarHud(eventPlayer.chamberTexts)
-    #stopChasingVariable(eventPlayer.chamberCharge)
     eventPlayer.allowButton(Button.PRIMARY_FIRE)
     eventPlayer.usingUltimateREAL = false
     eventPlayer.setMaxAmmo(0, 35)
     eventPlayer.setAmmo(0, 35)
+    wait()
+    destroyEffect(eventPlayer.chamberEffects_)
+    eventPlayer.chamberEffects = null
 
 rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     @Event eachPlayer
@@ -54,7 +54,8 @@ rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     while (raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getHitPosition() != evalOnce(eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction)):
         # Check if raycast hit a player
         if (raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getPlayerHit() != null): # We hit a player, do stuff and stop raycasting   
-            damage(raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getPlayerHit(), eventPlayer, 250)
+            if not eventPlayer.isInSpawnRoom():
+                damage(raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getPlayerHit(), eventPlayer, 200)
             eventPlayer.chamberCast_DistRemaining = 0
             break
         elif eventPlayer.chamberCast_DistRemaining < 0:

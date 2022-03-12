@@ -12,7 +12,7 @@ rule "[Global] Global 1":
     # workshop settings
     highPerformanceMode = createWorkshopSetting(bool, "SETTINGS", "ENABLE HIGH PERFORMANCE MODE (if server load is too high)", false, 1)
     ultBoost = 100 - (100 / ((createWorkshopSetting(int[0:400], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) + 100) / 100))
-    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", false, 1)
+    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", true, 1)
     specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", " Spade", " T1mur4TR"], "Credits", "Credits", 0, 2)
     # high performance mode
     if highPerformanceMode == true:
