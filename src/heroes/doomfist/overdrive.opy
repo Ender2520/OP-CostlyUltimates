@@ -36,7 +36,7 @@ rule "[Doomfist] Detect Ultimate Use":
     progressBarHud(eventPlayer, updateEveryTick(100 * (eventPlayer.ultimateDuration / 15)), "{0} Overdrive | Damage Increase {1}%".format(abilityIconString(Hero.DOOMFIST, Button.ULTIMATE), eventPlayer.damageIncrease * 100), HudPosition.TOP, -10, Color.RED, Color.WHITE, ProgressHudReeval.VISIBILITY_AND_VALUES, SpecVisibility.ALWAYS)
     eventPlayer.ultimateBar = getLastCreatedText()
     eventPlayer.usingUltimateREAL = true
-    waitUntil(eventPlayer.ultimateDuration == 0, 99999)
+    waitUntil(eventPlayer.ultimateDuration == 0 or eventPlayer.isDead(), 99999)
     # post-ultimate
     if eventPlayer.damageIncrease == 1.25:
         eventPlayer.damageDealt /= 1.25
@@ -63,6 +63,7 @@ rule "[Doomfist] Detect Ultimate Use":
     destroyProgressBarHud(eventPlayer.ultimateBar)
     destroyEffect(eventPlayer.overdriveEffects)
     stopChasingVariable(eventPlayer.ultimateDuration)
+    eventPlayer.ultimateDuration = 0
     eventPlayer.setUltEnabled(true)
     eventPlayer.usingUltimateREAL = false
     eventPlayer.ultimateBar = []
