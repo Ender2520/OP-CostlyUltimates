@@ -17,8 +17,10 @@ rule "[Widowmaker] Chamber Activated":
     eventPlayer.setMaxAmmo(0, 35)
     eventPlayer.setAmmo(0, 35)
     wait()
+    destroyEffect(eventPlayer.chamberEffects)
     destroyEffect(eventPlayer.chamberEffects_)
-    eventPlayer.chamberEffects = null
+    eventPlayer.chamberEffects = []
+    eventPlayer.chamberEffects_ = null
 
 rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     @Event eachPlayer
@@ -31,6 +33,7 @@ rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     #playEffect(eventPlayer, DynamicEffect.TRACER_RECALL_REAPPEAR_SOUND, Color.WHITE, eventPlayer, 100)
     #wait(0.1, Wait.ABORT_WHEN_FALSE)
     # initialize
+    eventPlayer.i = 0
     eventPlayer.chamberCast_Start = eventPlayer.getEyePosition()
     eventPlayer.chamberCast_Direction = eventPlayer.getFacingDirection()
     eventPlayer.chamberCast_DistRemaining = 80
@@ -43,7 +46,7 @@ rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
     createBeam(getPlayers(getOppositeTeam(eventPlayer.getTeam())), Beam.BAD, evalOnce(eventPlayer.chamberCast_Start), evalOnce(eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction), Color.RED, EffectReeval.VISIBILITY)
     eventPlayer.chamberEffects.append(getLastCreatedEntity())
     # play effects
-    wait()
+    wait(0.016, Wait.IGNORE_CONDITION)
     playEffect(getAllPlayers(), DynamicEffect.LUCIO_SOUND_BARRIER_CAST_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 100)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 150)
     playEffect(getAllPlayers(), DynamicEffect.MCCREE_FLASHBANG_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.getEyePosition(), 200)
@@ -63,7 +66,9 @@ rule "[Widowmaker] Chamber Shot Fired": # CREDITS TO CACTUS PUPPY
         else: # If we didn't hit a player, we hit a wall. Update our raycast to start a little past the wall.
             eventPlayer.chamberCast_DistRemaining = eventPlayer.chamberCast_DistRemaining - distance(eventPlayer.chamberCast_Start, raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Direction * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getHitPosition()) - 0.5
             eventPlayer.chamberCast_Start = raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_Direction * 100, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getHitPosition() + (eventPlayer.chamberCast_Direction * 0.5)
-            wait()
+            eventPlayer.i++
+            if eventPlayer.i % 4 == 0:
+                wait()
     waitUntil(eventPlayer.chamberCast_DistRemaining <= 0 or raycast(eventPlayer.chamberCast_Start, eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction, getPlayers(getOppositeTeam(eventPlayer.getTeam())), getPlayers(eventPlayer.getTeam()), false).getHitPosition() == evalOnce(eventPlayer.chamberCast_Start + eventPlayer.chamberCast_DistRemaining * eventPlayer.chamberCast_Direction), 9999)
     wait(0.5, Wait.IGNORE_CONDITION)
     # remove effects
