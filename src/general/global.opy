@@ -12,13 +12,13 @@ rule "[Global] Global 1":
     # workshop settings
     highPerformanceMode = createWorkshopSetting(bool, "SETTINGS", "ENABLE HIGH PERFORMANCE MODE (if server load is too high)", false, 1)
     ultBoost = 100 - (100 / ((createWorkshopSetting(int[0:400], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) + 100) / 100))
-    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", true, 1)
+    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", false, 1)
     specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", " Spade", " T1mur4TR"], "Credits", "Credits", 0, 2)
     # high performance mode
     if highPerformanceMode == true:
         setSlowMotion(95)
     # create hud texts
-    hudSubheader(getAllPlayers(), "Overwatch OP & Costly Ultimates v0.6.0-beta", HudPosition.RIGHT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
+    hudSubheader(getAllPlayers(), "Overwatch OP & Costly Ultimates v0.7.0-beta", HudPosition.RIGHT, 1, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudSubheader(getAllPlayers(), "Original by u/Ender | Code: RYKD3", HudPosition.RIGHT, 2, Color.WHITE, HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     hudText(getAllPlayers(), "Discord", "Join for Updates and to Give Feedback", "bit.ly/ENDERSWORKSHOP (all caps)", HudPosition.RIGHT, 3, rgb(188,103,245), rgb(243,224,255), rgb(243,224,255), HudReeval.VISIBILITY, SpecVisibility.DEFAULT)
     #
