@@ -1,6 +1,11 @@
 #!mainFile "../main.opy"
 
 rule "[Global] Global 1":
+    # workshop settings
+    highPerformanceMode = createWorkshopSetting(bool, "SETTINGS", "ENABLE HIGH PERFORMANCE MODE (if server load is too high)", false, 1)
+    ultBoost = 100 - (100 / ((createWorkshopSetting(int[0:400], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) + 100) / 100))
+    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", false, 1)
+    specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", " Spade", " T1mur4TR"], "Credits", "Credits", 0, 2)
     # testing hud texts
     if devTools == true:
         hudSubheader(getAllPlayers(), "Load [{0}] | Peak [{1}] | Avg [{2}]".format(getServerLoad(), getPeakServerLoad(), getAverageServerLoad()), HudPosition.RIGHT, 0, rgba(255, 255, 255, 125), HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
@@ -9,11 +14,6 @@ rule "[Global] Global 1":
         hudSubtext(getAllPlayers(), "FX/ENTITY - {0} | TXT - {1}".format(getNumberOfEntityIds(), getNumberOfTextIds()), HudPosition.RIGHT, 8, Color.WHITE, HudReeval.VISIBILITY_AND_STRING, SpecVisibility.DEFAULT)
     else:
         disableInspector()
-    # workshop settings
-    highPerformanceMode = createWorkshopSetting(bool, "SETTINGS", "ENABLE HIGH PERFORMANCE MODE (if server load is too high)", false, 1)
-    ultBoost = 100 - (100 / ((createWorkshopSetting(int[0:400], "OPTIONS", "ULTIMATE BOOST (%)", 0, 0) + 100) / 100))
-    devTools = createWorkshopSetting(bool, "SETTINGS", "ENABLE DEV TOOLS", false, 1)
-    specialThanks = createWorkshopSetting(enum["Thanks To", " Alomare", " LemonAid", " Zezombye", " CactusPuppy", " Zomg", " Provoxin", " Jester", " Spade", " T1mur4TR"], "Credits", "Credits", 0, 2)
     # high performance mode
     if highPerformanceMode == true:
         setSlowMotion(95)
