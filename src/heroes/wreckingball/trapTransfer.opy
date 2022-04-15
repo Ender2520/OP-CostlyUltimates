@@ -39,7 +39,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
         eventPlayer.trappedEffects.append(getLastCreatedEntity())
     # stun, burn & slow(eventPlayer)
     eventPlayer.moveSpeed[false] *= 1 - (0.2 + (5/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
-    eventPlayer.trappedPlayers.moveSpeed[false] *= 0.35
+    eventPlayer.trappedPlayers.moveSpeed[false] *= 0.5
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.STUNNED, 0.5)
     eventPlayer.trappedPlayers.setStatusEffect(eventPlayer, Status.BURNING, 9999)
     eventPlayer.trappedPlayers.startDoT(eventPlayer, 9999, 13.33333)
@@ -58,7 +58,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.WRECKING_BALL_MINEFIELD_EXPLOSION_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 150)
             playEffect(getAllPlayers() if eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].isAlive() else null, DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.WHITE, eventPlayer.trappedPlayers[evalOnce(eventPlayer.i)].getEyePosition(), 50)
     eventPlayer.moveSpeed[false] /= 1 - (0.2 + (5/*percent per enemy*/ * (len(eventPlayer.trappedPlayers)-1) / 100))
-    eventPlayer.trappedPlayers.moveSpeed[false] /= 0.35
+    eventPlayer.trappedPlayers.moveSpeed[false] /= 0.5
     eventPlayer.trappedPlayers.isStatused[5] = false
     eventPlayer.trappedPlayers.clearStatusEffect(Status.ROOTED)
     eventPlayer.trappedPlayers.clearStatusEffect(Status.BURNING)
