@@ -44,7 +44,9 @@ rule "[Orisa] Apply Debuffs":
 
     # apply debuffs
     eventPlayer.moveSpeed[false] /= 1.40
+    wait()
     eventPlayer.setStatusEffect([p for p in getPlayersOnHero(Hero.ORISA, eventPlayer.getTeam())], Status.HACKED, 9999)
     waitUntil(eventPlayer.orisaDebuffs != true, 999)
-    eventPlayer.clearStatusEffect(Status.HACKED)
     eventPlayer.moveSpeed[false] *= 1.40
+    wait()
+    eventPlayer.clearStatusEffect(Status.HACKED)
