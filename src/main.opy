@@ -18,7 +18,6 @@
 #!include "heroes/baptiste/amplificationMatrix.opy"
 
 #!include "heroes/bastion/initialize.opy"
-#!include "heroes/bastion/cleanup.opy"
 #!include "heroes/bastion/missile.opy"
 
 #!include "heroes/brigitte/initialize.opy"
