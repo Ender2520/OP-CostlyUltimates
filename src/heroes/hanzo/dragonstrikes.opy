@@ -9,7 +9,7 @@ rule "[Hanzo] Fire Several Dragonstrikes":
     eventPlayer.dragonStrikeCharges = 3
     # run loop 4 times
     while eventPlayer.dragonStrikeCharges > 0:
-        waitUntil(not eventPlayer.isUsingUltimate(), 99999)
+        waitUntil(not eventPlayer.isUsingUltimate() or eventPlayer.isDead(), 99999)
         eventPlayer.setUltCharge(100)
         wait()
         eventPlayer.forceButtonPress(Button.ULTIMATE)

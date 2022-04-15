@@ -4,6 +4,7 @@ rule "[Brigitte] Info":
     @Event eachPlayer
     @Hero brigitte
     @Condition eventPlayer.spawnedREAL == true
+    @Condition not eventPlayer.isDummy()
 
     wait(0.2) 
     eventPlayer.ultName = " Rally"

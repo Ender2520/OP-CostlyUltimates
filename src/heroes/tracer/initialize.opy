@@ -9,11 +9,3 @@ rule "[Tracer] Info":
     eventPlayer.ultName = " Manipulative Reality"
     eventPlayer.ultDesc = " Tracer gains complete control of reality.\n She is provided with infinite ammo,\n and can teleport around at will."
     eventPlayer.ultTooltip = "After Manipulating Reality, Tracer will be left with\n no ammo, no blinks, and no recall."
-
-rule "[Tracer] Initialize":
-    @Event eachPlayer
-    @Hero tracer
-    @Condition eventPlayer.hasSpawned()
-
-    wait(0.128)
-    eventPlayer.disallowButton(Button.ULTIMATE)

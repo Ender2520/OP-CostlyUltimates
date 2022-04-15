@@ -7,7 +7,7 @@ rule "[Winston] Primal Rage Activated":
 
     eventPlayer.damageDealt[false] *= 2.0
     eventPlayer.setKnockbackDealt(0)
-    waitUntil(eventPlayer.isUsingUltimate() != true, 9999)
+    waitUntil(eventPlayer.isUsingUltimate() != true or eventPlayer.isDead(), 9999)
     eventPlayer.damageDealt[false] /= 2.0
     eventPlayer.setKnockbackDealt(0)
 

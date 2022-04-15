@@ -9,11 +9,3 @@ rule "[Moira] Info":
     eventPlayer.ultName = " Coalnado"
     eventPlayer.ultDesc = " Moira summons a Coalescence tornado that travels forwards\n and damages enemies within the radius and heals teammates\n within the radius."
     eventPlayer.ultTooltip = null
-
-rule "[Moira] Initialize":
-    @Event eachPlayer
-    @Hero moira
-    @Condition eventPlayer.hasSpawned()
-
-    wait(0.128)
-    eventPlayer.disallowButton(Button.ULTIMATE)

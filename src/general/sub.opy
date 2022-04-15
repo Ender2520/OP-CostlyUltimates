@@ -1,24 +1,16 @@
 #!mainFile "../main.opy"
 
-def HeroCleanup(): # EVERY SPAWN PER HERO
-    @Name "SUB Hero Cleanup"
-    if eventPlayer.hero_ == Hero.MCCREE:
-        destroyDummy(eventPlayer.getTeam(), eventPlayer.cassidyShieldBot.getSlot())
-        eventPlayer.cassidyShieldBot = null
-    elif eventPlayer.hero_ == Hero.DVA:
-        eventPlayer.bombCenterPoint = vect(false,false,false)
-    elif eventPlayer.hero_ == Hero.MERCY:
-        stopChasingVariable(eventPlayer.goldenGunCooldown)
-
 def SwapCleanup(): # SWAPPING OFF A HERO
     @Name "SUB Swap Cleanup"
     eventPlayer.usingUltimateREAL = false
+    eventPlayer.removeAllHealthPools()
+    eventPlayer.overHealthPool = null
+    eventPlayer.allowButton(Button.ULTIMATE)
     if eventPlayer.hero_ == Hero.BAPTISTE:
         destroyEffect(eventPlayer.matrixEffect)
         wait()
         eventPlayer.matrixEffect = null
         eventPlayer.matrixSize = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.BASTION:
         destroyEffect(eventPlayer.missileAOEVisual)
         destroyEffect(eventPlayer.missileEffect)
@@ -28,36 +20,28 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.missileEffect = null
         eventPlayer.missileTimer = null
         eventPlayer.armorPool = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.BRIGITTE:
         getPlayers(eventPlayer.getTeam()).brigSpeedBoost = false
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.MCCREE:
         destroyDummy(eventPlayer.getTeam(), eventPlayer.cassidyShieldBot.getSlot())
         wait()
         eventPlayer.cassidyShieldBot = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.DVA:
         eventPlayer.bombEffect = null
     elif eventPlayer.hero_ == Hero.DOOMFIST:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyProgressBarHud(eventPlayer.ultimateBar)
         destroyEffect(eventPlayer.overdriveEffects)
         wait()
         eventPlayer.damageIncrease = null
         eventPlayer.ultimateBar = null
         eventPlayer.overdriveEffects = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.ECHO:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.counterpoiseEffects)
         wait()
         eventPlayer.counterpoiseEffects = null
         eventPlayer.counterpoiseSize = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.HANZO:
         eventPlayer.dragonStrikeCharges = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.MERCY:
         stopChasingVariable(eventPlayer.goldenGunCooldown)
         destroyHudText(eventPlayer.goldenGunHUD)
@@ -65,9 +49,7 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.goldenGunReloaded = null
         eventPlayer.goldenGunHUD = null
         eventPlayer.goldenGunCooldown = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.PHARAH:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
         destroyEffect(eventPlayer.strikeEffects)
@@ -90,7 +72,6 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.strikeEffects_ = null
         eventPlayer.strikeEffects__ = null
     elif eventPlayer.hero_ == Hero.TORBJORN:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyInWorldText(eventPlayer.strikeTexts)
         destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
         destroyEffect(eventPlayer.strikeEffects)
@@ -111,18 +92,14 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         wait()
         eventPlayer.fluxCenter = null
         eventPlayer.fluxExtraRangeEffect = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOLDIER:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[0].getSlot())
         destroyDummy(eventPlayer.getTeam(), eventPlayer.helixBot[1].getSlot())
         eventPlayer.helixBot = null
         wait()
         eventPlayer.fluxCenter = null
         eventPlayer.fluxExtraRangeEffect = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.SOMBRA:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.empEffect)
         destroyEffect(eventPlayer.victimEffects)
         wait()
@@ -130,7 +107,6 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.empEffect = null
         eventPlayer.victimEffects = null
     elif eventPlayer.hero_ == Hero.SYMMETRA:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.turretEffects)
         destroyDummy(eventPlayer.getTeam(), eventPlayer.turretEntity.getSlot())
         destroyProgressBarInWorldText(eventPlayer.turretTexts[0])
@@ -143,31 +119,24 @@ def SwapCleanup(): # SWAPPING OFF A HERO
         eventPlayer.turretTarget = null
         eventPlayer.turretTexts = null
         eventPlayer.turretTimer = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.TRACER:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.manipulateEffects)
         destroyProgressBarHud(eventPlayer.manipulateTexts)
         wait()
         eventPlayer.manipulateDuration = null
         eventPlayer.manipulateEffects = null
         eventPlayer.manipulateTexts = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.WIDOWMAKER:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.chamberEffects)
         destroyEffect(eventPlayer.chamberEffects_)
         wait()
         eventPlayer.chamberCast_Start = null
         eventPlayer.chamberCast_Direction = null
         eventPlayer.chamberCast_DistRemaining = null
-        eventPlayer.usingUltimateREAL = false
     elif eventPlayer.hero_ == Hero.HAMMOND:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.trappedEffects)
         destroyProgressBarHud(eventPlayer.trappedText)
     elif eventPlayer.hero_ == Hero.ZARYA:
-        eventPlayer.allowButton(Button.ULTIMATE)
         destroyEffect(eventPlayer.pitEffects)
         destroyEffect(eventPlayer.pitSinkEffect)
         destroyProgressBarHud(eventPlayer.pitTexts)
@@ -185,11 +154,13 @@ def RespawnCleanup(): # EVERY SPAWN GLOBAL
     eventPlayer.damageDealt[false] = 100
     eventPlayer.damageReceived[false] = 100
     eventPlayer.healingDealt[false] = 100
+    wait()
     # stop player changes
     eventPlayer.stopAllDoT()
     eventPlayer.stopAllHoT()
     # remove health pools
     eventPlayer.removeAllHealthPools()
+    wait()
     # reset variables
     eventPlayer.overHealthPool = null
 	eventPlayer.isStatused[0] = false
@@ -198,6 +169,14 @@ def RespawnCleanup(): # EVERY SPAWN GLOBAL
     eventPlayer.isStatused[3] = false
     eventPlayer.isStatused[4] = false
     eventPlayer.isStatused[5] = false
+    # 
+    eventPlayer.setMaxHealth(100)
+    wait()
+    eventPlayer.setHealth(999999)
+    # update huds
+    eventPlayer.spawnedREAL = true
+    wait()
+    eventPlayer.spawnedREAL = false
  
 def FullCleanup(): # FIRST SPAWN
     @Name "SUB Full Cleanup"
@@ -251,29 +230,11 @@ def FullCleanup(): # FIRST SPAWN
     eventPlayer.isStatused[3] = false
     eventPlayer.isStatused[4] = false
     eventPlayer.isStatused[5] = false
-    eventPlayer.firstSpawn = 1
+    eventPlayer.firstSpawn = true
     # update huds
     eventPlayer.spawnedREAL = true
     wait()
     eventPlayer.spawnedREAL = false
-
-def animationCleanup():
-    @Name "SUB Bastion Animation Cleanup"
-
-    # cleanup all bastion effects and changes from his ultimate
-    destroyEffect(eventPlayer.missileEffect)
-    eventPlayer.moveSpeed /= 1.75
-    removeHealthPool(eventPlayer.armorPool)
-    eventPlayer.setMaxHealth(100)
-    eventPlayer.setHealth(99999)
-    wait()
-    kill(eventPlayer, eventPlayer)
-    wait(1)
-    eventPlayer.stopCamera()
-    eventPlayer.allowButton(Button.PRIMARY_FIRE)
-    eventPlayer.setSecondaryFireEnabled(true)
-    eventPlayer.armorPool = null
-    eventPlayer.missileEffect = null
 
 def superChargerPulsingEffect():
     @Name "[Orisa] SUB Supercharger Pulsing Effect"

@@ -10,45 +10,40 @@ rule "[Automation] Prevent Server Crash":
     wait(0.25)
     setSlowMotion(100)
 
-rule "[Automation] Assembling Heroes (not first spawn)":
-    @Event eachPlayer
-    @Condition eventPlayer.hasSpawned()
-    @Condition isAssemblingHeroes()
-    @Condition eventPlayer.firstSpawn != null
-
-    printLog("FullCleanup() (AH)")
-    FullCleanup()
-    eventPlayer.hero_ = eventPlayer.getCurrentHero()
-
 rule "[Automation] First Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn == null
+    @Condition eventPlayer.firstSpawn != true
+    @Condition not eventPlayer.isDummy()
 
     printLog("FullCleanup()")
     FullCleanup()
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
+    if eventPlayer.hero_ in [Hero.MCCREE, Hero.DOOMFIST, Hero.ECHO, Hero.MOIRA, Hero.PHARAH, Hero.SOLDIER, Hero.SOMBRA, Hero.SYMMETRA, Hero.TORBJORN, Hero.TRACER, Hero.HAMMOND, Hero.ZARYA]:
+        eventPlayer.disallowButton(Button.ULTIMATE)
 
 rule "[Automation] Every Spawn":
     @Event eachPlayer
     @Condition eventPlayer.hasSpawned()
-    @Condition eventPlayer.firstSpawn != null
+    @Condition eventPlayer.isAlive()
+    @Condition eventPlayer.firstSpawn == true
+    @Condition not eventPlayer.isDummy()
 
+    wait(0.128)
     printLog("RespawnCleanup()")
     RespawnCleanup()
-    wait()
-    printLog("HeroCleanup()")
-    HeroCleanup()
 
 rule "[Automation] Hero Swap":
     @Event eachPlayer
     @Condition eventPlayer.hero_ != eventPlayer.getCurrentHero()
     @Condition eventPlayer.hero_ != null
     @Condition eventPlayer.isDummy() != true
-    
+
     printLog("SwapCleanup()")
     SwapCleanup()
     eventPlayer.hero_ = eventPlayer.getCurrentHero()
+    if eventPlayer.hero_ in [Hero.MCCREE, Hero.DOOMFIST, Hero.ECHO, Hero.MOIRA, Hero.PHARAH, Hero.SOLDIER, Hero.SOMBRA, Hero.SYMMETRA, Hero.TORBJORN, Hero.TRACER, Hero.HAMMOND, Hero.ZARYA]:
+        eventPlayer.disallowButton(Button.ULTIMATE)
 
 rule "[Automation] Ultimate Boost":
     @Event eachPlayer
@@ -63,11 +58,9 @@ rule "[Automation] Prevent Ultimate Charge Gain During Ultimate":
     @Event eachPlayer
     @Condition eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true
     @Condition eventPlayer.hero_ not in [Hero.LUCIO, Hero.BASTION, Hero.BRIGITTE, Hero.DVA, Hero.TORBJORN, Hero.PHARAH]
+    @Condition eventPlayer.getUltCharge() >= 0.49 + ultBoost
     
-    while eventPlayer.isUsingUltimate() or eventPlayer.usingUltimateREAL == true:
-        if eventPlayer.getUltCharge() >= ultBoost + 0.4:
-            eventPlayer.setUltCharge(ultBoost)
-        wait(0.096)
+    eventPlayer.setUltCharge(ultBoost)
 
 rule "[Automation] Move Speed":
     @Event eachPlayer
@@ -76,6 +69,8 @@ rule "[Automation] Move Speed":
     # update moveSpeed variable and move speed to that variable
     eventPlayer.moveSpeed[true] = eventPlayer.moveSpeed[false]
     eventPlayer.setMoveSpeed(eventPlayer.moveSpeed[true])
+    if RULE_CONDITION:
+        goto RULE_START
 
 rule "[Automation] Damage Dealt":
     @Event eachPlayer
@@ -84,6 +79,8 @@ rule "[Automation] Damage Dealt":
     # update damageDealt variable and damage dealt to that variable
     eventPlayer.damageDealt[true] = eventPlayer.damageDealt[false]
     eventPlayer.setDamageDealt(eventPlayer.damageDealt[true])
+    if RULE_CONDITION:
+        goto RULE_START
 
 rule "[Automation] Damage Received":
     @Event eachPlayer
@@ -92,6 +89,8 @@ rule "[Automation] Damage Received":
     # update damageDealt variable and damage dealt to that variable
     eventPlayer.damageReceived[true] = eventPlayer.damageReceived[false]
     eventPlayer.setDamageReceived(eventPlayer.damageReceived[true]) 
+    if RULE_CONDITION:
+        goto RULE_START
 
 rule "[Automation] Healing Dealt":
     @Event eachPlayer
@@ -100,6 +99,8 @@ rule "[Automation] Healing Dealt":
     # update healingDealt variable and healing dealt to that variable
     eventPlayer.healingDealt[true] = eventPlayer.healingDealt[false]
     eventPlayer.setHealingDealt(eventPlayer.healingDealt[true]) 
+    if RULE_CONDITION:
+        goto RULE_START
 
 rule "[Automation] STATUS Chase Amplified":
     @Event eachPlayer

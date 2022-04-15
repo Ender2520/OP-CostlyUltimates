@@ -26,5 +26,5 @@ rule "[Genji] Increase Damage":
     @Condition eventPlayer.isUsingUltimate()
     
     eventPlayer.damageDealt[false] *= 1.0909
-    waitUntil(eventPlayer.isUsingUltimate() != true, 9999)
+    waitUntil(eventPlayer.isUsingUltimate() != true or eventPlayer.isDead(), 9999)
     eventPlayer.damageDealt[false] /= 1.0909
