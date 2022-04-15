@@ -12,7 +12,7 @@ rule "[Zenyatta] Blinding Light Effects":
     for eventPlayer.i in range(len(eventPlayer.blindVictims)):
         createEffect(eventPlayer.blindVictims[evalOnce(eventPlayer.i)] if eventPlayer.blindVictims[evalOnce(eventPlayer.i)].zenVisible == true else null, Effect.SPHERE, Color.YELLOW, eventPlayer.blindVictims[evalOnce(eventPlayer.i)], 100, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
         eventPlayer.lightEffects.append(getLastCreatedEntity())
-    waitUntil(eventPlayer.isUsingUltimate() != true, 6)
+    waitUntil(eventPlayer.isUsingUltimate() != true or eventPlayer.isDead(), 6)
     destroyEffect(eventPlayer.lightEffects)
     eventPlayer.lightEffects = null
     eventPlayer.blindVictims = null

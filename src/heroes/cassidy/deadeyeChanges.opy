@@ -35,7 +35,7 @@ rule "[Cassidy] Deadeye Changes":
         eventPlayer.cassidyShieldBot.setStatusEffect(null, Status.PHASED_OUT, 9999)
         # shield bot hold up shield
         eventPlayer.cassidyShieldBot.startForcingButton(Button.SECONDARY_FIRE)
-        waitUntil(not eventPlayer.isUsingUltimate(), 99999)
+        waitUntil(not eventPlayer.isUsingUltimate() or eventPlayer.isDead(), 99999)
         # undo all changes
         destroyDummy(eventPlayer.getTeam(), eventPlayer.cassidyShieldBot.getSlot())
         eventPlayer.moveSpeed[false] /= 3.33333
