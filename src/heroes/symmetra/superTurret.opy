@@ -16,7 +16,7 @@ rule "[Symmetra] Create Super Turret":
     # initalize
     wait()
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     eventPlayer.turretTimer = 1
     eventPlayer.turretTexts = []
     # create/play effects (ACTUAL TURRET)

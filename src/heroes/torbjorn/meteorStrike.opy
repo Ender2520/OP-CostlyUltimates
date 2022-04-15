@@ -10,10 +10,11 @@ rule "[Torbjorn] Meteor Strike Activate":
     @Condition eventPlayer.isMeleeing() != true
     @Condition eventPlayer.usingUltimateREAL != true
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
-    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 7.5, BarrierLos.PASS_THROUGH_BARRIERS) == true
 
     if eventPlayer.isInAir():
         smallMessage(eventPlayer, "Can't Use Ultimate Mid-Air!")
+    elif isInLoS(eventPlayer.getEyePosition(), eventPlayer.getEyePosition() + Vector.UP * 8, BarrierLos.PASS_THROUGH_BARRIERS) != true:
+        smallMessage(eventPlayer, "Not Enough Space Above You!")
     else:
         # initalize
         eventPlayer.usingUltimateREAL = true
@@ -55,7 +56,7 @@ rule "[Torbjorn] Meteor Strike Activate":
             eventPlayer.forceButtonPress(Button.ULTIMATE)
             eventPlayer.disallowButton(Button.ULTIMATE)
             eventPlayer.disallowButton(Button.PRIMARY_FIRE)
-            eventPlayer.setUltCharge(0)
+            eventPlayer.setUltCharge(ultBoost)
             # destroy effects
             destroyInWorldText(eventPlayer.strikeTexts)
             destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
@@ -76,7 +77,7 @@ rule "[Torbjorn] Meteor Strike Activate":
             eventPlayer.allowButton(Button.MELEE)
             eventPlayer.setKnockbackReceived(100)
         else: # player died mid-ultimate
-            eventPlayer.setUltCharge(0)
+            eventPlayer.setUltCharge(ultBoost)
             # destroy effects
             destroyInWorldText(eventPlayer.strikeTexts)
             destroyProgressBarInWorldText(eventPlayer.strikeTexts_)
@@ -163,7 +164,7 @@ rule "[Torbjorn] Meteor Strike Dropped":
     eventPlayer.strikeEffects_[6] = getLastCreatedEntity()
     createEffect(getAllPlayers() if eventPlayer.strikeDrop1 != null else null, Effect.BAD_AURA, Color.ORANGE, eventPlayer.strikeLaunch1, 7.6, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.strikeEffects_[7] = getLastCreatedEntity()
-    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=4, ChaseReeval.NONE)
+    chase(eventPlayer.strikeLaunch1, eventPlayer.strikeDrop1, duration=3.5, ChaseReeval.NONE)
     while eventPlayer.strikeLaunch1 != eventPlayer.strikeDrop1:
         wait(0.072)
         playEffect(getAllPlayers(), DynamicEffect.BASTION_TANK_CANNON_EXPLOSION_SOUND, eventPlayer.getTeam(), eventPlayer.strikeLaunch1, 180)
@@ -195,7 +196,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     eventPlayer.strikeEffects__[5] = getLastCreatedEntity()
     wait(10)
     eventPlayer.usingUltimateREAL = false
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     destroyEffect(eventPlayer.strikeEffects_)
     destroyEffect(eventPlayer.strikeEffects__)
     eventPlayer.strikeEffects_ = null
@@ -205,7 +206,7 @@ rule "[Torbjorn] Meteor Strike Lava Pit Dropped EFFECTS":
     
 rule "[Torbjorn] Lava Pit Damage":
     @Event eachPlayer
-    @Condition any([player.strikeDrop1 == player.strikeLaunch1 and player.strikeDrop1 != null and player.isAlive() and player.usingUltimateREAL == true and eventPlayer.getPosition().y <= player.strikeLaunch1.y + 2 and eventPlayer.getPosition().y >= player.strikeLaunch1.y - 2 and distance(player.strikeLaunch1, eventPlayer) < 12 and player != eventPlayer for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))])
+    @Condition all([player.strikeDrop1 == player.strikeLaunch1 and player.strikeDrop1 != null and player.isAlive() and player.usingUltimateREAL == true and eventPlayer.getPosition().y <= player.strikeLaunch1.y + 3 and eventPlayer.getPosition().y >= player.strikeLaunch1.y - 3 and distance(player.strikeLaunch1, eventPlayer) < 12 and player != eventPlayer for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))])
 
     eventPlayer.setStatusEffect([player for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))], Status.BURNING, 9999)
     eventPlayer.startDoT([player for player in getPlayersOnHero(Hero.TORBJORN, getOppositeTeam(eventPlayer.getTeam()))], 9999, 45)
@@ -228,6 +229,7 @@ rule "[Torbjorn] Ultimate Loop":
     playEffect(getPlayers(eventPlayer.getTeam()), DynamicEffect.RING_EXPLOSION, Color.AQUA, eventPlayer.strikeDrop1, 23)
     playEffect(getAllPlayers(), DynamicEffect.ASHE_DYNAMITE_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.strikeDrop1, 60)
     playEffect(getAllPlayers(), DynamicEffect.PHARAH_BARRAGE_EXPLOSION_SOUND, Color.TEAM_1, eventPlayer.strikeDrop1, 30)
+    eventPlayer.setUltCharge(ultBoost)
     wait(0.512)
     if RULE_CONDITION:
         goto RULE_START

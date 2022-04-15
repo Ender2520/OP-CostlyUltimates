@@ -10,8 +10,8 @@ rule "[Doomfist] Detect Ultimate Use":
     @Condition eventPlayer.hasStatusEffect(Status.ASLEEP) != true or eventPlayer.hasStatusEffect(Status.FROZEN) != true or eventPlayer.hasStatusEffect(Status.HACKED) != true or eventPlayer.hasStatusEffect(Status.STUNNED) != true
 
     # pre-ultimate
-    eventPlayer.setUltCharge(0)
-    eventPlayer.ultimateDuration = 16
+    eventPlayer.setUltCharge(ultBoost)
+    eventPlayer.ultimateDuration = 12
     eventPlayer.damageIncrease[true] = 1
     eventPlayer.damageIncrease[false] = 1
     chase(eventPlayer.ultimateDuration, 0, rate=1, ChaseReeval.DESTINATION_AND_RATE)

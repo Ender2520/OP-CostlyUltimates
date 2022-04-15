@@ -25,20 +25,20 @@ rule "[Moira] Call Coalnado":
     eventPlayer.tornadoHeight = 0
     wait()
     # create effects
-    createEffect(getAllPlayers(), Effect.RING, Color.RED, updateEveryTick(raycast(eventPlayer.tornadoPos + vect(0,1,0), eventPlayer.tornadoPos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 3, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.RING, Color.RED, updateEveryTick(raycast(eventPlayer.tornadoPos + vect(0,1,0), eventPlayer.tornadoPos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 4, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    createEffect(getAllPlayers(), Effect.RING, Color.YELLOW, updateEveryTick(raycast(eventPlayer.tornadoPos + vect(0,1,0), eventPlayer.tornadoPos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 7, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createEffect(getAllPlayers(), Effect.RING, Color.YELLOW, updateEveryTick(raycast(eventPlayer.tornadoPos + vect(0,1,0), eventPlayer.tornadoPos - vect(0,1000,0), null, getAllPlayers(), false).getHitPosition()), 8, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
     createEffect(getAllPlayers(), Effect.BAD_AURA_SOUND, eventPlayer.getTeam(), eventPlayer.tornadoPos, 200, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/7 + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + angleToDirection(getTotalTimeElapsed() * 120, 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + angleToDirection(/*rotation*/getTotalTimeElapsed() * 360, 0) * /*top distance*/8 + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + angleToDirection(getTotalTimeElapsed() * 120, 0) * /*bottom distance*/0.5, eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + ((angleToDirection(/*rotation*/120 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/7) + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + ((angleToDirection(/*rotation*/120 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/8) + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + ((angleToDirection(120 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + ((angleToDirection(/*rotation*/240 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/7) + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
+    createBeam(getAllPlayers(), Beam.MOIRA_COALESCENCE, eventPlayer.tornadoPos + ((angleToDirection(/*rotation*/240 + getTotalTimeElapsed() * 360, 0)) * /*top distance*/8) + Vector.UP * /*height*/eventPlayer.tornadoHeight, eventPlayer.tornadoPos + ((angleToDirection(240 + getTotalTimeElapsed() * 120, 0)) * /*bottom distance*/0.5), eventPlayer.getTeam(), EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
     eventPlayer.tornadoEffects.append(getLastCreatedEntity())
-    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.tornadoPos, 7)
-    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.tornadoPos, 7)
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.VIOLET, eventPlayer.tornadoPos, 8)
+    playEffect(getAllPlayers(), DynamicEffect.BAD_EXPLOSION, Color.YELLOW, eventPlayer.tornadoPos, 8)
     # chase pos and height
     chase(eventPlayer.tornadoPos, eventPlayer.tornadoPos + vect(eventPlayer.getFacingDirection().x, 0, eventPlayer.getFacingDirection().z) * 100, rate=4.0, ChaseReeval.NONE)
     chase(eventPlayer.tornadoHeight, 70, duration=1.5, ChaseReeval.NONE)
@@ -67,8 +67,8 @@ rule "[Moira] Ultimate Loop":
     playEffect(getAllPlayers(), DynamicEffect.MOIRA_FADE_REAPPEAR_SOUND, Color.TEAM_1, eventPlayer.tornadoPos, 40)
     playEffect(getAllPlayers(), DynamicEffect.WRECKING_BALL_PILEDRIVER_IMPACT_SOUND, Color.TEAM_1, eventPlayer.tornadoPos, 15)
     # damage and heal over time
-    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 7].startDoT(eventPlayer, 0.512, 70)
-    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 3].startDoT(eventPlayer, 0.512, 35)
+    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 8].startDoT(eventPlayer, 0.512, 70)
+    [player for player in getPlayers(getOppositeTeam(eventPlayer.getTeam())) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 4].startDoT(eventPlayer, 0.512, 35)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 7].startHoT(eventPlayer, 0.512, 140)
     [player for player in getPlayers(eventPlayer.getTeam()) if distance(player.getPosition() * vect(1,0,1), eventPlayer.tornadoPos * vect(1,0,1)) < 3].startHoT(eventPlayer, 0.512, 70)
     if distance(eventPlayer.tornadoPos, raycast(eventPlayer.tornadoPos + vect(0,2,0), eventPlayer.tornadoPos - vect(0,8,0), null, getAllPlayers(), false).getHitPosition()) >= 0.25:

@@ -13,7 +13,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
 
     # initialize trap
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     eventPlayer.i = 0
     eventPlayer.trapTime = 1
     eventPlayer.trappedEffects = []
@@ -22,7 +22,7 @@ rule "[Wrecking Ball] Trap Transfer Activated":
     eventPlayer.disallowButton(Button.CROUCH)
     # define trapped players
     wait()
-    eventPlayer.trappedPlayers = [p for p in getPlayersInRadius(eventPlayer.getPosition(), 15, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES_AND_ENEMY_BARRIERS) if p.isAlive()]
+    eventPlayer.trappedPlayers = [p for p in getPlayersInRadius(eventPlayer.getPosition(), 15, getOppositeTeam(eventPlayer.getTeam()), LosCheck.SURFACES_AND_ENEMY_BARRIERS) if p.isAlive() and not p.isDummy()]
     # create eventPlayer text
     progressBarHud(eventPlayer, eventPlayer.trapTime * 100, "{0} Trap Transfer {0}".format(iconString(Icon.DIZZY)), HudPosition.TOP, 19, rgb(235 * eventPlayer.trapTime + 200 * (1-eventPlayer.trapTime), 150 * eventPlayer.trapTime + 30 * (1-eventPlayer.trapTime), 20 * (1-eventPlayer.trapTime)), Color.ORANGE, ProgressHudReeval.VISIBILITY_VALUES_AND_COLOR, SpecVisibility.DEFAULT)
     eventPlayer.trappedText = getLastCreatedText()

@@ -16,7 +16,7 @@ rule "[Soldier 76] Spam Helix Rockets":
         wait()
         return
     else:
-        eventPlayer.setUltCharge(0)
+        eventPlayer.setUltCharge(ultBoost)
         eventPlayer.usingUltimateREAL = true
         eventPlayer.setAbility1Enabled(false)
         eventPlayer.setSecondaryFireEnabled(false)
@@ -86,7 +86,7 @@ rule "[Soldier 76] Spam Helix Rockets":
         # revert changes
         eventPlayer.usingUltimateREAL = false
         destroyEffect(eventPlayer.autoHelixEffects)
-        eventPlayer.setUltCharge(0)
+        eventPlayer.setUltCharge(ultBoost)
         eventPlayer.setAbility1Enabled(true)
         eventPlayer.setSecondaryFireEnabled(true)
         eventPlayer.autoHelixEffects = []
@@ -101,7 +101,7 @@ rule "[Soldier 76] Dies During Ultimate":
 
     eventPlayer.usingUltimateREAL = false
     destroyEffect(eventPlayer.autoHelixEffects)
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     eventPlayer.setAbility1Enabled(true)
     eventPlayer.setSecondaryFireEnabled(true)
     eventPlayer.autoHelixEffects = []

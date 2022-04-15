@@ -17,4 +17,4 @@ rule "[Doomfist] On Ability Damage":
     @Condition eventAbility == Button.ABILITY_1 or eventAbility == Button.ABILITY_2 or eventAbility == Button.SECONDARY_FIRE
 
     # increase damage boost value
-    eventPlayer.damageIncrease[false] += 0.05
+    eventPlayer.damageIncrease[false] += 0.08

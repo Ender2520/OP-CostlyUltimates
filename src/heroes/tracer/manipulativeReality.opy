@@ -12,7 +12,7 @@ rule "[Tracer] Manipulative Reality Activate":
 
     # initialize
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     eventPlayer.manipulateDuration = 1
     eventPlayer.setMaxAmmo(0, 999)
     eventPlayer.setAmmo(0, 999)

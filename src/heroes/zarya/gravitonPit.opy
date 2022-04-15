@@ -23,7 +23,7 @@ rule "[Zarya] Graviton Pit Cast":
     if eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) == true:
         destroyInWorldText(eventPlayer.pitTexts[0])
         stopChasingVariable(eventPlayer.pitPosition)
-        eventPlayer.setUltCharge(0)
+        eventPlayer.setUltCharge(ultBoost)
         # pit animation
         playEffect(getAllPlayers(), DynamicEffect.TRACER_RECALL_REAPPEAR_SOUND, Color.WHITE, eventPlayer.pitPosition, 200)
         playEffect(getAllPlayers(), DynamicEffect.ZARYA_PARTICLE_CANNON_EXPLOSION_SOUND, Color.WHITE, eventPlayer.pitPosition, 150)

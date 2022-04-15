@@ -12,7 +12,7 @@ rule "[Sombra] Apply vulnerabled effect":
     
     # initialize emp
     eventPlayer.usingUltimateREAL = true
-    eventPlayer.setUltCharge(0)
+    eventPlayer.setUltCharge(ultBoost)
     eventPlayer.empRadius = 0
     eventPlayer.i = 0
     createEffect(getPlayers(eventPlayer.getTeam()), Effect.SPHERE, Color.PURPLE, evalOnce(eventPlayer.getPosition()), eventPlayer.empRadius, EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
